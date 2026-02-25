@@ -62,21 +62,21 @@ BIDS does not replace the data format but provides the organizational context ar
 
 While we tried wherever possible to maintain consistency with existing datatypes, we also designed this enhancement proposal to address the unique challenges of microelectrode electrophysiology:
 \begin{enumerate}
-\item Electrode scales spanning orders of magnitude (sub-micron tips to millimeter arrays).
-\item Diverse target species, which have different brain atlases, often including entirely different brain areas.
-\item Large data volumes, which can be over 100~GB for an individual session.
-\item Diverse probe geometries requiring specialized coordinate systems.
-\item Spike sorting as an essential preprocessing step requires specific metadata.
+	\item Electrode scales spanning orders of magnitude (sub-micron tips to millimeter arrays).
+	\item Diverse target species, which have different brain atlases, often including entirely different brain areas.
+	\item Large data volumes, which can be over 100~GB for an individual session.
+	\item Diverse probe geometries requiring specialized coordinate systems.
+	\item Spike sorting as an essential preprocessing step requires specific metadata.
 \end{enumerate}
 
 Here we present BIDS Extension Proposal 032 (BEP032), extending BIDS to microelectrode electrophysiology with a focus on animal models.
 This extension:
 \begin{itemize}
-\item introduces two datatypes (\texttt{ecephys} for extracellular and \texttt{icephys} for intracellular recordings),
-\item defines metadata across three levels: probes, electrodes, and channels,
-\item standardizes probe and electrode metadata including stereotaxic surgical coordinates,
-\item integrates with the ProbeInterface library~\cite{garcia_probeinterface_2022} for probe geometry definitions, and
-\item defines coordinate systems for multiple species including rodent and primate brain atlases.
+	\item introduces two datatypes (\texttt{ecephys} for extracellular and \texttt{icephys} for intracellular recordings),
+	\item defines metadata across three levels: probes, electrodes, and channels,
+	\item standardizes probe and electrode metadata including stereotaxic surgical coordinates,
+	\item integrates with the ProbeInterface library~\cite{garcia_probeinterface_2022} for probe geometry definitions, and
+	\item defines coordinate systems for multiple species including rodent and primate brain atlases.
 \end{itemize}
 
 \subsection*{Other ephys standardization efforts}
@@ -143,17 +143,21 @@ The ProbeInterface library~\cite{garcia_probeinterface_2022} provides a JSON-bas
 
 The \texttt{ecephys} datatype provides three possible mechanisms to provide the layout of the electrodes:
 \begin{enumerate}
-\item \textbf{\texttt{electrodes.tsv} (required):} An \texttt{electrodes.tsv} file without the use of a \texttt{space} entity is required, and this file uses \texttt{x}, \texttt{y}, and sometimes \texttt{z} to specify the positions of each electrode relative to the probe tip.
-This data is present for every electrophysiology data stream, and can be used by downstream tools.
-Electrodes in an alternative space may be defined in \texttt{electrodes.tsv} files with the \texttt{space} entity defined.
+	\item \textbf{\texttt{electrodes.tsv} (required):}
+	      An \texttt{electrodes.tsv} file without the use of a \texttt{space} entity is required, and this file uses \texttt{x}, \texttt{y}, and sometimes \texttt{z} to specify the positions of each electrode relative to the probe tip.
+	      This data is present for every electrophysiology data stream, and can be used by downstream tools.
+	      Electrodes in an alternative space may be defined in \texttt{electrodes.tsv} files with the \texttt{space} entity defined.
 
-\item \textbf{Link to probeinterface\_library:} ProbeInterface maintains a library of popular probes.% TODO: fill in current count (currently xxx)
-If the \texttt{ecephys} is recorded from a probe that is defined in this library, the user is encouraged to link to the formal ProbeInterface definition of the probe, which contains additional information about the probe, including the electrode shape, and probe shape.
-This link uses the \texttt{Levels} mechanism with \texttt{TermURL} to link from values of the \texttt{probe\_model} column of the \texttt{probes.tsv} table to the URL of the probe definition on GitHub.
+	\item \textbf{Link to probeinterface\_library:}
+	      ProbeInterface maintains a library of popular probes.
+	      % TODO: fill in current count (currently xxx)
+	      If the \texttt{ecephys} is recorded from a probe that is defined in this library, the user is encouraged to link to the formal ProbeInterface definition of the probe, which contains additional information about the probe, including the electrode shape, and probe shape.
+	      This link uses the \texttt{Levels} mechanism with \texttt{TermURL} to link from values of the \texttt{probe\_model} column of the \texttt{probes.tsv} table to the URL of the probe definition on GitHub.
 
-\item \textbf{Define custom ProbeInterface files:} If probeinterface\_library does not have the probe used, users are encouraged to create a probe definition JSON file.
-This file can be placed in \texttt{/probes}, and the \texttt{probe\_model} column of the \texttt{probes.tsv} table can use \texttt{Levels} with a BIDS URI to direct to the file.
-The user may also consider submitting this probe configuration file to the probeinterface\_library for use in future datasets.
+	\item \textbf{Define custom ProbeInterface files:}
+	      If probeinterface\_library does not have the probe used, users are encouraged to create a probe definition JSON file.
+	      This file can be placed in \texttt{/probes}, and the \texttt{probe\_model} column of the \texttt{probes.tsv} table can use \texttt{Levels} with a BIDS URI to direct to the file.
+	      The user may also consider submitting this probe configuration file to the probeinterface\_library for use in future datasets.
 \end{enumerate}
 
 \subsection*{Coordinate Systems}
@@ -161,10 +165,10 @@ The user may also consider submitting this probe configuration file to the probe
 Like other datatypes, including iEEG, MEG, and EEG, microelectrode electrophysiology must provide a way to report the anatomical localization of electrodes.
 However, this standard has four key differences in microephys experiments:
 \begin{enumerate}
-\item They often use stereotaxic coordinates to represent the surgical placement of the probe.
-\item Anatomical localization is not always known.
-\item Processing of the data requires understanding of real (unwarped) electrode spacing.
-\item The experiments are often done on various non-human species.
+	\item They often use stereotaxic coordinates to represent the surgical placement of the probe.
+	\item Anatomical localization is not always known.
+	\item Processing of the data requires understanding of real (unwarped) electrode spacing.
+	\item The experiments are often done on various non-human species.
 \end{enumerate}
 
 \subsubsection*{Stereotaxic coordinates}
@@ -213,11 +217,17 @@ Here we deviate from the iEEG datatype---the main \texttt{electrodes.tsv} file m
 
 Using NWB and NIX as the underlying data format allows microephys BIDS data to utilize the sophisticated software ecosystems associated with these data standards.
 
-The NWB software ecosystem contains a suite of tools to convert data from the various common electrophysiology data formats to NWB. PyNWB and MatNWB provide flexible APIs for writing NWB files~\cite{rubel_neurodata_2022}. NeuroConv automates conversion from 60+ formats, guiding the user in best practices~\cite{mayorquin_neuroconv_2025}. NWB Inspector provides automated checks to validate NWB files against best practices, and NWB GUIDE provides a graphical interface that provides the features of NeuroConv and NWB Inspector to non-programmers.
+The NWB software ecosystem contains a suite of tools to convert data from the various common electrophysiology data formats to NWB.
+PyNWB and MatNWB provide flexible APIs for writing NWB files~\cite{rubel_neurodata_2022}.
+NeuroConv automates conversion from 60+ formats, guiding the user in best practices~\cite{mayorquin_neuroconv_2025}.
+NWB Inspector provides automated checks to validate NWB files against best practices, and NWB GUIDE provides a graphical interface that provides the features of NeuroConv and NWB Inspector to non-programmers.
 
-30+ popular analysis tools support NWB as an input and/or output format, many of which are relevant to microephys data. SpikeInterface provides tools for creating spike sorting pipelines~\cite{buccino_spikeinterface_2020}. Neurosift provides interactive dashboards for visualizing NWB data~\cite{magland_neurosift_2024}, and Pynapple~\cite{viejo_pynapple_2023} provides tools for common neurophysiology analyses.
+30+ popular analysis tools support NWB as an input and/or output format, many of which are relevant to microephys data.
+SpikeInterface provides tools for creating spike sorting pipelines~\cite{buccino_spikeinterface_2020}.
+Neurosift provides interactive dashboards for visualizing NWB data~\cite{magland_neurosift_2024}, and Pynapple~\cite{viejo_pynapple_2023} provides tools for common neurophysiology analyses.
 
-NIX can be written from NEO~\cite{garcia_neo_2014}, which supports reading diverse electrophysiology data formats. NIX also supports data analysis libraries, such as Elephant~\cite{denker_collaborative_2018}.
+NIX can be written from NEO~\cite{garcia_neo_2014}, which supports reading diverse electrophysiology data formats.
+NIX also supports data analysis libraries, such as Elephant~\cite{denker_collaborative_2018}.
 
 \bibliography{bep032}
 
@@ -237,13 +247,14 @@ The authors declare no competing interests.
 \section*{Figures \& Tables}
 
 \begin{figure}[ht]
-\centering
-\includegraphics[width=\linewidth]{figures/figure1-ecephys-overview.png}
-\caption{Overview of the BIDS microelectrode electrophysiology extension showing an example extracellular electrophysiology dataset.
-Left: directory structure with the \texttt{ecephys/} datatype folder containing data files, metadata sidecars, and a \texttt{probes/} directory for ProbeInterface files.
-Right: the three core metadata tables linked by numbered labels to their location in the directory tree: (1)~\texttt{probes.tsv} describing probe type, stereotaxic placement coordinates, and manufacturer; (2)~\texttt{electrodes.tsv} with probe-relative contact positions in micrometers; (3)~\texttt{channels.tsv} linking recorded signals to electrodes with sampling frequency, gain, and \texttt{stream\_id}.
-The sidecar JSON (top right) stores recording-level metadata, while data files (bottom right) contain the raw signals in NWB or NIX format.}
-\label{fig:overview}
+	\centering
+	\includegraphics[width=\linewidth]{figures/figure1-ecephys-overview.png}
+	\caption{Overview of the BIDS microelectrode electrophysiology extension showing an example extracellular electrophysiology dataset.
+		Left: directory structure with the \texttt{ecephys/} datatype folder containing data files, metadata sidecars, and a \texttt{probes/} directory for ProbeInterface files.
+		Right: the three core metadata tables linked by numbered labels to their location in the directory tree: (1)~\texttt{probes.tsv} describing probe type, stereotaxic placement coordinates, and manufacturer; (2)~\texttt{electrodes.tsv} with probe-relative contact positions in micrometers; (3)~\texttt{channels.tsv} linking recorded signals to electrodes with sampling frequency, gain, and \texttt{stream\_id}.
+		The sidecar JSON (top right) stores recording-level metadata, while data files (bottom right) contain the raw signals in NWB or NIX format.
+	}
+	\label{fig:overview}
 \end{figure}
 
 \end{document}

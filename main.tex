@@ -163,15 +163,34 @@ A \texttt{stream\_id} column links channels to data objects within the NWB or NI
 
 \subsection*{Data Format Requirements}
 
-% Why require NWB/NIX (vs native formats)?
-% - Native formats too heterogeneous (dozens of manufacturers)
-% - NWB/NIX already widely adopted
-% - HDF5-based, open, self-documenting
-% - Conversion tools exist (neuroconv, Neo)
+Each major electrophysiology hardware manufacturer exports data in one or more proprietary file formats, making it challenging for software developers to design applications that handle all possible data formats users may produce.
+% [TODO: should we name specific formats like Blackrock, Plexon, Open Ephys, SpikeGLX, or keep general?]
+This fragmentation complicates data sharing and long-term archival: custom readers must be maintained for each format, and undocumented specifications risk rendering data inaccessible.
 
-% stream_id column in channels.tsv
-% - Links channels to data objects in NWB/NIX
-% - Handles multiple streams (LFP, spike band)
+Following the approach of prior BIDS electrophysiology extensions \cite{pernet_eeg-bids_2019, holdgraf_ieeg-bids_2019}, our selection of data formats was governed by three requirements:
+(i) address the needs of a substantial portion of the electrophysiology community,
+(ii) satisfy FAIR principles with open documentation and implementations in widely-used programming languages, and
+(iii) meet the technical demands of neurophysiological workflows---high numerical precision, efficient access to subsets of large files, and the capacity to store rich metadata alongside raw signals.
+
+We require data to be stored in NWB (Neurodata Without Borders, RRID:SCR\_015242) \cite{rubel_neurodata_2022} or NIX (Neuroscience Information Exchange, RRID:SCR\_016196) \cite{adrian_file_2014}.
+Both are HDF5-based, open-source (BSD-3 licensed), and self-documenting: the file itself contains the schema needed to interpret its contents.
+HDF5 offers practical advantages for multi-gigabyte recordings---hierarchical organization, built-in compression, and lazy loading without reading entire files into memory.
+
+These two formats represent complementary design philosophies.
+NWB provides a well-defined schema with extensive validation, ensuring consistency across datasets.
+NIX uses a minimal, generic data model that gives users more freedom in how they organize data, and serves as a storage backend for the Neo electrophysiology library (RRID:SCR\_000634) \cite{garcia_neo_2014}.
+Both have been reviewed and endorsed by the INCF as standard practices \cite{martone_pcall_2019, noauthor_nix_nodate}, and a dedicated archival repository (DANDI, RRID:SCR\_017571) exists for neurophysiology data stored in these formats.
+
+In iEEG-BIDS \cite{holdgraf_ieeg-bids_2019}, NWB was listed as an unofficially-supported format due to its then-nascent ecosystem.
+The maturation of NWB 2.0 and its subsequent INCF endorsement justify its promotion to fully compliant status here.
+Unlike iEEG-BIDS, which maintains separate tiers of compliant and unofficially-supported formats, we adopt a simpler two-format approach---both NWB and NIX are fully supported with no unofficial tier.
+
+The separation between BIDS sidecar files and the data format is intentional.
+BIDS provides dataset-level organization---directory structure, naming conventions, and human-readable TSV/JSON files that allow inspection without specialized tools.
+The NWB or NIX file ensures complete provenance within a self-contained container.
+Metadata may appear in both places; analysis tools such as SpikeInterface (RRID:SCR\_021150) can already extract probe geometry from NWB files, and future integration with BIDS sidecars will provide an alternative pathway.
+
+% [TODO: Add stream_id explanation here---how channels.tsv links to data objects within NWB/NIX containers.]
 
 \subsection*{ProbeInterface Integration}
 

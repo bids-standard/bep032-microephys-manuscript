@@ -1,0 +1,9 @@
+modifyLineBreaks:
+  oneSentencePerLine:
+    manipulateSentences: 1
+    sentencesBeginWith:
+      A-Z: 1
+    sentencesEndWith:
+      basicFullStop: 1
+      exclamationMark: 1
+      questionMark: 1

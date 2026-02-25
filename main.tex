@@ -211,9 +211,13 @@ Here we deviate from the iEEG datatype---the main \texttt{electrodes.tsv} file m
 
 \section*{Code Availability}
 
-% TODO: Add code availability text
-% - Specification: https://github.com/bids-standard/bids-specification
-% - Example datasets and scripts: [GITHUB LINK]
+Using NWB and NIX as the underlying data format allows microephys BIDS data to utilize the sophisticated software ecosystems associated with these data standards.
+
+The NWB software ecosystem contains a suite of tools to convert data from the various common electrophysiology data formats to NWB. PyNWB and MatNWB provide flexible APIs for writing NWB files~\cite{rubel_neurodata_2022}. NeuroConv automates conversion from 60+ formats, guiding the user in best practices~\cite{mayorquin_neuroconv_2025}. NWB Inspector provides automated checks to validate NWB files against best practices, and NWB GUIDE provides a graphical interface that provides the features of NeuroConv and NWB Inspector to non-programmers.
+
+30+ popular analysis tools support NWB as an input and/or output format, many of which are relevant to microephys data. SpikeInterface provides tools for creating spike sorting pipelines~\cite{buccino_spikeinterface_2020}. Neurosift provides interactive dashboards for visualizing NWB data~\cite{magland_neurosift_2024}, and Pynapple~\cite{viejo_pynapple_2023} provides tools for common neurophysiology analyses.
+
+NIX can be written from NEO~\cite{garcia_neo_2014}, which supports reading diverse electrophysiology data formats. NIX also supports data analysis libraries, such as Elephant~\cite{denker_collaborative_2018}.
 
 \bibliography{bep032}
 

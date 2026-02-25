@@ -122,3 +122,8 @@ bibtex main
 pdflatex main.tex
 pdflatex main.tex
 ```
+
+### Relevant GitHub Conversations
+
+- [the subject/sample question](https://github.com/INCF/neuroscience-data-structure/issues/9)
+- [demo pipeline for the usage od BEP032-example datasets](https://github.com/INCF/neuroscience-data-structure/issues/11)

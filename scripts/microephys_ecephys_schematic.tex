@@ -119,22 +119,23 @@
     {\footnotesize\textcolor{gray}{Recording Metadata Sidecar}}\\[4pt]
     {\tiny\ttfamily
     \{\\
-    ~~"TaskName": "discrimination",\\
-    ~~"TaskDescription": "Two-alternative forced choice...",\\
-    ~~"SamplingFrequency": 30000,\\
+    ~~"InstitutionName": "Example University",\\
     ~~"PowerLineFrequency": 60,\\
-    ~~"SoftwareFilters": "n/a",\\
+    ~~"Manufacturer": "ExampleManufacturer",\\
+    ~~"ManufacturersModelName": "Model-XYZ",\\
+    ~~"SamplingFrequency": 30000,\\
+    ~~"SoftwareName": "RecordingSoftware",\\
+    ~~"SoftwareVersions": "1.0.0",\\
     ~~"HardwareFilters": \{\\
     ~~~~"HighpassFilter": \{"Half-amplitude cutoff (Hz)": 0.1\}\\
     ~~\},\\
-    ~~"Manufacturer": "ManufacturerName",\\
-    ~~"ManufacturersModelName": "AcquisitionSystemModel",\\
-    ~~"SoftwareName": "RecordingSoftware",\\
-    ~~"SoftwareVersions": "1.0.0",\\
-    ~~"PharmaceuticalName": ["AnestheticAgent"],\\
+    ~~"PharmaceuticalName": ["anesthetic1", "anesthetic2"],\\
+    ~~"PharmaceuticalDoseAmount": [1.5, 10],\\
+    ~~"PharmaceuticalDoseUnits": ["percent", "mg/kg"],\\
     ~~"BodyPart": "BRAIN",\\
-    ~~"BodyPartDetails": "TargetBrainRegion",\\
-    ~~"SampleEnvironment": "in-vivo"\\
+    ~~"BodyPartDetails": "Motor Cortex",\\
+    ~~"SampleEnvironment": "in-vivo",\\
+    ~~"TaskName": "ExampleTask"\\
     \}
     }
 };
@@ -153,12 +154,12 @@
     \textbf{\normalsize\ttfamily *\_probes.tsv}\\[2pt]
     {\footnotesize\textcolor{gray}{Probes Table}}\\[4pt]
     {\tiny\ttfamily
-    \begin{tabular}{@{}llllllll@{}}
+    \begin{tabular}{@{}llllllllll@{}}
     \toprule
-    probe\_name & type & AP & ML & DV & AP\_angle & hemisphere & electrode\_count \\
+    probe\_name & type & AP & ML & DV & AP\_angle & ML\_angle & hemisphere & manufacturer & electrode\_count \\
     \midrule
-    probe01 & silicon-probe & -2.5 & 1.5 & -4.0 & 15 & L & 384 \\
-    probe02 & tetrode & -1.2 & -2.1 & -3.5 & 0 & R & 4 \\
+    probe01 & silicon-probe & -2.5 & 1.5 & -4.0 & 15 & 0 & L & IMEC & 384 \\
+    probe02 & tetrode & -1.2 & -2.1 & -3.5 & 0 & 10 & R & Neuralynx & 4 \\
     \bottomrule
     \end{tabular}
     }
@@ -170,14 +171,14 @@
     \textbf{\normalsize\ttfamily *\_channels.tsv}\\[2pt]
     {\footnotesize\textcolor{gray}{Channels Table}}\\[4pt]
     {\tiny\ttfamily
-    \begin{tabular}{@{}llllllll@{}}
+    \begin{tabular}{@{}llllllllll@{}}
     \toprule
-    name & reference & type & units & sampling\_frequency & hardware\_filters & gain & status \\
+    name & electrode\_name & reference & type & units & sampling\_frequency & gain & status & status\_description \\
     \midrule
-    ch001 & e001 & HP & uV & 30000 & HighpassFilter & 500 & good \\
-    ch002 & e002 & HP & uV & 30000 & HighpassFilter & 500 & good \\
-    ch003 & e003 & LFP & uV & 1000 & HighpassFilter & 500 & bad \\
-    sync01 & n/a & SYNC & V & 30000 & n/a & 1 & good \\
+    ch001 & e001 & ref01 & LFP & uV & 1000 & 500 & good & n/a \\
+    ch002 & e002 & ref01 & LFP & uV & 1000 & 500 & good & n/a \\
+    ch003 & e003 & ref01 & HP & uV & 30000 & 500 & bad & high\_noise \\
+    ch004 & n/a & n/a & SYNC & V & 30000 & 1 & good & n/a \\
     \bottomrule
     \end{tabular}
     }
@@ -189,14 +190,14 @@
     \textbf{\normalsize\ttfamily *\_electrodes.tsv}\\[2pt]
     {\footnotesize\textcolor{gray}{Electrodes Table (probe-relative)}}\\[4pt]
     {\tiny\ttfamily
-    \begin{tabular}{@{}llllllllll@{}}
+    \begin{tabular}{@{}lllllllllll@{}}
     \toprule
-    name & probe\_name & hemisphere & x & y & z & impedance & shank\_id & material & location \\
+    name & probe\_name & hemisphere & x & y & z & impedance & shank\_id & size & material & location \\
     \midrule
-    e001 & probe01 & L & 0 & 0 & 0 & 1.2 & 0 & iridium-oxide & RegionA \\
-    e002 & probe01 & L & 0 & 0 & 25 & 1.1 & 0 & iridium-oxide & RegionA \\
-    e003 & probe01 & L & 0 & 0 & 50 & 1.3 & 0 & iridium-oxide & RegionA \\
-    e004 & probe01 & L & 0 & 0 & 75 & 1.4 & 0 & iridium-oxide & RegionA \\
+    e001 & probe01 & L & 0 & 0 & 0 & 1.2 & 0 & 15 & iridium-oxide & MOp \\
+    e002 & probe01 & L & 0 & 0 & 25 & 1.1 & 0 & 15 & iridium-oxide & MOp \\
+    e003 & probe01 & L & 0 & 0 & 50 & 1.3 & 0 & 15 & iridium-oxide & MOp \\
+    e004 & probe01 & L & 0 & 0 & 75 & 1.4 & 0 & 15 & iridium-oxide & MOp \\
     \bottomrule
     \end{tabular}
     }

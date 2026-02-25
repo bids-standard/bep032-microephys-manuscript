@@ -2,6 +2,7 @@
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
 \usepackage{lineno}
+\usepackage{graphicx}
 
 \linenumbers
 
@@ -235,7 +236,7 @@ Metadata may appear in both places; analysis tools such as SpikeInterface (RRID:
 % - Specification: https://github.com/bids-standard/bids-specification
 % - Example datasets and scripts: [GITHUB LINK]
 
-\bibliography{bep032}
+% \bibliography{bep032}
 
 \section*{Acknowledgements}
 % INCF Working Group members, funders, community contributors
@@ -250,7 +251,7 @@ The authors declare no competing interests.
 
 \begin{figure}[ht]
 \centering
-% \includegraphics[width=\linewidth]{figures/bep032_overview}
+\includegraphics[width=\linewidth]{figures/figure.pdf}
 \caption{Overview of the BIDS microelectrode electrophysiology extension showing an example extracellular electrophysiology dataset.
 Left: directory structure with the \texttt{ecephys/} datatype folder containing data files and metadata.
 Right: file contents showing (a) the sidecar JSON with recording metadata, (b) \texttt{probes.tsv} describing probe placement and type, (c) \texttt{electrodes.tsv} with probe-relative electrode positions, (d) \texttt{channels.tsv} linking recorded signals to electrodes, and (e) example voltage traces.

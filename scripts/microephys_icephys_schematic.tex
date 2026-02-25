@@ -69,7 +69,7 @@
 
 % Title at top
 \node[font=\LARGE\bfseries, text=darktext] (title) {
-    Intracellular Electrophysiology (icephys) BIDS Dataset
+    Intracellular Electrophysiology (icephys) BIDS BEP032 Dataset
 };
 
 % File tree
@@ -121,11 +121,13 @@
     \textbf{\normalsize\ttfamily *\_probes.tsv}\\[2pt]
     {\footnotesize\textcolor{gray}{Probes Table (pipette)}}\\[4pt]
     {\tiny\ttfamily
-    \begin{tabular}{@{}llllllll@{}}
+    \begin{tabular}{@{}llllllllll@{}}
     \toprule
-    probe\_name & type & AP & ML & DV & AP\_angle & hemisphere & electrode\_count \\
+    probe\_name & type & AP & ML & DV & AP\_angle & ML\_angle & hemisphere & manufacturer & electrode\_count \\
     \midrule
-    pip01 & patch-pipette & -1.8 & 0.5 & -2.2 & 30 & L & 1 \\
+    pipette01 & patch-pipette & -1.8 & 0.5 & -2.2 & 30 & 0 & L & Sutter & 1 \\
+    pipette02 & patch-pipette & -1.8 & -0.5 & -2.2 & 30 & 0 & R & Sutter & 1 \\
+    pipette03 & sharp-electrode & -3.2 & 1.2 & -3.8 & 20 & 5 & L & WPI & 1 \\
     \bottomrule
     \end{tabular}
     }
@@ -137,11 +139,13 @@
     \textbf{\normalsize\ttfamily *\_electrodes.tsv}\\[2pt]
     {\footnotesize\textcolor{gray}{Electrodes Table}}\\[4pt]
     {\tiny\ttfamily
-    \begin{tabular}{@{}llllllll@{}}
+    \begin{tabular}{@{}llllllllll@{}}
     \toprule
-    name & probe\_name & x & y & z & impedance & pipette\_solution & material \\
+    name & probe\_name & hemisphere & x & y & z & impedance & pipette\_solution & material & location \\
     \midrule
-    patch01 & pip01 & 0 & 0 & 0 & 5.2 & Internal & glass \\
+    patch01 & pipette01 & L & 0 & 0 & 0 & 5.2 & K-gluconate & borosilicate-glass & VISp2/3 \\
+    patch02 & pipette02 & R & 0 & 0 & 0 & 4.8 & K-gluconate & borosilicate-glass & VISp2/3 \\
+    sharp01 & pipette03 & L & 0 & 0 & 0 & 80 & 3M KCl & borosilicate-glass & PL5 \\
     \bottomrule
     \end{tabular}
     }
@@ -155,9 +159,11 @@
     {\tiny\ttfamily
     \begin{tabular}{@{}llllllll@{}}
     \toprule
-    name & reference & type & units & sampling\_frequency & recording\_mode & ground & status \\
+    name & type & units & sampling\_frequency & recording\_mode & gain & ground & status \\
     \midrule
-    patch01 & n/a & VM & mV & 20000 & I-clamp & AgCl & good \\
+    patch01 & VM & mV & 20000 & current-clamp & 10 & AgCl & good \\
+    patch02 & VM & mV & 20000 & current-clamp & 10 & AgCl & good \\
+    sharp01 & IM & pA & 20000 & voltage-clamp & 5 & AgCl & good \\
     \bottomrule
     \end{tabular}
     }
@@ -214,25 +220,23 @@
     {\footnotesize\textcolor{gray}{Recording Metadata Sidecar}}\\[4pt]
     {\tiny\ttfamily
     \{\\
-    ~~"TaskName": "IVcurve",\\
-    ~~"TaskDescription": "Current injection protocol to\\
-    ~~~characterize intrinsic membrane properties",\\
-    ~~"SamplingFrequency": 20000,\\
+    ~~"InstitutionName": "Example Institute",\\
     ~~"PowerLineFrequency": 60,\\
-    ~~"HardwareFilters": "n/a",\\
-    ~~"SoftwareFilters": "n/a",\\
-    ~~"Manufacturer": "AmplifierManufacturer",\\
-    ~~"ManufacturersModelName": "AmplifierModel",\\
-    ~~"SoftwareName": "AcquisitionSoftware",\\
-    ~~"SoftwareVersions": "1.0.0",\\
-    ~~"RecordingType": "epoched",\\
+    ~~"Manufacturer": "PatchClampManufacturer",\\
+    ~~"ManufacturersModelName": "Amplifier-ABC",\\
+    ~~"SamplingFrequency": 20000,\\
+    ~~"SoftwareName": "PatchSoftware",\\
+    ~~"SoftwareVersions": "2.1.0",\\
+    ~~"SoftwareFilters": \{\\
+    ~~~~"BesselFilter": \{"Half-amplitude cutoff (Hz)": 10000\}\\
+    ~~\},\\
     ~~"BodyPart": "BRAIN",\\
-    ~~"BodyPartDetails": "TargetBrainRegion",\\
+    ~~"BodyPartDetails": "Visual Cortex",\\
     ~~"SampleEnvironment": "ex-vivo",\\
     ~~"SliceThickness": 300,\\
-    ~~"SliceThicknessUnits": "um",\\
-    ~~"TissueOrigin": "TargetBrainRegion",\\
-    ~~"CellType": "cell\_type"\\
+    ~~"TaskName": "MembraneProperties",\\
+    ~~"TaskDescription": "Characterization of intrinsic\\
+    ~~~properties"\\
     \}
     }
 };

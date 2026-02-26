@@ -1,0 +1,494 @@
+<mxfile host="draw.io">
+  <diagram name="ProbeInterface Integration" id="fig3">
+    <mxGraphModel dx="1050" dy="560" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1200" pageHeight="580" background="#FFFFFF" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ============================================================ -->
+        <!-- FIGURE TITLE                                                  -->
+        <!-- ============================================================ -->
+        <mxCell id="fig_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=13;fontColor=#212121;fontStyle=1;" value="ProbeInterface integration with BEP032" vertex="1">
+          <mxGeometry height="22" width="400" x="20" y="10" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LEFT: probes.tsv (GREEN) — probe-level metadata               -->
+        <!-- Container: x=20, y=45, w=280, h=120                          -->
+        <!-- ============================================================ -->
+        <mxCell id="probes_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="120" width="280" x="20" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="probes_num" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#388E3C;strokeColor=none;fontColor=#fff;fontStyle=1;fontSize=11;" value="1" vertex="1">
+          <mxGeometry height="20" width="20" x="28" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="probes_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=11;fontColor=#388E3C;fontStyle=1;" value="*_probes.tsv" vertex="1">
+          <mxGeometry height="20" width="110" x="52" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="probes_desc" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=8;fontColor=#000;fontStyle=2;" value="Physical recording devices" vertex="1">
+          <mxGeometry height="14" width="140" x="165" y="53" as="geometry" />
+        </mxCell>
+        <!-- Header row -->
+        <mxCell id="p_h1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#A5D6A7;fontFamily=Consolas;fontSize=9;fontStyle=1;" value="probe_name" vertex="1">
+          <mxGeometry height="18" width="62" x="30" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="p_h2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#A5D6A7;fontFamily=Consolas;fontSize=9;fontStyle=1;" value="type" vertex="1">
+          <mxGeometry height="18" width="58" x="92" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="p_h3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#A5D6A7;fontFamily=Consolas;fontSize=9;" value="manufacturer" vertex="1">
+          <mxGeometry height="18" width="72" x="150" y="76" as="geometry" />
+        </mxCell>
+        <mxCell id="p_h4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#A5D6A7;fontFamily=Consolas;fontSize=9;" value="model" vertex="1">
+          <mxGeometry height="18" width="68" x="222" y="76" as="geometry" />
+        </mxCell>
+        <!-- Data row 1 -->
+        <mxCell id="p_r1c1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;fontStyle=1;fontColor=#388E3C;" value="A4x8" vertex="1">
+          <mxGeometry height="16" width="62" x="30" y="94" as="geometry" />
+        </mxCell>
+        <mxCell id="p_r1c2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="silicon" vertex="1">
+          <mxGeometry height="16" width="58" x="92" y="94" as="geometry" />
+        </mxCell>
+        <mxCell id="p_r1c3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="neuronexus" vertex="1">
+          <mxGeometry height="16" width="72" x="150" y="94" as="geometry" />
+        </mxCell>
+        <mxCell id="p_r1c4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="A4x8-5mm..." vertex="1">
+          <mxGeometry height="16" width="68" x="222" y="94" as="geometry" />
+        </mxCell>
+        <!-- Data row 2 -->
+        <mxCell id="p_r2c1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;fontStyle=1;fontColor=#388E3C;" value="TET01" vertex="1">
+          <mxGeometry height="16" width="62" x="30" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="p_r2c2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="tetrode" vertex="1">
+          <mxGeometry height="16" width="58" x="92" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="p_r2c3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;fontColor=#999;" value="n/a" vertex="1">
+          <mxGeometry height="16" width="72" x="150" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="p_r2c4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;fontColor=#999;" value="n/a" vertex="1">
+          <mxGeometry height="16" width="68" x="222" y="110" as="geometry" />
+        </mxCell>
+        <!-- More columns note -->
+        <mxCell id="p_note" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#666;fontStyle=2;" value="+ AP, ML, DV, angles, dimensions..." vertex="1">
+          <mxGeometry height="12" width="200" x="30" y="128" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LEFT: electrodes.tsv (PINK) — contact positions & shapes      -->
+        <!-- Container: x=20, y=180, w=280, h=145                         -->
+        <!-- ============================================================ -->
+        <mxCell id="elec_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="145" width="280" x="20" y="180" as="geometry" />
+        </mxCell>
+        <mxCell id="elec_num" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#C2185B;strokeColor=none;fontColor=#fff;fontStyle=1;fontSize=11;" value="2" vertex="1">
+          <mxGeometry height="20" width="20" x="28" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="elec_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=11;fontColor=#C2185B;fontStyle=1;" value="*_electrodes.tsv" vertex="1">
+          <mxGeometry height="20" width="130" x="52" y="185" as="geometry" />
+        </mxCell>
+        <mxCell id="elec_desc" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=8;fontColor=#000;fontStyle=2;" value="Contact points (probe-relative μm)" vertex="1">
+          <mxGeometry height="14" width="180" x="120" y="188" as="geometry" />
+        </mxCell>
+        <!-- Header row -->
+        <mxCell id="e_h1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8BBD9;strokeColor=#F48FB1;fontFamily=Consolas;fontSize=9;fontStyle=1;" value="name" vertex="1">
+          <mxGeometry height="18" width="46" x="30" y="211" as="geometry" />
+        </mxCell>
+        <mxCell id="e_h2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8BBD9;strokeColor=#F48FB1;fontFamily=Consolas;fontSize=9;fontStyle=1;" value="probe_name" vertex="1">
+          <mxGeometry height="18" width="52" x="76" y="211" as="geometry" />
+        </mxCell>
+        <mxCell id="e_h3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8BBD9;strokeColor=#F48FB1;fontFamily=Consolas;fontSize=9;fontStyle=1;" value="x" vertex="1">
+          <mxGeometry height="18" width="26" x="128" y="211" as="geometry" />
+        </mxCell>
+        <mxCell id="e_h4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8BBD9;strokeColor=#F48FB1;fontFamily=Consolas;fontSize=9;fontStyle=1;" value="y" vertex="1">
+          <mxGeometry height="18" width="26" x="154" y="211" as="geometry" />
+        </mxCell>
+        <mxCell id="e_h5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8BBD9;strokeColor=#F48FB1;fontFamily=Consolas;fontSize=9;fontStyle=1;" value="z" vertex="1">
+          <mxGeometry height="18" width="26" x="180" y="211" as="geometry" />
+        </mxCell>
+        <mxCell id="e_h6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8BBD9;strokeColor=#F48FB1;fontFamily=Consolas;fontSize=9;" value="shank_id" vertex="1">
+          <mxGeometry height="18" width="52" x="206" y="211" as="geometry" />
+        </mxCell>
+        <mxCell id="e_h7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#F8BBD9;strokeColor=#F48FB1;fontFamily=Consolas;fontSize=9;" value="elec_shape" vertex="1">
+          <mxGeometry height="18" width="32" x="258" y="211" as="geometry" />
+        </mxCell>
+        <!-- Data row 1 -->
+        <mxCell id="e_r1c1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;fontStyle=1;fontColor=#C2185B;" value="1" vertex="1">
+          <mxGeometry height="16" width="46" x="30" y="229" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r1c2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;fontColor=#388E3C;" value="A4x8" vertex="1">
+          <mxGeometry height="16" width="52" x="76" y="229" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r1c3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="0" vertex="1">
+          <mxGeometry height="16" width="26" x="128" y="229" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r1c4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="0" vertex="1">
+          <mxGeometry height="16" width="26" x="154" y="229" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r1c5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="0" vertex="1">
+          <mxGeometry height="16" width="26" x="180" y="229" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r1c6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="0" vertex="1">
+          <mxGeometry height="16" width="52" x="206" y="229" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r1c7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="circle" vertex="1">
+          <mxGeometry height="16" width="32" x="258" y="229" as="geometry" />
+        </mxCell>
+        <!-- Data row 2 -->
+        <mxCell id="e_r2c1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;fontStyle=1;fontColor=#C2185B;" value="9" vertex="1">
+          <mxGeometry height="16" width="46" x="30" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r2c2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;fontColor=#388E3C;" value="A4x8" vertex="1">
+          <mxGeometry height="16" width="52" x="76" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r2c3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="200" vertex="1">
+          <mxGeometry height="16" width="26" x="128" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r2c4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="0" vertex="1">
+          <mxGeometry height="16" width="26" x="154" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r2c5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="0" vertex="1">
+          <mxGeometry height="16" width="26" x="180" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r2c6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="1" vertex="1">
+          <mxGeometry height="16" width="52" x="206" y="245" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r2c7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="circle" vertex="1">
+          <mxGeometry height="16" width="32" x="258" y="245" as="geometry" />
+        </mxCell>
+        <!-- Data row 3 -->
+        <mxCell id="e_r3c1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;fontStyle=1;fontColor=#C2185B;" value="2" vertex="1">
+          <mxGeometry height="16" width="46" x="30" y="261" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r3c2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;fontColor=#388E3C;" value="A4x8" vertex="1">
+          <mxGeometry height="16" width="52" x="76" y="261" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r3c3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="0" vertex="1">
+          <mxGeometry height="16" width="26" x="128" y="261" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r3c4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="200" vertex="1">
+          <mxGeometry height="16" width="26" x="154" y="261" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r3c5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="0" vertex="1">
+          <mxGeometry height="16" width="26" x="180" y="261" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r3c6" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="0" vertex="1">
+          <mxGeometry height="16" width="52" x="206" y="261" as="geometry" />
+        </mxCell>
+        <mxCell id="e_r3c7" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="circle" vertex="1">
+          <mxGeometry height="16" width="32" x="258" y="261" as="geometry" />
+        </mxCell>
+        <!-- More columns note -->
+        <mxCell id="e_note" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#666;fontStyle=2;" value="+ impedance, size, material, hemisphere, location..." vertex="1">
+          <mxGeometry height="12" width="250" x="30" y="280" as="geometry" />
+        </mxCell>
+        <!-- FK arrow label -->
+        <mxCell id="e_fk_arrow" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#388E3C;strokeWidth=1.5;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="102" y="229" as="sourcePoint" />
+            <mxPoint x="61" y="126" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="e_fk_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#388E3C;fontStyle=1;" value="probe_name" vertex="1">
+          <mxGeometry height="10" width="50" x="70" y="165" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- LEFT: channels.tsv (ORANGE) — contact IDs & wiring            -->
+        <!-- Container: x=20, y=340, w=280, h=120                         -->
+        <!-- ============================================================ -->
+        <mxCell id="chan_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#F57C00;strokeWidth=2;" value="" vertex="1">
+          <mxGeometry height="120" width="280" x="20" y="340" as="geometry" />
+        </mxCell>
+        <mxCell id="chan_num" parent="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#F57C00;strokeColor=none;fontColor=#fff;fontStyle=1;fontSize=11;" value="3" vertex="1">
+          <mxGeometry height="20" width="20" x="28" y="345" as="geometry" />
+        </mxCell>
+        <mxCell id="chan_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=11;fontColor=#F57C00;fontStyle=1;" value="*_channels.tsv" vertex="1">
+          <mxGeometry height="20" width="120" x="52" y="345" as="geometry" />
+        </mxCell>
+        <mxCell id="chan_desc" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=8;fontColor=#000;fontStyle=2;" value="Recording channel wiring" vertex="1">
+          <mxGeometry height="14" width="140" x="165" y="348" as="geometry" />
+        </mxCell>
+        <!-- Header row -->
+        <mxCell id="c_h1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FFCC80;fontFamily=Consolas;fontSize=9;fontStyle=1;" value="name" vertex="1">
+          <mxGeometry height="18" width="62" x="30" y="371" as="geometry" />
+        </mxCell>
+        <mxCell id="c_h2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FFCC80;fontFamily=Consolas;fontSize=9;fontStyle=1;" value="electrode_name" vertex="1">
+          <mxGeometry height="18" width="68" x="92" y="371" as="geometry" />
+        </mxCell>
+        <mxCell id="c_h3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FFCC80;fontFamily=Consolas;fontSize=9;" value="type" vertex="1">
+          <mxGeometry height="18" width="40" x="160" y="371" as="geometry" />
+        </mxCell>
+        <mxCell id="c_h4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FFCC80;fontFamily=Consolas;fontSize=9;" value="units" vertex="1">
+          <mxGeometry height="18" width="40" x="200" y="371" as="geometry" />
+        </mxCell>
+        <mxCell id="c_h5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FFCC80;fontFamily=Consolas;fontSize=9;" value="sampling_freq" vertex="1">
+          <mxGeometry height="18" width="50" x="240" y="371" as="geometry" />
+        </mxCell>
+        <!-- Data row 1 -->
+        <mxCell id="c_r1c1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;fontStyle=1;fontColor=#F57C00;" value="ch0" vertex="1">
+          <mxGeometry height="16" width="62" x="30" y="389" as="geometry" />
+        </mxCell>
+        <mxCell id="c_r1c2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;fontColor=#C2185B;" value="1" vertex="1">
+          <mxGeometry height="16" width="68" x="92" y="389" as="geometry" />
+        </mxCell>
+        <mxCell id="c_r1c3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="BB" vertex="1">
+          <mxGeometry height="16" width="40" x="160" y="389" as="geometry" />
+        </mxCell>
+        <mxCell id="c_r1c4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="uV" vertex="1">
+          <mxGeometry height="16" width="40" x="200" y="389" as="geometry" />
+        </mxCell>
+        <mxCell id="c_r1c5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="30000" vertex="1">
+          <mxGeometry height="16" width="50" x="240" y="389" as="geometry" />
+        </mxCell>
+        <!-- Data row 2 -->
+        <mxCell id="c_r2c1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;fontStyle=1;fontColor=#F57C00;" value="ch7" vertex="1">
+          <mxGeometry height="16" width="62" x="30" y="405" as="geometry" />
+        </mxCell>
+        <mxCell id="c_r2c2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;fontColor=#C2185B;" value="8" vertex="1">
+          <mxGeometry height="16" width="68" x="92" y="405" as="geometry" />
+        </mxCell>
+        <mxCell id="c_r2c3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="BB" vertex="1">
+          <mxGeometry height="16" width="40" x="160" y="405" as="geometry" />
+        </mxCell>
+        <mxCell id="c_r2c4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="uV" vertex="1">
+          <mxGeometry height="16" width="40" x="200" y="405" as="geometry" />
+        </mxCell>
+        <mxCell id="c_r2c5" parent="1" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ddd;fontFamily=Consolas;fontSize=9;" value="30000" vertex="1">
+          <mxGeometry height="16" width="50" x="240" y="405" as="geometry" />
+        </mxCell>
+        <!-- More columns note -->
+        <mxCell id="c_note" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#666;fontStyle=2;" value="+ low_cutoff, high_cutoff, notch, reference..." vertex="1">
+          <mxGeometry height="12" width="230" x="30" y="424" as="geometry" />
+        </mxCell>
+        <!-- FK arrow: electrode_id → electrodes -->
+        <mxCell id="c_fk_arrow" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#C2185B;strokeWidth=1.5;dashed=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="126" y="389" as="sourcePoint" />
+            <mxPoint x="53" y="277" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="c_fk_label" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#C2185B;fontStyle=1;" value="electrode_name" vertex="1">
+          <mxGeometry height="10" width="60" x="60" y="330" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- CENTRE: Annotated probe geometry (placeholder for SVG)        -->
+        <!-- ============================================================ -->
+        <mxCell id="geom_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#9E9E9E;strokeWidth=1;dashed=1;" value="" vertex="1">
+          <mxGeometry height="370" width="300" x="330" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="geom_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=top;fontFamily=Helvetica;fontSize=10;fontColor=#212121;fontStyle=1;" value="Probe geometry" vertex="1">
+          <mxGeometry height="18" width="280" x="340" y="50" as="geometry" />
+        </mxCell>
+        <mxCell id="geom_hint" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=8;fontColor=#9E9E9E;fontStyle=2;" value="(Import annotated_A4x8_coloured.svg)" vertex="1">
+          <mxGeometry height="14" width="250" x="355" y="70" as="geometry" />
+        </mxCell>
+
+        <!-- Schematic legend inside geometry box -->
+        <mxCell id="geom_leg_green" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=1.5;fontFamily=Helvetica;fontSize=7;fontColor=#388E3C;fontStyle=1;" value="outline = probes.tsv" vertex="1">
+          <mxGeometry height="18" width="130" x="340" y="378" as="geometry" />
+        </mxCell>
+        <mxCell id="geom_leg_pink" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE4EC;strokeColor=#C2185B;strokeWidth=1.5;fontFamily=Helvetica;fontSize=7;fontColor=#C2185B;fontStyle=1;" value="● contacts = electrodes.tsv" vertex="1">
+          <mxGeometry height="18" width="150" x="475" y="378" as="geometry" />
+        </mxCell>
+        <mxCell id="geom_leg_orange" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF3E0;strokeColor=#F57C00;strokeWidth=1.5;fontFamily=Helvetica;fontSize=7;fontColor=#F57C00;fontStyle=1;" value="ch indices = channels.tsv" vertex="1">
+          <mxGeometry height="18" width="120" x="340" y="400" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- RIGHT: Colour-coded ProbeInterface JSON                       -->
+        <!-- ============================================================ -->
+        <mxCell id="json_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#BDBDBD;strokeWidth=1;" value="" vertex="1">
+          <mxGeometry height="395" width="260" x="660" y="45" as="geometry" />
+        </mxCell>
+        <mxCell id="json_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontFamily=Helvetica;fontSize=9;fontColor=#212121;fontStyle=1;" value="ProbeInterface JSON" vertex="1">
+          <mxGeometry height="16" width="150" x="670" y="50" as="geometry" />
+        </mxCell>
+
+        <!-- Structural lines (black) -->
+        <mxCell id="j01" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#212121;" value="{" vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="70" as="geometry" />
+        </mxCell>
+        <mxCell id="j02" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#212121;" value='  &quot;specification&quot;: &quot;probeinterface&quot;,' vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="82" as="geometry" />
+        </mxCell>
+        <mxCell id="j03" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#212121;" value='  &quot;probes&quot;: [{' vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="94" as="geometry" />
+        </mxCell>
+
+        <!-- GREEN: probe-level fields -->
+        <mxCell id="j04" parent="1" style="text;html=1;strokeColor=none;fillColor=#E8F5E9;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#388E3C;fontStyle=1;rounded=1;" value='    &quot;si_units&quot;: &quot;um&quot;,' vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="110" as="geometry" />
+        </mxCell>
+        <mxCell id="j05" parent="1" style="text;html=1;strokeColor=none;fillColor=#E8F5E9;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#388E3C;rounded=1;" value='    &quot;annotations&quot;: {' vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="122" as="geometry" />
+        </mxCell>
+        <mxCell id="j06" parent="1" style="text;html=1;strokeColor=none;fillColor=#E8F5E9;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#388E3C;rounded=1;" value='      &quot;manufacturer&quot;: &quot;neuronexus&quot;,' vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="134" as="geometry" />
+        </mxCell>
+        <mxCell id="j07" parent="1" style="text;html=1;strokeColor=none;fillColor=#E8F5E9;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#388E3C;rounded=1;" value='      &quot;model_name&quot;: &quot;A4x8-5mm-...&quot;' vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="146" as="geometry" />
+        </mxCell>
+        <mxCell id="j08" parent="1" style="text;html=1;strokeColor=none;fillColor=#E8F5E9;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#388E3C;rounded=1;" value="    }," vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="158" as="geometry" />
+        </mxCell>
+
+        <!-- PINK: electrode-level fields -->
+        <mxCell id="j09" parent="1" style="text;html=1;strokeColor=none;fillColor=#FCE4EC;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#C2185B;fontStyle=1;rounded=1;" value='    &quot;contact_positions&quot;: [' vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="174" as="geometry" />
+        </mxCell>
+        <mxCell id="j10" parent="1" style="text;html=1;strokeColor=none;fillColor=#FCE4EC;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#C2185B;rounded=1;" value="      [0, 0], [0, 100]," vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="186" as="geometry" />
+        </mxCell>
+        <mxCell id="j11" parent="1" style="text;html=1;strokeColor=none;fillColor=#FCE4EC;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#C2185B;rounded=1;" value="      [200, 0], [200, 100], ..." vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="198" as="geometry" />
+        </mxCell>
+        <mxCell id="j12" parent="1" style="text;html=1;strokeColor=none;fillColor=#FCE4EC;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#C2185B;rounded=1;" value="    ]," vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="j13" parent="1" style="text;html=1;strokeColor=none;fillColor=#FCE4EC;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#C2185B;rounded=1;" value='    &quot;contact_shapes&quot;: [&quot;circle&quot;],' vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="226" as="geometry" />
+        </mxCell>
+        <mxCell id="j14" parent="1" style="text;html=1;strokeColor=none;fillColor=#FCE4EC;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#C2185B;rounded=1;" value='    &quot;contact_shape_params&quot;: [' vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="238" as="geometry" />
+        </mxCell>
+        <mxCell id="j15" parent="1" style="text;html=1;strokeColor=none;fillColor=#FCE4EC;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#C2185B;rounded=1;" value='      {&quot;radius&quot;: 7.5}' vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="250" as="geometry" />
+        </mxCell>
+        <mxCell id="j16" parent="1" style="text;html=1;strokeColor=none;fillColor=#FCE4EC;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#C2185B;rounded=1;" value="    ]," vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="262" as="geometry" />
+        </mxCell>
+        <mxCell id="j17" parent="1" style="text;html=1;strokeColor=none;fillColor=#FCE4EC;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#C2185B;rounded=1;" value='    &quot;shank_ids&quot;: [&quot;0&quot;, &quot;0&quot;, ...],' vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="278" as="geometry" />
+        </mxCell>
+
+        <!-- GREEN: probe_planar_contour -->
+        <mxCell id="j18" parent="1" style="text;html=1;strokeColor=none;fillColor=#E8F5E9;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#388E3C;fontStyle=1;rounded=1;" value='    &quot;probe_planar_contour&quot;: [' vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="306" as="geometry" />
+        </mxCell>
+        <mxCell id="j19" parent="1" style="text;html=1;strokeColor=none;fillColor=#E8F5E9;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#388E3C;rounded=1;" value="      [-20, 720], [-20, -20]," vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="318" as="geometry" />
+        </mxCell>
+        <mxCell id="j20" parent="1" style="text;html=1;strokeColor=none;fillColor=#E8F5E9;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#388E3C;rounded=1;" value="      [620, 720], ..." vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="330" as="geometry" />
+        </mxCell>
+        <mxCell id="j21" parent="1" style="text;html=1;strokeColor=none;fillColor=#E8F5E9;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#388E3C;rounded=1;" value="    ]," vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="342" as="geometry" />
+        </mxCell>
+
+        <!-- PINK: contact_ids are electrode identifiers (→ electrodes.tsv name) -->
+        <mxCell id="j22" parent="1" style="text;html=1;strokeColor=none;fillColor=#FCE4EC;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#C2185B;fontStyle=1;rounded=1;" value='    &quot;contact_ids&quot;: [&quot;1&quot;,&quot;8&quot;,...],' vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="290" as="geometry" />
+        </mxCell>
+        <!-- ORANGE: channel-level field -->
+        <mxCell id="j23" parent="1" style="text;html=1;strokeColor=none;fillColor=#FFF3E0;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#F57C00;fontStyle=1;rounded=1;" value='    &quot;device_channel_indices&quot;: [' vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="358" as="geometry" />
+        </mxCell>
+        <mxCell id="j24" parent="1" style="text;html=1;strokeColor=none;fillColor=#FFF3E0;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#F57C00;rounded=1;" value="      0, 7, 1, 6, 2, 5, ..." vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="j25" parent="1" style="text;html=1;strokeColor=none;fillColor=#FFF3E0;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#F57C00;rounded=1;" value="    ]" vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="382" as="geometry" />
+        </mxCell>
+
+        <!-- Structural close -->
+        <mxCell id="j26" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#212121;" value="  }]" vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="398" as="geometry" />
+        </mxCell>
+        <mxCell id="j27" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#212121;" value="}" vertex="1">
+          <mxGeometry height="12" width="230" x="670" y="410" as="geometry" />
+        </mxCell>
+
+        <!-- JSON colour legend -->
+        <mxCell id="jleg_green" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#388E3C;strokeColor=none;fontFamily=Helvetica;fontSize=6;fontColor=#fff;" value="probes.tsv" vertex="1">
+          <mxGeometry height="14" width="60" x="670" y="425" as="geometry" />
+        </mxCell>
+        <mxCell id="jleg_pink" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C2185B;strokeColor=none;fontFamily=Helvetica;fontSize=6;fontColor=#fff;" value="electrodes.tsv" vertex="1">
+          <mxGeometry height="14" width="75" x="736" y="425" as="geometry" />
+        </mxCell>
+        <mxCell id="jleg_orange" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F57C00;strokeColor=none;fontFamily=Helvetica;fontSize=6;fontColor=#fff;" value="channels.tsv" vertex="1">
+          <mxGeometry height="14" width="70" x="817" y="425" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- ARROWS: TSV → Geometry (left to centre)                       -->
+        <!-- ============================================================ -->
+        <mxCell id="arr_probes" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#388E3C;strokeWidth=2;curved=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="105" as="sourcePoint" />
+            <mxPoint x="330" y="105" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr_elec" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#C2185B;strokeWidth=2;curved=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="252" as="sourcePoint" />
+            <mxPoint x="330" y="230" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr_chan" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#F57C00;strokeWidth=2;curved=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="300" y="400" as="sourcePoint" />
+            <mxPoint x="330" y="350" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- ARROWS: Geometry → JSON (centre to right)                     -->
+        <!-- ============================================================ -->
+        <mxCell id="arr_j_green" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#388E3C;strokeWidth=2;curved=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="630" y="134" as="sourcePoint" />
+            <mxPoint x="660" y="134" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr_j_pink" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#C2185B;strokeWidth=2;curved=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="630" y="226" as="sourcePoint" />
+            <mxPoint x="660" y="226" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="arr_j_orange" edge="1" parent="1" style="endArrow=classic;html=1;strokeColor=#F57C00;strokeWidth=2;curved=1;" value="">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="630" y="364" as="sourcePoint" />
+            <mxPoint x="660" y="364" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- BOTTOM: ProbeInterface definition block (neutral)             -->
+        <!-- ============================================================ -->
+        <mxCell id="pidef_box" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#78909C;strokeWidth=1.5;" value="" vertex="1">
+          <mxGeometry height="55" width="580" x="330" y="460" as="geometry" />
+        </mxCell>
+        <mxCell id="pidef_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=9;fontColor=#37474F;fontStyle=1;" value="ProbeInterface definition source" vertex="1">
+          <mxGeometry height="16" width="220" x="340" y="465" as="geometry" />
+        </mxCell>
+        <mxCell id="pidef_opt1" parent="1" style="text;html=1;strokeColor=none;fillColor=#CFD8DC;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#37474F;spacingLeft=4;rounded=1;" value="Option A: probeinterface_library URL  →  &quot;TermURL&quot;: &quot;https://gin.g-node.org/.../probe.json&quot;" vertex="1">
+          <mxGeometry height="14" width="560" x="340" y="484" as="geometry" />
+        </mxCell>
+        <mxCell id="pidef_opt2" parent="1" style="text;html=1;strokeColor=none;fillColor=#CFD8DC;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#37474F;spacingLeft=4;rounded=1;" value="Option B: custom file in dataset       →  &quot;TermURL&quot;: &quot;bids::probes/custom_probe.json&quot;" vertex="1">
+          <mxGeometry height="14" width="560" x="340" y="500" as="geometry" />
+        </mxCell>
+
+        <!-- ============================================================ -->
+        <!-- COLOUR KEY (bottom-left)                                      -->
+        <!-- ============================================================ -->
+        <mxCell id="key_title" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#616161;fontStyle=2;" value="Colours match Figure 1:" vertex="1">
+          <mxGeometry height="14" width="120" x="20" y="468" as="geometry" />
+        </mxCell>
+        <mxCell id="key_green" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#388E3C;strokeColor=none;fontFamily=Helvetica;fontSize=7;fontColor=#fff;fontStyle=1;" value="probes" vertex="1">
+          <mxGeometry height="16" width="50" x="20" y="484" as="geometry" />
+        </mxCell>
+        <mxCell id="key_pink" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C2185B;strokeColor=none;fontFamily=Helvetica;fontSize=7;fontColor=#fff;fontStyle=1;" value="electrodes" vertex="1">
+          <mxGeometry height="16" width="65" x="76" y="484" as="geometry" />
+        </mxCell>
+        <mxCell id="key_orange" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F57C00;strokeColor=none;fontFamily=Helvetica;fontSize=7;fontColor=#fff;fontStyle=1;" value="channels" vertex="1">
+          <mxGeometry height="16" width="55" x="147" y="484" as="geometry" />
+        </mxCell>
+        <mxCell id="key_note" parent="1" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#616161;fontStyle=2;" value="Same colour = same BIDS level" vertex="1">
+          <mxGeometry height="14" width="170" x="20" y="504" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

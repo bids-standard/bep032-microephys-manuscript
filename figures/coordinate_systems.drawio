@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" modified="2026-02-09T12:00:00.000Z" agent="Claude" version="21.0.0" type="device">
+  <diagram name="coordinate_systems" id="coord-systems-v2">
+    <mxGraphModel dx="1000" dy="650" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="900" pageHeight="480" math="0" shadow="0" background="#FFFFFF">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+
+        <!-- ===== TITLE ===== -->
+        <mxCell id="main_title" value="Electrode Localization" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=14;fontColor=#333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="10" width="860" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== KEY DIFFERENCE BANNER ===== -->
+        <mxCell id="diff_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#FBC02D;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="35" width="860" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="diff_text" value="vs iEEG-BIDS:  iEEG = anatomical coords  |  Microephys = probe-relative (for spike sorting) + optional anatomical" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=9;fontColor=#333;" vertex="1" parent="1">
+          <mxGeometry x="20" y="38" width="860" height="20" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== COLUMN 1: Probe-relative ===== -->
+        <mxCell id="col1_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="20" y="70" width="270" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="col1_title" value="Probe-Relative" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=#388E3C;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="75" width="120" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="col1_req" value="REQUIRED" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#388E3C;strokeColor=none;fontFamily=Helvetica;fontSize=7;fontColor=#fff;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="155" y="77" width="50" height="14" as="geometry"/>
+        </mxCell>
+        <mxCell id="col1_file" value="electrodes.tsv" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=9;fontColor=#388E3C;" vertex="1" parent="1">
+          <mxGeometry x="30" y="95" width="100" height="14" as="geometry"/>
+        </mxCell>
+
+        <!-- Probe visual with coordinates -->
+        <mxCell id="pr_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ccc;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="30" y="115" width="120" height="160" as="geometry"/>
+        </mxCell>
+        <mxCell id="pr_shank" value="" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#B0BEC5;strokeColor=#78909C;" vertex="1" parent="1">
+          <mxGeometry x="80" y="125" width="18" height="130" as="geometry"/>
+        </mxCell>
+        <!-- Electrodes with y labels -->
+        <mxCell id="pr_e1" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFC107;strokeColor=#FF9800;" vertex="1" parent="1">
+          <mxGeometry x="84" y="238" width="10" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="pr_e1_lbl" value="y=0" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#666;" vertex="1" parent="1">
+          <mxGeometry x="100" y="236" width="25" height="12" as="geometry"/>
+        </mxCell>
+        <mxCell id="pr_e2" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFC107;strokeColor=#FF9800;" vertex="1" parent="1">
+          <mxGeometry x="84" y="218" width="10" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="pr_e2_lbl" value="y=25" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=7;fontColor=#666;" vertex="1" parent="1">
+          <mxGeometry x="100" y="216" width="30" height="12" as="geometry"/>
+        </mxCell>
+        <mxCell id="pr_e3" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFC107;strokeColor=#FF9800;" vertex="1" parent="1">
+          <mxGeometry x="84" y="198" width="10" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="pr_e4" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFC107;strokeColor=#FF9800;" vertex="1" parent="1">
+          <mxGeometry x="84" y="178" width="10" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="pr_dots" value="⋮" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=10;fontColor=#666;" vertex="1" parent="1">
+          <mxGeometry x="82" y="150" width="14" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="pr_en" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFC107;strokeColor=#FF9800;" vertex="1" parent="1">
+          <mxGeometry x="84" y="132" width="10" height="10" as="geometry"/>
+        </mxCell>
+        <!-- Origin -->
+        <mxCell id="pr_origin" value="+" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#E53935;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="68" y="250" width="14" height="14" as="geometry"/>
+        </mxCell>
+        <mxCell id="pr_tip" value="tip" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#E53935;" vertex="1" parent="1">
+          <mxGeometry x="50" y="252" width="20" height="10" as="geometry"/>
+        </mxCell>
+        <!-- Axes -->
+        <mxCell id="pr_yarr" value="" style="endArrow=classic;html=1;strokeColor=#333;strokeWidth=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="55" y="258" as="sourcePoint"/>
+            <mxPoint x="55" y="225" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="pr_ylbl" value="y (μm)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#333;" vertex="1" parent="1">
+          <mxGeometry x="35" y="223" width="25" height="10" as="geometry"/>
+        </mxCell>
+
+        <!-- Key points -->
+        <mxCell id="pr_k1" value="Real physical spacing" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=8;fontColor=#2E7D32;" vertex="1" parent="1">
+          <mxGeometry x="160" y="140" width="120" height="12" as="geometry"/>
+        </mxCell>
+        <mxCell id="pr_k2" value="Origin at probe tip" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=8;fontColor=#2E7D32;" vertex="1" parent="1">
+          <mxGeometry x="160" y="155" width="110" height="12" as="geometry"/>
+        </mxCell>
+        <mxCell id="pr_k3" value="For spike sorting" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=8;fontColor=#2E7D32;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="160" y="170" width="100" height="12" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== COLUMN 2: Stereotaxic ===== -->
+        <mxCell id="col2_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBE9E7;strokeColor=#E64A19;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="310" y="70" width="270" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="col2_title" value="Stereotaxic" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=#E64A19;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="75" width="90" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="col2_opt" value="OPTIONAL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E64A19;strokeColor=none;fontFamily=Helvetica;fontSize=7;fontColor=#fff;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="420" y="77" width="50" height="14" as="geometry"/>
+        </mxCell>
+        <mxCell id="col2_file" value="probes.tsv" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=9;fontColor=#E64A19;" vertex="1" parent="1">
+          <mxGeometry x="320" y="95" width="80" height="14" as="geometry"/>
+        </mxCell>
+
+        <!-- Brain dorsal view -->
+        <mxCell id="brain_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ccc;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="115" width="120" height="120" as="geometry"/>
+        </mxCell>
+        <mxCell id="brain" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#FFCCBC;strokeColor=#E64A19;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="335" y="125" width="90" height="100" as="geometry"/>
+        </mxCell>
+        <!-- Bregma -->
+        <mxCell id="bregma" value="+" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=12;fontColor=#333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="374" y="140" width="12" height="12" as="geometry"/>
+        </mxCell>
+        <mxCell id="bregma_lbl" value="Bregma" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#333;" vertex="1" parent="1">
+          <mxGeometry x="385" y="138" width="40" height="12" as="geometry"/>
+        </mxCell>
+        <!-- Insertion point -->
+        <mxCell id="insert" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#1976D2;strokeColor=#0D47A1;" vertex="1" parent="1">
+          <mxGeometry x="358" y="175" width="8" height="8" as="geometry"/>
+        </mxCell>
+        <mxCell id="insert_lbl" value="insertion" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=6;fontColor=#1976D2;" vertex="1" parent="1">
+          <mxGeometry x="368" y="173" width="35" height="10" as="geometry"/>
+        </mxCell>
+        <!-- AP/ML axes -->
+        <mxCell id="ap_arr" value="" style="endArrow=classic;html=1;strokeColor=#333;strokeWidth=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="220" as="sourcePoint"/>
+            <mxPoint x="380" y="195" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ap_lbl" value="AP" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="382" y="202" width="15" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="ml_arr" value="" style="endArrow=classic;html=1;strokeColor=#333;strokeWidth=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="380" y="220" as="sourcePoint"/>
+            <mxPoint x="405" y="220" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="ml_lbl" value="ML" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="222" width="18" height="10" as="geometry"/>
+        </mxCell>
+
+        <!-- Columns list -->
+        <mxCell id="st_cols" value="AP, ML, DV (mm)&#xa;AP_angle, ML_angle&#xa;rotation_angle" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontFamily=Consolas;fontSize=7;fontColor=#666;" vertex="1" parent="1">
+          <mxGeometry x="450" y="125" width="100" height="40" as="geometry"/>
+        </mxCell>
+        <mxCell id="st_k1" value="Relative to Bregma" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=8;fontColor=#BF360C;" vertex="1" parent="1">
+          <mxGeometry x="450" y="175" width="110" height="12" as="geometry"/>
+        </mxCell>
+        <mxCell id="st_k2" value="Surgical intent" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=8;fontColor=#BF360C;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="450" y="190" width="90" height="12" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== COLUMN 3: Anatomical ===== -->
+        <mxCell id="col3_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00796B;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="600" y="70" width="280" height="260" as="geometry"/>
+        </mxCell>
+        <mxCell id="col3_title" value="Anatomical / Atlas" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=11;fontColor=#00796B;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="75" width="130" height="18" as="geometry"/>
+        </mxCell>
+        <mxCell id="col3_opt" value="OPTIONAL" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#00796B;strokeColor=none;fontFamily=Helvetica;fontSize=7;fontColor=#fff;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="750" y="77" width="50" height="14" as="geometry"/>
+        </mxCell>
+        <mxCell id="col3_file1" value="space-&lt;label&gt;_electrodes.tsv" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=8;fontColor=#00796B;" vertex="1" parent="1">
+          <mxGeometry x="610" y="95" width="160" height="14" as="geometry"/>
+        </mxCell>
+        <mxCell id="col3_file2" value="space-&lt;label&gt;_coordsystem.json" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Consolas;fontSize=8;fontColor=#00796B;" vertex="1" parent="1">
+          <mxGeometry x="610" y="110" width="175" height="14" as="geometry"/>
+        </mxCell>
+
+        <!-- Atlas visual - simplified brain with regions -->
+        <mxCell id="atlas_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#ccc;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="130" width="100" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="atlas_brain" value="" style="ellipse;whiteSpace=wrap;html=1;fillColor=#B2DFDB;strokeColor=#00796B;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="620" y="140" width="80" height="80" as="geometry"/>
+        </mxCell>
+        <!-- Grid overlay representing atlas -->
+        <mxCell id="atlas_grid1" value="" style="line;strokeWidth=1;html=1;strokeColor=#00796B;opacity=30;" vertex="1" parent="1">
+          <mxGeometry x="620" y="160" width="80" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="atlas_grid2" value="" style="line;strokeWidth=1;html=1;strokeColor=#00796B;opacity=30;" vertex="1" parent="1">
+          <mxGeometry x="620" y="180" width="80" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="atlas_grid3" value="" style="line;strokeWidth=1;html=1;strokeColor=#00796B;opacity=30;rotation=90;" vertex="1" parent="1">
+          <mxGeometry x="620" y="180" width="80" height="1" as="geometry"/>
+        </mxCell>
+        <mxCell id="atlas_grid4" value="" style="line;strokeWidth=1;html=1;strokeColor=#00796B;opacity=30;rotation=90;" vertex="1" parent="1">
+          <mxGeometry x="640" y="180" width="80" height="1" as="geometry"/>
+        </mxCell>
+        <!-- Electrode points -->
+        <mxCell id="atlas_e1" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFC107;strokeColor=#FF9800;" vertex="1" parent="1">
+          <mxGeometry x="648" y="185" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="atlas_e2" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFC107;strokeColor=#FF9800;" vertex="1" parent="1">
+          <mxGeometry x="652" y="175" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="atlas_e3" value="" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#FFC107;strokeColor=#FF9800;" vertex="1" parent="1">
+          <mxGeometry x="656" y="165" width="6" height="6" as="geometry"/>
+        </mxCell>
+        <mxCell id="atlas_lbl" value="AllenCCFv3" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#00796B;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="625" y="220" width="70" height="10" as="geometry"/>
+        </mxCell>
+
+        <!-- Supported systems -->
+        <mxCell id="sys_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff;strokeColor=#B2DFDB;strokeWidth=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="130" width="150" height="100" as="geometry"/>
+        </mxCell>
+        <mxCell id="sys_title" value="Coordinate systems:" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontFamily=Helvetica;fontSize=8;fontColor=#00796B;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="725" y="135" width="110" height="12" as="geometry"/>
+        </mxCell>
+        <mxCell id="sys_rodent" value="AllenCCFv3&#xa;PaxinosWatson&#xa;WaxholmSpace" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontFamily=Helvetica;fontSize=7;fontColor=#666;" vertex="1" parent="1">
+          <mxGeometry x="725" y="150" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="sys_primate" value="CHARM&#xa;D99&#xa;MarmosetBrainAtlas" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=top;fontFamily=Helvetica;fontSize=7;fontColor=#666;" vertex="1" parent="1">
+          <mxGeometry x="725" y="188" width="100" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Key point -->
+        <mxCell id="col3_k1" value="Cross-study comparison" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=8;fontColor=#00695C;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="610" y="240" width="130" height="12" as="geometry"/>
+        </mxCell>
+
+        <!-- ===== BOTTOM: Flow summary ===== -->
+        <mxCell id="flow_box" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FAFAFA;strokeColor=#E0E0E0;strokeWidth=1;dashed=1;" vertex="1" parent="1">
+          <mxGeometry x="20" y="345" width="860" height="55" as="geometry"/>
+        </mxCell>
+
+        <!-- Flow elements -->
+        <mxCell id="f1" value="electrodes.tsv&#xa;(probe-relative)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#388E3C;fontFamily=Helvetica;fontSize=8;fontColor=#388E3C;" vertex="1" parent="1">
+          <mxGeometry x="40" y="355" width="90" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="f_plus1" value="+" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=16;fontColor=#333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="135" y="360" width="20" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="f2" value="probes.tsv&#xa;(stereotaxic)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FBE9E7;strokeColor=#E64A19;fontFamily=Helvetica;fontSize=8;fontColor=#E64A19;" vertex="1" parent="1">
+          <mxGeometry x="160" y="355" width="80" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="f_plus2" value="+" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=16;fontColor=#333;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="245" y="360" width="20" height="25" as="geometry"/>
+        </mxCell>
+        <mxCell id="f3" value="histology" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1976D2;fontFamily=Helvetica;fontSize=8;fontColor=#1976D2;" vertex="1" parent="1">
+          <mxGeometry x="270" y="355" width="60" height="35" as="geometry"/>
+        </mxCell>
+        <mxCell id="f_arrow" value="" style="endArrow=classic;html=1;strokeColor=#666;strokeWidth=2;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="340" y="372" as="sourcePoint"/>
+            <mxPoint x="390" y="372" as="targetPoint"/>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="f4" value="space-*_electrodes.tsv&#xa;(atlas coordinates)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E0F2F1;strokeColor=#00796B;fontFamily=Helvetica;fontSize=8;fontColor=#00796B;" vertex="1" parent="1">
+          <mxGeometry x="400" y="355" width="120" height="35" as="geometry"/>
+        </mxCell>
+
+        <!-- Status labels -->
+        <mxCell id="f1_status" value="always" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#388E3C;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="55" y="388" width="50" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="f2_status" value="if available" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#E64A19;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="165" y="388" width="60" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="f3_status" value="post-hoc" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#1976D2;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="270" y="388" width="50" height="10" as="geometry"/>
+        </mxCell>
+        <mxCell id="f4_status" value="if localized" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;fontFamily=Helvetica;fontSize=7;fontColor=#00796B;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="425" y="388" width="60" height="10" as="geometry"/>
+        </mxCell>
+
+        <!-- Note -->
+        <mxCell id="note" value="Stereotaxic = surgical intent (limited reproducibility)  |  Histological = precise positioning (requires post-mortem)" style="text;html=1;strokeColor=none;fillColor=none;align=left;verticalAlign=middle;fontFamily=Helvetica;fontSize=8;fontColor=#666;fontStyle=2;" vertex="1" parent="1">
+          <mxGeometry x="540" y="365" width="330" height="20" as="geometry"/>
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

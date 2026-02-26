@@ -122,7 +122,13 @@ Upon reaching community consensus, the proposal was submitted as a pull request 
 
 \subsection*{Data Format Requirements}
 
-Following the approach of prior BIDS electrophysiology extensions~\cite{pernet_eeg-bids_2019, holdgraf_ieeg-bids_2019}, our selection of data formats was governed by three requirements: address the needs of a substantial portion of the electrophysiology community, satisfy FAIR principles with open documentation and implementations in widely-used programming languages, and meet the technical demands of neurophysiological workflows: high numerical precision, efficient storage of large data volumes, efficient access to subsets of large files, and the capacity to store rich metadata alongside raw signals.
+Following the approach of prior BIDS electrophysiology extensions~\cite{pernet_eeg-bids_2019, holdgraf_ieeg-bids_2019}, our selection of data formats was governed by three requirements: 
+
+\begin{enumerate}
+	\item address the needs of a substantial portion of the electrophysiology community, 
+	\item satisfy FAIR principles with open documentation and implementations in widely-used programming languages, and 
+	\item meet the technical demands of neurophysiological workflows: high numerical precision, efficient storage of large data volumes, efficient access to subsets of large files, and the capacity to store rich metadata alongside raw signals.
+\end{enumerate}
 
 We require data to be stored in NWB (Neurodata Without Borders, RRID:SCR\_015242)~\cite{rubel_neurodata_2022} or NIX (Neuroscience Information Exchange, RRID:SCR\_016196)~\cite{adrian_file_2014}.
 Both are HDF5-based, open-source (BSD-3 licensed), and self-documenting: the file itself contains the schema needed to interpret its contents.
@@ -284,8 +290,12 @@ The authors declare no competing interests.
 	\centering
 	\includegraphics[width=\linewidth]{figures/figure1-overview.png}
 	\caption{microephys-BIDS folder structure and metadata files, illustrated with the \texttt{microephys\_toy} example dataset.
-		\textbf{(A)}~Extracellular electrophysiology (\texttt{ecephys}). The directory tree shows the three core metadata files (\texttt{probes.tsv}, \texttt{electrodes.tsv}, \texttt{channels.tsv}), session-level recording sidecars, and coordinate-system files. Representative rows from each file are shown alongside the tree.
-		\textbf{(B)}~Intracellular electrophysiology (\texttt{icephys}). The same three-file hierarchy accommodates patch-clamp recordings, with pipette-specific fields in \texttt{electrodes.tsv} and a \texttt{recording\_mode} column in \texttt{channels.tsv}. All values are taken from the publicly available toy dataset.
+		\textbf{(A)}~Extracellular electrophysiology (\texttt{ecephys}).
+		The directory tree shows the three core metadata files (\texttt{probes.tsv}, \texttt{electrodes.tsv}, \texttt{channels.tsv}), session-level recording sidecars, and coordinate-system files.
+		Representative rows from each file are shown alongside the tree.
+		\textbf{(B)}~Intracellular electrophysiology (\texttt{icephys}).
+		The same three-file hierarchy accommodates patch-clamp recordings, with pipette-specific fields in \texttt{electrodes.tsv} and a \texttt{recording\_mode} column in \texttt{channels.tsv}.
+		All values are taken from the publicly available toy dataset.
 	}
 	\label{fig:overview}
 \end{figure}
@@ -309,8 +319,10 @@ The authors declare no competing interests.
 	\centering
 	\includegraphics[width=\linewidth]{figures/figure3-coordinates.png}
 	\caption{Spatial localization and animal metadata in microephys-BIDS.
-		\textbf{(A)}~Stereotaxic surgical coordinates. Bregma and Lambda skull landmarks define the origin; six parameters per probe (AP, ML, DV and three rotation angles) are recorded in \texttt{probes.tsv}.
-		\textbf{(B)}~Dual coordinate representation. Probe-relative coordinates in \texttt{electrodes.tsv} describe contact geometry on the device, while a \texttt{space-<label>\_electrodes.tsv} and matching \texttt{coordsystem.json} locate each contact in an anatomical reference frame.
+		\textbf{(A)}~Stereotaxic surgical coordinates.
+		Bregma and Lambda skull landmarks define the origin; six parameters per probe (AP, ML, DV and three rotation angles) are recorded in \texttt{probes.tsv}.
+		\textbf{(B)}~Dual coordinate representation.
+		Probe-relative coordinates in \texttt{electrodes.tsv} describe contact geometry on the device, while a \texttt{space-<label>\_electrodes.tsv} and matching \texttt{coordsystem.json} locate each contact in an anatomical reference frame.
 		\textbf{(C)}~Animal subject metadata in \texttt{participants.tsv}: species, strain, and strain RRID; \texttt{age\_category} with UBERON life-cycle stages is pending (PR~\#2340).
 	}
 	\label{fig:coordinates}
@@ -319,32 +331,32 @@ The authors declare no competing interests.
 \begin{table}[ht]
 	\centering
 	\caption{Supported coordinate systems for microelectrode electrophysiology in BIDS, grouped by species.
-		Each system has a corresponding restricted keyword for use in \texttt{MicroephysCoordinateSystem}
-		and the \texttt{space-<label>} entity.
-		Users may also specify \texttt{Other} with a free-text description.}
+		Each system has a corresponding restricted keyword for use in \texttt{MicroephysCoordinateSystem} and the \texttt{space-<label>} entity.
+		Users may also specify \texttt{Other} with a free-text description.
+	}
 	\label{tab:coordsystems}
 	\begin{tabular}{l l l}
 		\hline
-		\textbf{Species} & \textbf{Coordinate System} & \textbf{Reference} \\
+		\textbf{Species} & \textbf{Coordinate System} & \textbf{Reference}                    \\
 		\hline
-		Mouse   & AllenCCFv3       & Wang et al.\ (2020) Cell \\
-		        & WaxholmSpace     & Johnson et al.\ (2010) NeuroImage \\
-		        & FranklinPaxinos  & Franklin \& Paxinos, Academic Press \\
+		Mouse            & AllenCCFv3                 & Wang et al.\ (2020) Cell              \\
+		                 & WaxholmSpace               & Johnson et al.\ (2010) NeuroImage     \\
+		                 & FranklinPaxinos            & Franklin \& Paxinos, Academic Press   \\
 		\hline
-		Rat     & PaxinosWatson    & Paxinos \& Watson, Academic Press \\
-		        & WistarRatAtlas   & Papp et al.\ (2014) NeuroImage \\
-		        & SwansonRat       & Swanson, Elsevier \\
+		Rat              & PaxinosWatson              & Paxinos \& Watson, Academic Press     \\
+		                 & WistarRatAtlas             & Papp et al.\ (2014) NeuroImage        \\
+		                 & SwansonRat                 & Swanson, Elsevier                     \\
 		\hline
-		Macaque & CHARM            & Jung et al.\ (2021) NeuroImage \\
-		        & D99              & Reveley et al.\ (2017) Cereb.\ Cortex \\
-		        & PaxinosMacaque   & Paxinos et al., Academic Press \\
+		Macaque          & CHARM                      & Jung et al.\ (2021) NeuroImage        \\
+		                 & D99                        & Reveley et al.\ (2017) Cereb.\ Cortex \\
+		                 & PaxinosMacaque             & Paxinos et al., Academic Press        \\
 		\hline
-		Marmoset & MarmosetBrainAtlas & Hashikawa et al.\ (2015) NeuroImage \\
+		Marmoset         & MarmosetBrainAtlas         & Hashikawa et al.\ (2015) NeuroImage   \\
 		\hline
-		Any     & Stereotaxic      & Generic stereotaxic (Bregma origin) \\
-		        & individual       & Subject-specific anatomy \\
-		        & Pixels           & 2D photo/rendering coordinates \\
-		        & Other            & Free-text description required \\
+		Any              & Stereotaxic                & Generic stereotaxic (Bregma origin)   \\
+		                 & individual                 & Subject-specific anatomy              \\
+		                 & Pixels                     & 2D photo/rendering coordinates        \\
+		                 & Other                      & Free-text description required        \\
 		\hline
 	\end{tabular}
 \end{table}

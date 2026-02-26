@@ -51,10 +51,14 @@ However, neither standard provides organizational guidance at the project level.
 That is, how to organize data across multiple sessions, subjects, and experimental conditions within a study.
 Researchers must still make ad-hoc decisions about directory structures, naming conventions, and where to place study-level metadata such as participant information or experimental protocols.
 
-% TODO: consider adding a short paragraph here about BIDS
-BIDS has successfully standardized human neuroimaging data organization~\cite{gorgolewski_brain_2016}, with over a thousand datasets on OpenNeuro and adoption by major repositories.
-BIDS has existing enhancements for human electrophysiology: EEG~\cite{pernet_eeg-bids_2019}, MEG~\cite{niso_meg-bids_2018}, and iEEG~\cite{holdgraf_ieeg-bids_2019}.
-These datatypes established patterns for organizing time-series neural data that we build upon here.
+The Brain Imaging Data Structure (BIDS)~\cite{gorgolewski_brain_2016} is a community-driven standard for organizing and sharing neuroscience data.
+In a BIDS dataset, all data from each subject are organized hierarchically in subject-specific directories, with optional session subdirectories containing modality-specific folders for the data files themselves.
+Files follow a structured naming scheme that encodes relevant metadata such as subject, session, and task.
+JSON sidecar files provide detailed metadata for each data file, while TSV files capture tabular information such as participant demographics and channel properties.
+A \texttt{dataset\_description.json} file describes the dataset as a whole, and JSON metadata at higher directory levels are inherited by lower levels unless overridden.
+Originally developed for MRI, BIDS has been extended through community-driven proposals to additional modalities including MEG~\cite{niso_meg-bids_2018}, EEG~\cite{pernet_eeg-bids_2019}, iEEG~\cite{holdgraf_ieeg-bids_2019}, PET, and microscopy.
+With over a thousand public datasets on OpenNeuro and endorsement by the INCF, BIDS has become a widely adopted framework for FAIR neuroscience data.
+The electrophysiology extensions established patterns for organizing time-series neural data that we build upon here.
 This extension bridges the gap between session-level data standardization (NWB/NIX) and study-level organization (BIDS), combining the strengths of both approaches.
 BIDS provides the organizational framework for datasets containing multiple subjects and sessions, consistent with existing modalities, while NWB and NIX handle the complex internal structure of electrophysiology recordings within each session.
 This complementary relationship mirrors how BIDS for neuroimaging organizes NIfTI files.
@@ -82,6 +86,29 @@ This extension:
 \subsection*{Other ephys standardization efforts}
 
 \section*{Methods}
+
+\subsection*{Development Process}
+
+% Refs: INCF WG page https://www.incf.org/sig/incf-working-group-standardized-data
+% BEP032 Google Doc https://bids.neuroimaging.io/bep032
+% Original discussion doc https://docs.google.com/document/d/1NTDGBpdAIXVL5VI4Pyjzo-I783-OuCBzrhTFwDMJ5xU/
+% INCF repo with meeting minutes https://github.com/INCF/neuroscience-data-structure/pull/13
+% BEP032tools https://bep032tools.readthedocs.io/en/latest/ (repo: https://github.com/INT-NIT/BEP032tools)
+
+The BEP032 effort grew out of the Animal Data Organization (AnDO) project, initiated at the Institut de Neurosciences de la Timone in Marseille in early 2020 to standardize experimental data recorded in animal models.
+Following the initial development, the effort was opened to the broader community through the launch of an INCF-endorsed Working Group on Standardized Data.
+The working group, comprising approximately 40 members from institutions across Europe and North America, held monthly teleconferences and made progress in subgroups on well-defined issues between meetings.
+After discussions within the group, a specific standardization effort for electrophysiology was initiated as BIDS Extension Proposal 032.
+The proposal was developed in the open on a Google Document following the standard BEP process, with the community invited to comment directly on the specification.
+
+Several design decisions required coordination with other BIDS extension efforts and with developers of related tools.
+The active participation of developers of other BEPs and of BIDS maintainers was critical to the resolution of design issues, particularly the three-level metadata hierarchy and the dual coordinate system approach.
+% any other better example?
+
+% BEP032tools: https://github.com/INT-NIT/BEP032tools
+Upon reaching community consensus, the proposal was submitted as a pull request to the BIDS specification repository, concurrently with the preparation of example datasets and the update of the BIDS validator schema.
+
+\subsection*{Creating a BIDS-compliant microephys dataset}
 
 \section*{Results}
 
@@ -139,7 +166,7 @@ It provides a mechanism to link to formal probe model specifications.
 
 In extracellular electrophysiology, the spatial layout of the electrodes (i.e.\ contacts) on the probe is important for processing such as spike sorting, particularly on high-density probes~\cite{buccino_spikeinterface_2020}.
 The positions of the electrodes on a template brain can be useful as well, but often the relative positions of the electrodes are substantially warped in the registration process, so microephys needs to also store relative positions of the electrodes on the probe.
-The ProbeInterface library~\cite{garcia_probeinterface_2022} provides a JSON-based schema for specifying electrode layout on the probe, as well as specifying the shapes of the electrodes and the geometry of the probe itself, which may be used for further visualization and analysis.
+The ProbeInterface library~\cite{garcia_probeinterface_2022} provides a JSON-based schema for specifying electrode layout on the probe, as well as specifying the shapes of the electrodes and the geometry of the probe itself, which may be used for further visualization and analysis (Figure~\ref{fig:probeinterface}).
 
 The \texttt{ecephys} datatype provides three possible mechanisms to provide the layout of the electrodes:
 \begin{enumerate}
@@ -213,6 +240,13 @@ Here we deviate from the iEEG datatype---the main \texttt{electrodes.tsv} file m
 
 \section*{Data Availability}
 
+% PRs: https://github.com/bids-standard/bids-examples/pull/491
+%       https://github.com/bids-standard/bids-examples/pull/527
+Two example datasets are provided in the BIDS examples repository (\url{https://github.com/bids-standard/bids-examples}).
+The first is a conversion of the Reach-to-Grasp multi-electrode array dataset~\cite{brochier_massively_2018}, originally published on the G-Node repository (DOI: 10.12751/g-node.f83565).
+It contains extracellular recordings from two macaque subjects using 96-channel Utah arrays, with both local field potential (1~kHz) and high-pass (30~kHz) data streams, behavioral channels, and task events.
+The second is a synthetic dataset demonstrating both \texttt{ecephys} and \texttt{icephys} datatypes, including registration to the Allen CCF v3 coordinate system, multiple simultaneous probes, and both ProbeInterface library references and custom probe definition files.
+
 \section*{Code Availability}
 
 Using NWB and NIX as the underlying data format allows microephys BIDS data to utilize the sophisticated software ecosystems associated with these data standards.
@@ -248,13 +282,71 @@ The authors declare no competing interests.
 
 \begin{figure}[ht]
 	\centering
-	\includegraphics[width=\linewidth]{figures/figure1-ecephys-overview.png}
-	\caption{Overview of the BIDS microelectrode electrophysiology extension showing an example extracellular electrophysiology dataset.
-		Left: directory structure with the \texttt{ecephys/} datatype folder containing data files, metadata sidecars, and a \texttt{probes/} directory for ProbeInterface files.
-		Right: the three core metadata tables linked by numbered labels to their location in the directory tree: (1)~\texttt{probes.tsv} describing probe type, stereotaxic placement coordinates, and manufacturer; (2)~\texttt{electrodes.tsv} with probe-relative contact positions in micrometers; (3)~\texttt{channels.tsv} linking recorded signals to electrodes with sampling frequency, gain, and \texttt{stream\_id}.
-		The sidecar JSON (top right) stores recording-level metadata, while data files (bottom right) contain the raw signals in NWB or NIX format.
+	\includegraphics[width=\linewidth]{figures/figure1-overview.png}
+	\caption{microephys-BIDS folder structure and metadata files, illustrated with the \texttt{microephys\_toy} example dataset.
+		\textbf{(A)}~Extracellular electrophysiology (\texttt{ecephys}). The directory tree shows the three core metadata files (\texttt{probes.tsv}, \texttt{electrodes.tsv}, \texttt{channels.tsv}), session-level recording sidecars, and coordinate-system files. Representative rows from each file are shown alongside the tree.
+		\textbf{(B)}~Intracellular electrophysiology (\texttt{icephys}). The same three-file hierarchy accommodates patch-clamp recordings, with pipette-specific fields in \texttt{electrodes.tsv} and a \texttt{recording\_mode} column in \texttt{channels.tsv}. All values are taken from the publicly available toy dataset.
 	}
 	\label{fig:overview}
 \end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\linewidth]{figures/figure2-probeinterface.png}
+	\caption{ProbeInterface integration with microephys-BIDS.
+		Three colours encode the mapping to the file hierarchy: probe outline (\textit{green}) maps to \texttt{probes.tsv}, contact positions (\textit{pink}) to \texttt{electrodes.tsv}, and channel wiring (\textit{orange}) to \texttt{channels.tsv}.
+		\textbf{(A)}~Colour-coded microephys-BIDS sidecar tables.
+		\textbf{(B)}~NeuroNexus A4x8 probe geometry (4~shanks, 32~channels) from the ProbeInterface library~\cite{garcia_probeinterface_2022}; interleaved electrode identifiers reflect the manufacturer's connector pin numbering.
+		\textbf{(C)}~ProbeInterface JSON fields highlighted by their microephys-BIDS level.
+		\textbf{(D)}~Diversity of supported probe geometries, from tetrodes (4~ch) to Neuropixels~2.0 (5120~ch, 4~shanks).
+		\textbf{(E)}~Two mechanisms for linking probe definitions via the \texttt{*\_probes.json} sidecar: a custom file in the dataset's \texttt{probes/} directory, or a reference to the ProbeInterface library.
+		Device channel indices assume an Intan RHD2132 headstage with A32-OM32 adapter (pin $N \to$ input $N - 1$).
+	}
+	\label{fig:probeinterface}
+\end{figure}
+
+\begin{figure}[ht]
+	\centering
+	\includegraphics[width=\linewidth]{figures/figure3-coordinates.png}
+	\caption{Spatial localization and animal metadata in microephys-BIDS.
+		\textbf{(A)}~Stereotaxic surgical coordinates. Bregma and Lambda skull landmarks define the origin; six parameters per probe (AP, ML, DV and three rotation angles) are recorded in \texttt{probes.tsv}.
+		\textbf{(B)}~Dual coordinate representation. Probe-relative coordinates in \texttt{electrodes.tsv} describe contact geometry on the device, while a \texttt{space-<label>\_electrodes.tsv} and matching \texttt{coordsystem.json} locate each contact in an anatomical reference frame.
+		\textbf{(C)}~Animal subject metadata in \texttt{participants.tsv}: species, strain, and strain RRID; \texttt{age\_category} with UBERON life-cycle stages is pending (PR~\#2340).
+	}
+	\label{fig:coordinates}
+\end{figure}
+
+\begin{table}[ht]
+	\centering
+	\caption{Supported coordinate systems for microelectrode electrophysiology in BIDS, grouped by species.
+		Each system has a corresponding restricted keyword for use in \texttt{MicroephysCoordinateSystem}
+		and the \texttt{space-<label>} entity.
+		Users may also specify \texttt{Other} with a free-text description.}
+	\label{tab:coordsystems}
+	\begin{tabular}{l l l}
+		\hline
+		\textbf{Species} & \textbf{Coordinate System} & \textbf{Reference} \\
+		\hline
+		Mouse   & AllenCCFv3       & Wang et al.\ (2020) Cell \\
+		        & WaxholmSpace     & Johnson et al.\ (2010) NeuroImage \\
+		        & FranklinPaxinos  & Franklin \& Paxinos, Academic Press \\
+		\hline
+		Rat     & PaxinosWatson    & Paxinos \& Watson, Academic Press \\
+		        & WistarRatAtlas   & Papp et al.\ (2014) NeuroImage \\
+		        & SwansonRat       & Swanson, Elsevier \\
+		\hline
+		Macaque & CHARM            & Jung et al.\ (2021) NeuroImage \\
+		        & D99              & Reveley et al.\ (2017) Cereb.\ Cortex \\
+		        & PaxinosMacaque   & Paxinos et al., Academic Press \\
+		\hline
+		Marmoset & MarmosetBrainAtlas & Hashikawa et al.\ (2015) NeuroImage \\
+		\hline
+		Any     & Stereotaxic      & Generic stereotaxic (Bregma origin) \\
+		        & individual       & Subject-specific anatomy \\
+		        & Pixels           & 2D photo/rendering coordinates \\
+		        & Other            & Free-text description required \\
+		\hline
+	\end{tabular}
+\end{table}
 
 \end{document}

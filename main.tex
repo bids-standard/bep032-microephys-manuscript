@@ -114,6 +114,19 @@ Upon reaching community consensus, the proposal was submitted as a pull request 
 
 \subsection*{Microephys-BIDS Summary}
 
+The microephys extension introduces two datatypes: \texttt{ecephys} for extracellular recordings (silicon probes, tetrode arrays, Utah arrays) and \texttt{icephys} for intracellular recordings (patch-clamp, sharp electrode).
+Both use NWB or NIX as raw data formats.
+Data files reside in modality-specific folders (\texttt{ecephys/} or \texttt{icephys/}) with accompanying TSV/JSON metadata following standard BIDS inheritance principles.
+
+Extracellular recordings present a spatial metadata challenge: a multi-channel probe is both a manufactured device with fixed electrode geometry and an implanted object at a specific brain location.
+Spike sorting algorithms require the former—inter-electrode spacing, shank arrangement, contact impedances—to reconstruct spike waveforms and assign them to recording sites.
+Anatomical interpretation requires the latter—stereotaxic coordinates, brain region labels, atlas registration—to relate spiking activity to circuit function.
+The extension therefore organizes metadata in a three-level hierarchy: \texttt{probes.tsv} describes devices and their surgical placement, \texttt{electrodes.tsv} provides contact positions in probe-relative coordinates (required), and \texttt{channels.tsv} links recorded signals to those contacts.
+Anatomical coordinates are optional and distinguished by \texttt{space-<label>} prefixes (for example, \texttt{space-AllenCCFv3\_electrodes.tsv}).
+For intracellular recordings, \texttt{samples.tsv} links individual recordings to characterized cells or tissue slices, inheriting animal metadata conventions from Microscopy-BIDS.
+
+The following subsections detail these components.
+
 \subsubsection*{Updates to Participant Files}
 
 \subsection*{Specific Microephys-BIDS Considerations}

@@ -121,6 +121,22 @@ Upon reaching community consensus, the proposal was submitted as a pull request 
 
 \subsection*{Creating a BIDS-compliant microephys dataset}
 
+A typical workflow for creating a BIDS-compliant microephys dataset consists of four steps:
+\begin{enumerate}
+	\item \textbf{Convert raw data.}
+	      Convert recordings from the acquisition system's proprietary format to NWB or NIX\@.
+	      Tools such as NeuroConv~\cite{mayorquin_neuroconv_2025} automate conversion from dozens of proprietary formats to NWB, while Neo~\cite{garcia_neo_2014} supports writing NIX files from a comparable range of sources.
+	\item \textbf{Organize into BIDS.}
+	      Arrange the converted files into a BIDS directory structure and generate sidecar metadata files.
+	      % TODO: add nwb2bids citation
+	      nwb2bids extracts metadata from NWB files to populate BIDS sidecar TSV and JSON files and reorganizes files into the required directory layout, with explicit support for the \texttt{ecephys} and \texttt{icephys} datatypes defined in this extension.
+	\item \textbf{Complete metadata.}
+	      Review and complete the generated metadata: verify that probe coordinates, electrode positions, and channel mappings are consistent, and fill in any information not captured in the source files (for example, stereotaxic surgical coordinates).
+	\item \textbf{Validate.}
+	      Validate the dataset using the BIDS validator, which is schema-driven and will support microephys datasets once the schema changes from this extension are merged into the specification.
+		%   TODO: update after merge
+\end{enumerate}
+
 \section*{Results}
 
 \subsection*{Microephys-BIDS Summary}

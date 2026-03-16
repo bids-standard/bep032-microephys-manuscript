@@ -125,7 +125,7 @@ A typical workflow for creating a BIDS-compliant microephys dataset consists of 
 \begin{enumerate}
 	\item \textbf{Convert raw data.}
 	      Convert recordings from the acquisition system's proprietary format to NWB or NIX\@.
-	      Tools such as NeuroConv~\cite{mayorquin_neuroconv_2025} automate conversion from dozens of proprietary formats to NWB, while Neo~\cite{garcia_neo_2014} supports writing NIX files from a comparable range of sources.
+	      The Neo library~\cite{garcia_neo_2014} provides readers for dozens of proprietary acquisition formats and serves as the foundation for conversion tools; NeuroConv~\cite{mayorquin_neuroconv_2025} builds on Neo to automate conversion to NWB, while Neo also supports writing NIX files directly.
 	\item \textbf{Organize into BIDS.}
 	      Arrange the converted files into a BIDS directory structure and generate sidecar metadata files.
 	      % TODO: add nwb2bids citation

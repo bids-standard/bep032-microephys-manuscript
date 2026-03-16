@@ -20,13 +20,13 @@
 \maketitle
 
 \begin{abstract}
-The Brain Imaging Data Structure (BIDS) has facilitated data sharing and tool development in human neuroimaging.
-We present an extension for microelectrode electrophysiology recordings in animals, specifically addressing the unique requirements of intracellular and extracellular recordings.
-This extension introduces two new data types: \texttt{icephys} for intracellular and \texttt{ecephys} for extracellular recordings, supporting diverse recording modalities from patch-clamp to high-density silicon probes.
-Building on existing BIDS principles and the prior electrophysiology extensions for EEG and iEEG, we specify metadata for probes, electrodes, and channels, with particular attention to metadata required for spike sorting analysis.
-The extension adopts NWB (Neurodata Without Borders) and NIX (Neuroscience Information Exchange) as data formats, ensuring comprehensive metadata capture while maintaining compatibility with existing analysis ecosystems.
-We provide example datasets covering common use cases and discuss integration with established tools.
-This standardization enables reproducible analysis pipelines, facilitates data sharing through repositories like DANDI, G-Node and EBRAINS, and bridges different scales from cellular to systems neuroscience.
+	The Brain Imaging Data Structure (BIDS) has facilitated data sharing and tool development in human neuroimaging.
+	We present an extension for microelectrode electrophysiology recordings in animals, specifically addressing the unique requirements of intracellular and extracellular recordings.
+	This extension introduces two new data types: \texttt{icephys} for intracellular and \texttt{ecephys} for extracellular recordings, supporting diverse recording modalities from patch-clamp to high-density silicon probes.
+	Building on existing BIDS principles and the prior electrophysiology extensions for EEG and iEEG, we specify metadata for probes, electrodes, and channels, with particular attention to metadata required for spike sorting analysis.
+	The extension adopts NWB (Neurodata Without Borders) and NIX (Neuroscience Information Exchange) as data formats, ensuring comprehensive metadata capture while maintaining compatibility with existing analysis ecosystems.
+	We provide example datasets covering common use cases and discuss integration with established tools.
+	This standardization enables reproducible analysis pipelines, facilitates data sharing through repositories like DANDI, G-Node and EBRAINS, and bridges different scales from cellular to systems neuroscience.
 \end{abstract}
 
 \thispagestyle{empty}
@@ -85,7 +85,13 @@ This extension:
 	\item defines coordinate systems for multiple species including rodent and primate brain atlases.
 \end{itemize}
 
-\subsection*{Other ephys standardization efforts}
+\subsection*{Standardization landscape}
+
+The MINI checklist~\cite{gibson_minimum_2009}, developed by the CARMEN consortium, was among the first community efforts to define what metadata should accompany electrophysiology recordings, covering subject, electrode, recording location, and stimulus information, but explicitly left data format and organization out of scope.
+odML~\cite{grewe_bottom-up_2011} addressed how to structure such metadata through flexible key-value annotation and was adopted in practice for multi-electrode array datasets~\cite{zehl_handling_2016}.
+NWB~\cite{teeters_neurodata_2015} and NIX~\cite{adrian_file_2014} then standardized the data format itself, embedding metadata within self-describing files, while Neo~\cite{garcia_neo_2014} unified programmatic access across formats.
+At the project level, large-scale collaborations developed their own organizational conventions: the Allen Brain Observatory~\cite{de_vries_sharing_2023} adopted internal data management practices, while the International Brain Laboratory designed the Open Neurophysiology Environment (ONE) to coordinate Neuropixels recordings across dozens of laboratories.
+BEP032 occupies this project-level layer, providing a community standard that builds on the mature ecosystems from these earlier initiatives and that could serve as a common baseline for such collaborative efforts.
 
 \section*{Methods}
 
@@ -141,7 +147,8 @@ Microelectrode electrophysiology constitutes a single modality—electrical meas
 Extracellular electrodes remain in the extracellular space, recording field potentials in the microvolt range from populations of nearby neurons without directly accessing any single cell.
 Intracellular electrodes penetrate or attach to cell membranes, providing direct access to intracellular voltage (tens of millivolts) or current with sub-millisecond temporal resolution of individual synaptic events and intrinsic membrane properties.
 This distinction is well-established across the field: NWB organizes its schema into separate \texttt{icephys} and \texttt{ecephys} modules, OpenMinds defines ExtracellularElectrophysiology as a distinct technique in its terminology service, and the Ontology for Biomedical Investigations (OBI) classifies them as separate assay types.
-We adopt this distinction at the datatype level, creating \texttt{ecephys} and \texttt{icephys} as two datatypes within the microelectrode electrophysiology modality, analogous to how MRI encompasses T1w, T2w, and BOLD. In the accompanying examples, repeated task trials are distinguished using \texttt{run-<index>}, while the specification supports \texttt{acq-<label>} for different recording configurations within a session.
+We adopt this distinction at the datatype level, creating \texttt{ecephys} and \texttt{icephys} as two datatypes within the microelectrode electrophysiology modality, analogous to how MRI encompasses T1w, T2w, and BOLD.
+In the accompanying examples, repeated task trials are distinguished using \texttt{run-<index>}, while the specification supports \texttt{acq-<label>} for different recording configurations within a session.
 
 The different techniques demand different metadata.
 Spike sorting algorithms require probe geometry—inter-electrode spacing, shank arrangement, contact impedance—to reconstruct waveforms from voltage deflections distributed across contacts and assign action potentials to individual neurons.
@@ -156,11 +163,11 @@ Channel \texttt{type} values distinguish membrane voltage and current (\texttt{V
 
 \subsection*{Data Format Requirements}
 
-Following the approach of prior BIDS electrophysiology extensions~\cite{pernet_eeg-bids_2019, holdgraf_ieeg-bids_2019}, our selection of data formats was governed by three requirements: 
+Following the approach of prior BIDS electrophysiology extensions~\cite{pernet_eeg-bids_2019, holdgraf_ieeg-bids_2019}, our selection of data formats was governed by three requirements:
 
 \begin{enumerate}
-	\item address the needs of a substantial portion of the electrophysiology community, 
-	\item satisfy FAIR principles with open documentation and implementations in widely-used programming languages, and 
+	\item address the needs of a substantial portion of the electrophysiology community,
+	\item satisfy FAIR principles with open documentation and implementations in widely-used programming languages, and
 	\item meet the technical demands of neurophysiological workflows: high numerical precision, efficient storage of large data volumes, efficient access to subsets of large files, and the capacity to store rich metadata alongside raw signals.
 \end{enumerate}
 

@@ -1,6 +1,7 @@
-\documentclass[fleqn,10pt]{wlscirep}
+\documentclass[fleqn,10pt]{article}
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
+\usepackage{manuscript-style}
 \usepackage{lineno}
 \usepackage{graphicx}
 
@@ -12,6 +13,12 @@
 \author[1,*]{First Author}
 % Add co-authors from INCF Working Group, tool developers, early adopters
 
+\date{}
+
+\begin{document}
+
+\maketitle
+
 \begin{abstract}
 The Brain Imaging Data Structure (BIDS) has facilitated data sharing and tool development in human neuroimaging.
 We present an extension for microelectrode electrophysiology recordings in animals, specifically addressing the unique requirements of intracellular and extracellular recordings.
@@ -21,11 +28,6 @@ The extension adopts NWB (Neurodata Without Borders) and NIX (Neuroscience Infor
 We provide example datasets covering common use cases and discuss integration with established tools.
 This standardization enables reproducible analysis pipelines, facilitates data sharing through repositories like DANDI, G-Node and EBRAINS, and bridges different scales from cellular to systems neuroscience.
 \end{abstract}
-
-\begin{document}
-
-\flushbottom
-\maketitle
 
 \thispagestyle{empty}
 
@@ -326,6 +328,7 @@ Neurosift provides interactive dashboards for visualizing NWB data~\cite{magland
 NIX can be written from NEO~\cite{garcia_neo_2014}, which supports reading diverse electrophysiology data formats.
 NIX also supports data analysis libraries, such as Elephant~\cite{denker_collaborative_2018}.
 
+\bibliographystyle{plainnat}
 \bibliography{bep032}
 
 \section*{Acknowledgements}

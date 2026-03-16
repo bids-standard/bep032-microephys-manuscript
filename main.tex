@@ -168,7 +168,11 @@ The following subsections detail these components.
 	\label{fig:overview}
 \end{figure}
 
-\subsubsection*{Updates to Participant Files}
+\subsubsection*{Animal subject metadata}
+
+Microephys datasets predominantly involve non-human subjects, requiring animal-specific metadata in \texttt{participants.tsv}.
+The \texttt{species}, \texttt{strain}, and \texttt{strain\_rrid} columns introduced by Microscopy-BIDS~\cite{bourget_microscopy-bids_2022} are reused here without modification.
+An \texttt{age\_category} column using UBERON life-cycle stage terms is under development in a separate specification effort (PR~\#2340).
 
 \subsection*{Specific Microephys-BIDS Considerations}
 

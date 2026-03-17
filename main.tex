@@ -5,6 +5,7 @@
 \usepackage{lineno}
 \usepackage{graphicx}
 \usepackage{booktabs}
+\usepackage{float}
 \usepackage{hyperref}
 \newcommand{\rrid}[1]{\href{https://scicrunch.org/resolver/#1}{#1}}
 
@@ -154,15 +155,18 @@ For intracellular recordings, \texttt{samples.tsv} links individual recordings t
 
 The following subsections detail these components.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{figures/figure1-overview.png}
-	\caption{microephys-BIDS folder structure and metadata files, illustrated with the \texttt{microephys\_toy} example dataset.
+	\includegraphics[width=\linewidth]{figures/fig-1.pdf}
+	\caption{Microephys-BIDS folder structure and metadata files, illustrated with the \texttt{microephys\_toy} example dataset.
 		\textbf{(A)}~Extracellular electrophysiology (\texttt{ecephys}).
-		The directory tree shows the three core metadata files (\texttt{probes.tsv}, \texttt{electrodes.tsv}, \texttt{channels.tsv}), session-level recording sidecars, and coordinate-system files.
-		Representative rows from each file are shown alongside the tree.
+		The directory tree shows the three core metadata files (\texttt{*\_probes.tsv}, \texttt{*\_electrodes.tsv}, \texttt{*\_channels.tsv}), session-level recording sidecars (\texttt{*\_ecephys.json}), and coordinate-system files.
+		Representative rows from each TSV file are shown alongside the tree; bold column headers indicate required fields.
+		The \texttt{*\_ecephys.json} sidecar provides task and acquisition metadata.
 		\textbf{(B)}~Intracellular electrophysiology (\texttt{icephys}).
-		The same three-file hierarchy accommodates patch-clamp recordings, with pipette-specific fields in \texttt{electrodes.tsv} and a \texttt{recording\_mode} column in \texttt{channels.tsv}.
+		The same three-file hierarchy accommodates patch-clamp recordings, with pipette-specific fields in \texttt{*\_electrodes.tsv} and a \texttt{recording\_mode} column in \texttt{*\_channels.tsv}.
+		The \texttt{*\_icephys.json} sidecar reflects the ex~vivo slice preparation.
+		The \texttt{*\_coordsystem.json} file defines the anatomical reference frame for atlas-registered electrode coordinates.
 		All values are taken from the publicly available toy dataset.
 	}
 	\label{fig:overview}
@@ -271,17 +275,16 @@ The \texttt{ecephys} datatype provides three possible mechanisms to provide the 
 	      The user may also consider submitting this probe configuration file to the probeinterface\_library for use in future datasets.
 \end{enumerate}
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{figures/figure2-probeinterface.png}
+	\includegraphics[width=\linewidth]{figures/fig-2.pdf}
 	\caption{ProbeInterface integration with microephys-BIDS.
-		Three colours encode the mapping to the file hierarchy: probe outline (\textit{green}) maps to \texttt{probes.tsv}, contact positions (\textit{pink}) to \texttt{electrodes.tsv}, and channel wiring (\textit{orange}) to \texttt{channels.tsv}.
-		\textbf{(A)}~Colour-coded microephys-BIDS sidecar tables.
-		\textbf{(B)}~NeuroNexus A4x8 probe geometry (4~shanks, 32~channels) from the ProbeInterface library~\cite{garcia_probeinterface_2022}; interleaved electrode identifiers reflect the manufacturer's connector pin numbering.
-		\textbf{(C)}~ProbeInterface JSON fields highlighted by their microephys-BIDS level.
-		\textbf{(D)}~Diversity of supported probe geometries, from tetrodes (4~ch) to Neuropixels~2.0 (5120~ch, 4~shanks).
-		\textbf{(E)}~Two mechanisms for linking probe definitions via the \texttt{*\_probes.json} sidecar: a custom file in the dataset's \texttt{probes/} directory, or a reference to the ProbeInterface library.
-		Device channel indices assume an Intan RHD2132 headstage with A32-OM32 adapter (pin \(N \to\) input \(N - 1\)).
+		Three colours encode the mapping to the file hierarchy: probe outline (\textit{green}) maps to \texttt{*\_probes.tsv}, contact positions (\textit{pink}) to \texttt{*\_electrodes.tsv}, and channel wiring (\textit{orange}) to \texttt{*\_channels.tsv}.
+		\textbf{(A)}~Colour-coded microephys-BIDS sidecar tables showing the three-level hierarchy with dashed arrows indicating cross-file references between probe, electrode, and channel entries.
+		The \texttt{*\_probes.json} sidecar links probe models to definitions via two mechanisms: a custom file in the dataset's \texttt{probes/} directory, or a reference to the ProbeInterface library on GitHub.
+		\textbf{(B)}~NeuroNexus A4x8-5mm-100-200-177 probe geometry (4~shanks, 32~channels) from the ProbeInterface library~\cite{garcia_probeinterface_2022}; interleaved electrode identifiers reflect the manufacturer's connector pin numbering.
+		\textbf{(C)}~ProbeInterface JSON fields highlighted by their microephys-BIDS level: probe-level fields (green), contact positions (pink), and device channel indices (orange).
+		Device channel indices assume an adapter where pin \(N\) maps to input \(N - 1\).
 	}
 	\label{fig:probeinterface}
 \end{figure}
@@ -335,20 +338,22 @@ Other atlases have been developed for mice and a variety of other species, thoug
 Expressing localization of electrodes on an individual, group, or common coordinate system requires an additional \texttt{electrodes.tsv} file with a \texttt{space} entity, and a corresponding \texttt{MicroephysCoordinateSystem.json} file.
 Here we deviate from the iEEG datatype---the main \texttt{electrodes.tsv} file must store the real physical coordinates of electrodes in relative probe-space, as this is important information for downstream processing.
 
-\begin{figure}[ht]
+\begin{figure}[H]
 	\centering
-	\includegraphics[width=\linewidth]{figures/figure3-coordinates.png}
-	\caption{Spatial localization and animal metadata in microephys-BIDS.
-		\textbf{(A)}~Stereotaxic surgical coordinates.
-		Bregma and Lambda skull landmarks define the origin; six parameters per probe (AP, ML, DV and three rotation angles) are recorded in \texttt{probes.tsv}.
-		\textbf{(B)}~Dual coordinate representation.
-		Probe-relative coordinates in \texttt{electrodes.tsv} describe contact geometry on the device, while a \texttt{space-<label>\_electrodes.tsv} and matching \texttt{coordsystem.json} locate each contact in an anatomical reference frame.
-		\textbf{(C)}~Animal subject metadata in \texttt{participants.tsv}: species, strain, and strain RRID\@; \texttt{age\_category} with UBERON life-cycle stages is pending (PR~\#2340).
+	\includegraphics[width=\linewidth]{figures/fig-3.pdf}
+	\caption{Spatial localization in microephys-BIDS.
+		\textbf{(A)}~File tree showing the three coordinate layers: stereotaxic surgical coordinates in \texttt{*\_probes.tsv} (green), probe-relative contact positions in \texttt{*\_electrodes.tsv} (pink), and atlas-registered coordinates in \texttt{*\_space-AllenCCFv3\_electrodes.tsv} with a matching \texttt{*\_coordsystem.json} (blue).
+		\textbf{(B)}~Stereotaxic coordinate system.
+		Bregma and Lambda skull landmarks define the origin; six parameters per probe (AP, ML, DV and three rotation angles) are recorded in \texttt{*\_probes.tsv}.
+		\textbf{(C)}~Probe-relative coordinate representation.
+		Electrode positions in \texttt{*\_electrodes.tsv} (without a \texttt{space} entity) describe contact geometry on the device in micrometers relative to the probe tip.
+		\textbf{(D)}~Atlas coordinates (with \texttt{space} entity).
+		The \texttt{*\_space-AllenCCFv3\_electrodes.tsv} file places each contact in the Allen CCF v3 reference frame; the corresponding \texttt{*\_coordsystem.json} defines the coordinate system, units, and origin.
 	}
 	\label{fig:coordinates}
 \end{figure}
 
-\begin{table}[ht]
+\begin{table}[H]
 	\centering
 	\caption{Supported coordinate systems for microelectrode electrophysiology in BIDS, grouped by species.
 		Each system has a corresponding restricted keyword for use in \texttt{MicroephysCoordinateSystem} and the \texttt{space-<label>} entity.

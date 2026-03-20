@@ -13,25 +13,34 @@
 
 \title{Microelectrode electrophysiology: Extending the Brain Imaging Data Structure to intracellular and extracellular recordings in animal models}
 
-% TODO: Add remaining authors from INCF Working Group, tool developers, early adopters
-\author[1]{Reema Gupta}
-\author[2]{Benjamin Dichter}
+% TODO: Add remaining authors - 3 meetings threshold
+% Ask maintainers how to credit them
+% Review feedback deadline - April 15th
+\author[1]{Reema Gupta} % first author
+\author[2]{Cody Baker}
 \author[3,4]{Robert Oostenveld}
 \author[5]{Peyman Najafi}
+\author[]{Lyuba Zehl}
 \author[5]{Andrew P. Davison}
 \author[1]{Thomas Wachtler}
 \author[6]{Julia Sprenger}
+\author[2]{Yaroslav O. Halchenko}
 \author[7]{Sylvain Takerkart}
+\author[8]{Benjamin Dichter} % senior author
+
 
 
 
 \affil[1]{Ludwig-Maximilians-Universit\"at M\"unchen, Munich, Germany}
-\affil[2]{CatalystNeuro}
+\affil[2]{Psychological and Brain Sciences, Dartmouth University, Hanover, NH}
+
 \affil[3]{Donders Institute for Brain, Cognition and Behaviour, Radboud University Nijmegen, The Netherlands}
 \affil[4]{NatMEG, Karolinska Institutet, Stockholm, Sweden}
 \affil[5]{Paris-Saclay Institute of Neuroscience, CNRS, Université Paris-Saclay, Saclay, France}
 \affil[6]{}
 \affil[7]{}
+\affil[8]{CatalystNeuro, LLC}
+
 
 
 \date{}
@@ -440,6 +449,8 @@ The first is a conversion of the Reach-to-Grasp multi-electrode array dataset~\c
 It contains extracellular recordings from two macaque subjects using 96-channel Utah arrays, with both local field potential (1~kHz) and high-pass (30~kHz) data streams, behavioral channels, and task events.
 The second is a synthetic dataset demonstrating both \texttt{ecephys} and \texttt{icephys} datatypes, including registration to the Allen CCF v3 coordinate system, multiple simultaneous probes, and both ProbeInterface library references and custom probe definition files.
 
+TODO: add mention of ongoing bids-dandisets as a project of examples (Cody will publish to zenodo at some point when in a better state for persistence)
+
 \section*{Code Availability}
 
 Using NWB and NIX as the underlying data format allows microephys BIDS data to utilize the sophisticated software ecosystems associated with these data standards.
@@ -467,6 +478,8 @@ The authors would like to thank ...
 This work was supported by 
 EU H2020 (GA 956669),
 EU HE (GA 101147319), 
+[NWB U24 grant]
+[DANDI R grant]
 ...
 
 \section*{Author Contributions}

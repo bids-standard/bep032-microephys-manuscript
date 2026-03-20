@@ -41,3 +41,4 @@
 *.latexmain
 _minted-*/
 auto/
+build/

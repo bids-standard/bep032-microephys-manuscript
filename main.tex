@@ -20,6 +20,9 @@
 \author[5]{Peyman Najafi}
 \author[5]{Andrew P. Davison}
 \author[1]{Thomas Wachtler}
+\author[6]{Julia Sprenger}
+\author[7]{Sylvain Takerkart}
+
 
 
 \affil[1]{Ludwig-Maximilians-Universit\"at M\"unchen, Munich, Germany}
@@ -27,6 +30,9 @@
 \affil[3]{Donders Institute for Brain, Cognition and Behaviour, Radboud University Nijmegen, The Netherlands}
 \affil[4]{NatMEG, Karolinska Institutet, Stockholm, Sweden}
 \affil[5]{Paris-Saclay Institute of Neuroscience, CNRS, Université Paris-Saclay, Saclay, France}
+\affil[6]{}
+\affil[7]{}
+
 
 \date{}
 
@@ -49,33 +55,33 @@
 \section*{Introduction}
 
 Microelectrode electrophysiology encompasses techniques for recording electrical activity on spatial scales smaller than one millimetre, such as the membrane potential of individual neurons and local field potentials, providing crucial insights into neural computation at high spatial and temporal resolution, often with the ability to track individual neuronal action potentials.
-Recent technological advances, including high-density silicon probes such as Neuropixels~\cite{jun_fully_2017}, have dramatically increased data acquisition rates, with single probes now capable of recording from hundreds of neurons simultaneously.
-Intracellular techniques such as patch clamp recordings~\cite{sakmann_patch_1984} provide direct access to cellular membrane dynamics, enabling detailed characterization of synaptic transmission and intrinsic neuronal properties.
+Recent technological advances, including high-density silicon probes such as Neuropixels~\citep{jun_fully_2017}, have dramatically increased data acquisition rates, with single probes now capable of recording from hundreds of neurons simultaneously.
+Intracellular techniques such as patch clamp recordings~\citep{sakmann_patch_1984} provide direct access to cellular membrane dynamics, enabling detailed characterization of synaptic transmission and intrinsic neuronal properties.
 These methods are primarily used in animal research and generate data of increasing complexity that demands standardized organization.
 
 A key challenge in the microelectrode electrophysiology community has been the proliferation of proprietary data formats.
 Different acquisition systems, such as Blackrock, Plexon, TDT, Open Ephys, and SpikeGLX, each produce data in their own formats, creating barriers to data sharing and tool interoperability.
-This fragmentation complicates data sharing and long-term archival: custom readers must be maintained for each format (see for example the Neo (\rrid{RRID:SCR\_000634}) library~\cite{garcia_neo_2014}.)
+This fragmentation complicates data sharing and long-term archival: custom readers must be maintained for each format (see for example the Neo (\rrid{RRID:SCR\_000634}) library~\citep{garcia_neo_2014}.)
 Undocumented specifications, unmaintained programmatic interfaces, and language lock-in risk rendering data inaccessible.
 
-Two major community efforts have emerged to address this challenge at the file format level.
-Neurodata Without Borders (NWB, \rrid{RRID:SCR\_015242})~\cite{rubel_neurodata_2022, teeters_neurodata_2015} is an open data standard for neurophysiology developed as part of the National Institutes of Health BRAIN Initiative by a community of researchers over the last 10 years.
+Two major community efforts have emerged to address this challenge at the file format level for single recording sessions.
+Neurodata Without Borders (NWB, \rrid{RRID:SCR\_015242})~\citep{rubel_neurodata_2022, teeters_neurodata_2015} is an open data standard for neurophysiology developed as part of the National Institutes of Health BRAIN Initiative by a community of researchers over the last 10 years.
 NWB uses HDF5 or Zarr as its backend and provides a comprehensive schema for storing electrophysiology data alongside stimulus information, behavioral data, and metadata.
-The Neuroscience Information Exchange Format (NIX, \rrid{RRID:SCR\_016196})~\cite{adrian_file_2014} is a data model for annotated scientific datasets that provides an HDF5 file backend for the Neo library.
-Both standards are widely adopted in the neuroscience community and supported by major analysis toolkits such as SpikeInterface (\rrid{RRID:SCR\_021150})~\cite{buccino_spikeinterface_2020}, and both have been endorsed by the International Neuroinformatics Coordinating Facility (INCF) as community standards for electrophysiology data.
-Both NWB and NIX have been successful in standardizing data representation at the single-session level, enabling tool developers to build analysis pipelines that work across laboratories~\cite{denker_collaborative_2018, viejo_pynapple_2023, magland_neurosift_2024}.
+The Neuroscience Information Exchange Format (NIX, \rrid{RRID:SCR\_016196})~\citep{adrian_file_2014} is a data model for annotated scientific datasets that provides an HDF5 file backend for the Neo library.
+Both standards are widely adopted in the neuroscience community and supported by major analysis toolkits such as SpikeInterface (\rrid{RRID:SCR\_021150})~\citep{buccino_spikeinterface_2020}, and both have been endorsed by the International Neuroinformatics Coordinating Facility (INCF) as community standards for electrophysiology data.
+Both NWB and NIX have been successful in standardizing data representation at the single-session level, enabling tool developers to build analysis pipelines that work across laboratories~\citep{denker_collaborative_2018, viejo_pynapple_2023, magland_neurosift_2024}.
 However, neither standard provides organizational guidance at the project level.
 That is, how to organize data across multiple sessions, subjects, and experimental conditions within a study.
 Researchers must still make ad-hoc decisions about directory structures, naming conventions, and where to place study-level metadata such as participant information or experimental protocols.
 
-The Brain Imaging Data Structure (BIDS, \rrid{RRID:SCR\_016124})~\cite{gorgolewski_brain_2016} is a community-driven standard for organizing and sharing neuroscience data.
+The Brain Imaging Data Structure (BIDS, \rrid{RRID:SCR\_016124})~\citep{gorgolewski_brain_2016} is a community-driven standard for organizing and sharing neuroscience data.
 In a BIDS dataset, all data from each subject are organized hierarchically in subject-specific directories, with optional session subdirectories containing modality-specific folders for the data files themselves.
 Files follow a structured naming scheme that encodes relevant metadata such as subject, session, and task.
 JSON sidecar files provide detailed metadata for each data file, while TSV files capture tabular information such as participant demographics and channel properties.
 A \texttt{dataset\_description.json} file describes the dataset as a whole, and JSON metadata at higher directory levels are inherited by lower levels unless overridden.
-Originally developed for MRI, BIDS has been extended through community-driven proposals to additional modalities including MEG~\cite{niso_meg-bids_2018}, EEG~\cite{pernet_eeg-bids_2019}, iEEG~\cite{holdgraf_ieeg-bids_2019}, PET, and microscopy.
+Originally developed for MRI, BIDS has been extended through community-driven proposals to additional modalities including MEG~\citep{niso_meg-bids_2018}, EEG~\citep{pernet_eeg-bids_2019}, iEEG~\citep{holdgraf_ieeg-bids_2019}, PET, and microscopy.
 With over a thousand public datasets on OpenNeuro and endorsement by the INCF, BIDS has become a widely adopted framework for FAIR neuroscience data.
-The electrophysiology extensions established patterns for organizing time-series neural data that we build upon here.
+The existing electrophysiology extensions established patterns for organizing time-series neural data that we build upon here.
 This extension bridges the gap between session-level data standardization (NWB/NIX) and study-level organization (BIDS), combining the strengths of both approaches.
 BIDS provides the organizational framework for datasets containing multiple subjects and sessions, consistent with existing modalities, while NWB and NIX handle the complex internal structure of electrophysiology recordings within each session.
 This complementary relationship mirrors how BIDS for neuroimaging organizes NIfTI files.
@@ -96,16 +102,16 @@ This extension:
 	\item introduces two datatypes (\texttt{ecephys} for extracellular and \texttt{icephys} for intracellular recordings),
 	\item defines metadata across three levels: probes, electrodes, and channels,
 	\item standardizes probe and electrode metadata including stereotaxic surgical coordinates,
-	\item integrates with the ProbeInterface library~\cite{garcia_probeinterface_2022} for probe geometry definitions, and
+	\item integrates with the ProbeInterface library~\citep{garcia_probeinterface_2022} for probe geometry definitions, and
 	\item defines coordinate systems for multiple species including rodent and primate brain atlases.
 \end{itemize}
 
 \subsection*{Standardization landscape}
 
-The MINI checklist~\cite{gibson_minimum_2009}, developed by the CARMEN consortium, was among the first community efforts to define what metadata should accompany electrophysiology recordings, covering subject, electrode, recording location, and stimulus information, but explicitly left data format and organization out of scope.
-odML (\rrid{RRID:SCR\_001376})~\cite{grewe_bottom-up_2011} addressed how to structure such metadata through flexible key-value annotation and was adopted in practice for multi-electrode array datasets~\cite{zehl_handling_2016}.
-NWB~\cite{teeters_neurodata_2015} and NIX~\cite{adrian_file_2014} then standardized the data format itself, embedding metadata within self-describing files, while Neo~\cite{garcia_neo_2014} provided the programmatic IO layer that bridges proprietary acquisition formats to these open standards.
-At the project level, large-scale collaborations developed their own organizational conventions: the Allen Brain Observatory~\cite{de_vries_sharing_2023} adopted internal data management practices, while the International Brain Laboratory designed the Open Neurophysiology Environment (ONE) to coordinate Neuropixels recordings across dozens of laboratories.
+The MINI checklist~\citep{gibson_minimum_2009}, developed by the CARMEN consortium, was among the first community efforts to define what metadata should accompany electrophysiology recordings, covering subject, electrode, recording location, and stimulus information, but explicitly left data format and organization out of scope.
+odML (\rrid{RRID:SCR\_001376})~\citep{grewe_bottom-up_2011} addressed how to structure such metadata through flexible key-value annotation and was adopted in practice for multi-electrode array datasets~\citep{zehl_handling_2016}.
+NWB~\citep{teeters_neurodata_2015} and NIX~\citep{adrian_file_2014} then standardized the data format itself, embedding metadata within self-describing files, while Neo~\citep{garcia_neo_2014} provided the programmatic IO layer that bridges proprietary acquisition formats to these open standards.
+At the project level, large-scale collaborations developed their own organizational conventions: the Allen Brain Observatory~\citep{de_vries_sharing_2023} adopted internal data management practices, while the International Brain Laboratory designed the Open Neurophysiology Environment (ONE) to coordinate Neuropixels recordings across dozens of laboratories.
 BEP032 occupies this project-level layer, providing a community standard that builds on the mature ecosystems from these earlier initiatives and that could serve as a common baseline for such collaborative efforts.
 
 \section*{Methods}
@@ -137,7 +143,7 @@ A typical workflow for creating a BIDS-compliant microephys dataset consists of 
 \begin{enumerate}
 	\item \textbf{Convert raw data.}
 	      Convert recordings from the acquisition system's proprietary format to NWB or NIX\@.
-	      The Neo library~\cite{garcia_neo_2014} provides readers for dozens of proprietary acquisition formats and serves as the foundation for conversion tools; NeuroConv~\cite{mayorquin_neuroconv_2025} builds on Neo to automate conversion to NWB, while Neo also supports writing NIX files directly.
+	      The Neo library~\citep{garcia_neo_2014} provides readers for dozens of proprietary acquisition formats and serves as the foundation for conversion tools; NeuroConv~\citep{mayorquin_neuroconv_2025} builds on Neo to automate conversion to NWB, while Neo also supports writing NIX files directly.
 	\item \textbf{Organize into BIDS.}
 	      Arrange the converted files into a BIDS directory structure and generate sidecar metadata files.
 	      % TODO: add nwb2bids citation
@@ -162,7 +168,7 @@ Spike sorting algorithms require the former—inter-electrode spacing, shank arr
 Anatomical interpretation requires the latter—stereotaxic coordinates, brain region labels, atlas registration—to relate spiking activity to circuit function.
 The extension therefore organizes metadata in a three-level hierarchy: \texttt{probes.tsv} describes devices and their surgical placement, \texttt{electrodes.tsv} provides contact positions in probe-relative coordinates (required), and \texttt{channels.tsv} links recorded signals to those contacts.
 Anatomical coordinates are optional and distinguished by \texttt{space-<label>} prefixes (for example, \texttt{space-AllenCCFv3\_electrodes.tsv}).
-For intracellular recordings, \texttt{samples.tsv} links individual recordings to characterized cells or tissue slices, inheriting animal metadata conventions from Microscopy-BIDS\cite{bourget_microscopy-bids_2022}.
+For intracellular recordings, \texttt{samples.tsv} links individual recordings to characterized cells or tissue slices, inheriting animal metadata conventions from Microscopy-BIDS\citep{bourget_microscopy-bids_2022}.
 
 The following subsections detail these components.
 
@@ -186,7 +192,7 @@ The following subsections detail these components.
 \subsubsection*{Animal subject metadata}
 
 Microephys datasets predominantly involve non-human subjects, requiring animal-specific metadata in \texttt{participants.tsv}.
-The \texttt{species}, \texttt{strain}, and \texttt{strain\_rrid} columns introduced by Microscopy-BIDS~\cite{bourget_microscopy-bids_2022} are reused here without modification.
+The \texttt{species}, \texttt{strain}, and \texttt{strain\_rrid} columns introduced by Microscopy-BIDS~\citep{bourget_microscopy-bids_2022} are reused here without modification.
 An \texttt{age\_category} column using UBERON life-cycle stage terms is under development in a separate specification effort (PR~\#2340).
 
 \subsection*{Specific Microephys-BIDS Considerations}
@@ -210,12 +216,12 @@ Patch-clamp experiments often involve multiple cells from the same tissue slice 
 
 Both datatypes share the core organizational structure--probes, electrodes, channels--but populate it with technique-specific metadata.
 For \texttt{ecephys}, \texttt{probes.tsv} documents surgical placement and device specifications, \texttt{electrodes.tsv} specifies contact layout for spike sorting, and optional ProbeInterface integration links to detailed probe specification.
-For \texttt{icephys}, \texttt{samples.tsv} (inherited from Microscopy-BIDS~\cite{bourget_microscopy-bids_2022}) links acquisitions to characterized biological samples with fields such as \texttt{sample\_type}, \texttt{derived\_from}, and \texttt{pathology}.
+For \texttt{icephys}, \texttt{samples.tsv} (inherited from Microscopy-BIDS~\citep{bourget_microscopy-bids_2022}) links acquisitions to characterized biological samples with fields such as \texttt{sample\_type}, \texttt{derived\_from}, and \texttt{pathology}.
 Channel \texttt{type} values distinguish membrane voltage and current (\texttt{VM}, \texttt{IM}) from extracellular signals (\texttt{LFP}, \texttt{HP}, \texttt{MUA}).
 
 \subsection*{Data Format Requirements}
 
-Following the approach of prior BIDS electrophysiology extensions~\cite{pernet_eeg-bids_2019, holdgraf_ieeg-bids_2019}, our selection of data formats was governed by three requirements:
+Following the approach of prior BIDS electrophysiology extensions~\citep{pernet_eeg-bids_2019, holdgraf_ieeg-bids_2019}, our selection of data formats was governed by three requirements:
 
 \begin{enumerate}
 	\item address the needs of a substantial portion of the electrophysiology community,
@@ -223,17 +229,17 @@ Following the approach of prior BIDS electrophysiology extensions~\cite{pernet_e
 	\item meet the technical demands of neurophysiological workflows: high numerical precision, efficient storage of large data volumes, efficient access to subsets of large files, and the capacity to store rich metadata alongside raw signals.
 \end{enumerate}
 
-We require data to be stored in NWB~\cite{rubel_neurodata_2022} or NIX~\cite{adrian_file_2014}.
+We require data to be stored in NWB~\citep{rubel_neurodata_2022} or NIX~\citep{adrian_file_2014}.
 Both are HDF5-based, open-source (BSD-3 licensed), and self-documenting: the file itself contains the schema needed to interpret its contents.
 HDF5 offers practical advantages for multi-gigabyte recordings: hierarchical organization, built-in compression, and lazy loading without reading entire files into memory.
 
 These two formats represent complementary design philosophies.
 NWB provides a well-defined schema with extensive validation, ensuring consistency across datasets.
-NIX uses a minimal, generic data model that gives users more freedom in how they organize data, and serves as a storage backend for the Neo electrophysiology library~\cite{garcia_neo_2014}.
+NIX uses a minimal, generic data model that gives users more freedom in how they organize data, and serves as a storage backend for the Neo electrophysiology library~\citep{garcia_neo_2014}.
 To ensure interoperability, this extension requires that \texttt{.nix} files follow Neo's internal structure conventions, where Neo's object hierarchy and type annotations serve as the domain-specific schema that NIX itself does not prescribe.
-Both have been reviewed and endorsed by the INCF as standard practices~\cite{martone_pcall_2019, noauthor_nix_nodate}, and a dedicated archival repository (DANDI, \rrid{RRID:SCR\_017571}) exists for neurophysiology data stored in these formats.
+Both have been reviewed and endorsed by the INCF as standard practices~\citep{martone_pcall_2019, noauthor_nix_nodate}, and a dedicated archival repository (DANDI, \rrid{RRID:SCR\_017571}) exists for neurophysiology data stored in these formats.
 
-In iEEG-BIDS~\cite{holdgraf_ieeg-bids_2019}, NWB was listed as an unofficially-supported format due to its then-nascent ecosystem.
+In iEEG-BIDS~\citep{holdgraf_ieeg-bids_2019}, NWB was listed as an unofficially-supported format due to its then-nascent ecosystem.
 The maturation of NWB 2.0 and its subsequent INCF endorsement justify its promotion to fully compliant status here.
 Unlike iEEG-BIDS, which maintains separate tiers of compliant and unofficially-supported formats, we adopt a simpler two-format approach.
 Both NWB and NIX are fully supported with no unofficial tier.
@@ -264,9 +270,9 @@ It provides a mechanism to link to formal probe model specifications.
 
 \subsection*{ProbeInterface Integration}
 
-In extracellular electrophysiology, the spatial layout of the electrodes (i.e.\ contacts) on the probe is important for processing such as spike sorting, particularly on high-density probes~\cite{buccino_spikeinterface_2020}.
+In extracellular electrophysiology, the spatial layout of the electrodes (i.e.\ contacts) on the probe is important for processing such as spike sorting, particularly on high-density probes~\citep{buccino_spikeinterface_2020}.
 The positions of the electrodes on a template brain can be useful as well, but often the relative positions of the electrodes are substantially warped in the registration process, so microephys needs to also store relative positions of the electrodes on the probe.
-The ProbeInterface library (\rrid{RRID:SCR\_021150}, part of the SpikeInterface project)~\cite{garcia_probeinterface_2022} provides a JSON-based schema for specifying electrode layout on the probe, as well as specifying the shapes of the electrodes and the geometry of the probe itself, which may be used for further visualization and analysis (Figure~\ref{fig:probeinterface}).
+The ProbeInterface library (\rrid{RRID:SCR\_021150}, part of the SpikeInterface project)~\citep{garcia_probeinterface_2022} provides a JSON-based schema for specifying electrode layout on the probe, as well as specifying the shapes of the electrodes and the geometry of the probe itself, which may be used for further visualization and analysis (Figure~\ref{fig:probeinterface}).
 
 The \texttt{ecephys} datatype provides three possible mechanisms to provide the layout of the electrodes:
 \begin{enumerate}
@@ -294,7 +300,7 @@ The \texttt{ecephys} datatype provides three possible mechanisms to provide the 
 		Three colours encode the mapping to the file hierarchy: probe outline (\textit{green}) maps to \texttt{*\_probes.tsv}, contact positions (\textit{pink}) to \texttt{*\_electrodes.tsv}, and channel wiring (\textit{orange}) to \texttt{*\_channels.tsv}.
 		\textbf{(A)}~Colour-coded microephys-BIDS sidecar tables showing the three-level hierarchy with dashed arrows indicating cross-file references between probe, electrode, and channel entries.
 		The \texttt{*\_probes.json} sidecar links probe models to definitions via two mechanisms: a custom file in the dataset's \texttt{probes/} directory, or a reference to the ProbeInterface library on GitHub.
-		\textbf{(B)}~NeuroNexus A4x8-5mm-100-200-177 probe geometry (4~shanks, 32~channels) from the ProbeInterface library~\cite{garcia_probeinterface_2022}; interleaved electrode identifiers reflect the manufacturer's connector pin numbering.
+		\textbf{(B)}~NeuroNexus A4x8-5mm-100-200-177 probe geometry (4~shanks, 32~channels) from the ProbeInterface library~\citep{garcia_probeinterface_2022}; interleaved electrode identifiers reflect the manufacturer's connector pin numbering.
 		\textbf{(C)}~ProbeInterface JSON fields highlighted by their microephys-BIDS level: probe-level fields (green), contact positions (pink), and device channel indices (orange).
 		Device channel indices assume an adapter where pin \(N\) maps to input \(N - 1\).
 	}
@@ -317,7 +323,7 @@ However, this standard has four key differences in microephys experiments:
 When inserting microelectrode probes in vivo, experimenters often use stereotaxic instruments to target a desired brain region.
 The position and angle of the inserted probe are the stereotaxic coordinates, and describe the surgical positioning procedure.
 We reviewed the field thoroughly, and found that the systems for notating stereotaxic coordinates were often varied, inconsistent, and poorly documented.
-The BrainSTEM project~\cite{petersen_brainstem} provides clear and unambiguous definitions of stereotaxic coordinates along with detailed illustrations in its online documentation.
+The BrainSTEM project~\citep{petersen_brainstem} provides clear and unambiguous definitions of stereotaxic coordinates along with detailed illustrations in its online documentation.
 We adopt and formalize this convention here, and encourage others to do the same.
 
 In microephys, the stereotaxic coordinates are stored as columns of the \texttt{probes.tsv} table.
@@ -332,7 +338,7 @@ For example, placement of Utah array probes in non-human primates and in humans 
 They are often simply manually placed in the desired brain area based on gyral patterns observed on the surface of the brain.
 In these cases, there are no stereotaxic coordinates to report.
 
-Stereotaxic coordinates are valuable information, as it reveals the intent of the surgical probe placement, and it is often the best estimate the experimenter has until histological probe localization can be conducted post mortem, however, a recent analysis has revealed that stereotaxic reproducibility can be quite poor, even in ideal circumstances, and substantial, meaningful variance exists between surgeries~\cite{international_brain_laboratory_reproducibility_2025}.
+Stereotaxic coordinates are valuable information, as it reveals the intent of the surgical probe placement, and it is often the best estimate the experimenter has until histological probe localization can be conducted post mortem, however, a recent analysis has revealed that stereotaxic reproducibility can be quite poor, even in ideal circumstances, and substantial, meaningful variance exists between surgeries~\citep{international_brain_laboratory_reproducibility_2025}.
 Stereotaxic coordinates also fail to capture inter-individual variability in brain structure.
 Therefore, while this information is valuable, it is incomplete.
 
@@ -344,7 +350,7 @@ The most common method is to take histological slices of the brain where the pro
 The gold standard for anatomical localization in microephys experiments is to register the probe to a 3-dimensional coordinate system.
 This technique registers electrodes implanted in different subjects onto a common brain, analogous to registration procedures that are commonplace in MRI.
 Most microelectrode electrophysiology data is from non-human animal subjects, so we must provide a new set of coordinate systems for different species.
-The most popular coordinate system for mice is the Allen Institute Common Coordinate Framework (CCF) v3~\cite{wang_allen_2020}.
+The most popular coordinate system for mice is the Allen Institute Common Coordinate Framework (CCF) v3~\citep{wang_allen_2020}.
 Other atlases have been developed for mice and a variety of other species, though complete coverage of species will require new coordinate systems and atlases to be added as they are developed.
 
 Expressing localization of electrodes on an individual, group, or common coordinate system requires an additional \texttt{electrodes.tsv} file with a \texttt{space} entity, and a corresponding \texttt{MicroephysCoordinateSystem.json} file.
@@ -430,7 +436,7 @@ BIDS complements these standards by providing a modality-spanning organisational
 % PRs: https://github.com/bids-standard/bids-examples/pull/491
 %       https://github.com/bids-standard/bids-examples/pull/527
 Two example datasets are provided in the BIDS examples repository (\url{https://github.com/bids-standard/bids-examples}).
-The first is a conversion of the Reach-to-Grasp multi-electrode array dataset~\cite{brochier_massively_2018}, originally published on the G-Node repository (DOI: 10.12751/g-node.f83565).
+The first is a conversion of the Reach-to-Grasp multi-electrode array dataset~\citep{brochier_massively_2018}, originally published on the G-Node repository (DOI: 10.12751/g-node.f83565).
 It contains extracellular recordings from two macaque subjects using 96-channel Utah arrays, with both local field potential (1~kHz) and high-pass (30~kHz) data streams, behavioral channels, and task events.
 The second is a synthetic dataset demonstrating both \texttt{ecephys} and \texttt{icephys} datatypes, including registration to the Allen CCF v3 coordinate system, multiple simultaneous probes, and both ProbeInterface library references and custom probe definition files.
 
@@ -439,22 +445,29 @@ The second is a synthetic dataset demonstrating both \texttt{ecephys} and \textt
 Using NWB and NIX as the underlying data format allows microephys BIDS data to utilize the sophisticated software ecosystems associated with these data standards.
 
 The NWB software ecosystem contains a suite of tools to convert data from the various common electrophysiology data formats to NWB.
-PyNWB (\rrid{RRID:SCR\_017452}) and MatNWB (\rrid{RRID:SCR\_021156}) provide flexible APIs for writing NWB files~\cite{rubel_neurodata_2022}.
-NeuroConv automates conversion from 60+ formats, guiding the user in best practices~\cite{mayorquin_neuroconv_2025}.
+PyNWB (\rrid{RRID:SCR\_017452}) and MatNWB (\rrid{RRID:SCR\_021156}) provide flexible APIs for writing NWB files~\citep{rubel_neurodata_2022}.
+NeuroConv automates conversion from 60+ formats, guiding the user in best practices~\citep{mayorquin_neuroconv_2025}.
 NWB Inspector (\rrid{RRID:SCR\_025465}) provides automated checks to validate NWB files against best practices, and NWB GUIDE provides a graphical interface that provides the features of NeuroConv and NWB Inspector to non-programmers.
 
 30+ popular analysis tools support NWB as an input and/or output format, many of which are relevant to microephys data.
-SpikeInterface provides tools for creating spike sorting pipelines~\cite{buccino_spikeinterface_2020}.
-Neurosift (\rrid{RRID:SCR\_025466}) provides interactive dashboards for visualizing NWB data~\cite{magland_neurosift_2024}, and Pynapple (\rrid{RRID:SCR\_023312})~\cite{viejo_pynapple_2023} provides tools for common neurophysiology analyses.
+SpikeInterface provides tools for creating spike sorting pipelines~\citep{buccino_spikeinterface_2020}.
+Neurosift (\rrid{RRID:SCR\_025466}) provides interactive dashboards for visualizing NWB data~\citep{magland_neurosift_2024}, and Pynapple (\rrid{RRID:SCR\_023312})~\citep{viejo_pynapple_2023} provides tools for common neurophysiology analyses.
 
-NIX can be written from NEO~\cite{garcia_neo_2014}, which supports reading diverse electrophysiology data formats.
-NIX also supports data analysis libraries, such as Elephant (\rrid{RRID:SCR\_003833})~\cite{denker_collaborative_2018}.
+NIX can be written from NEO~\citep{garcia_neo_2014}, which supports reading diverse electrophysiology data formats.
+NIX also supports data analysis libraries, such as Elephant (\rrid{RRID:SCR\_003833})~\citep{denker_collaborative_2018}.
 
 \bibliographystyle{plainnat}
 \bibliography{bep032}
 
 \section*{Acknowledgements}
 % INCF Working Group members, funders, community contributors
+The authors would like to thank ...
+\\
+% TODO: Collect funding information from all authors
+This work was supported by 
+EU H2020 (GA 956669),
+EU HE (GA 101147319), 
+...
 
 \section*{Author Contributions}
 % CRediT-style contributions
@@ -462,10 +475,6 @@ NIX also supports data analysis libraries, such as Elephant (\rrid{RRID:SCR\_003
 \section*{Competing Interests}
 The authors declare no competing interests.
 
-\section*{Funding}
-% TODO: Collect funding information from all authors
-R.G.
-\ was supported by In2PrimateBrains GA n\textsuperscript{o}956669 -- H2020 and EBRAINS 2.0 GA n\textsuperscript{o}101147319 Open Call Project 46.
 
 \section*{Ethics statement}
 

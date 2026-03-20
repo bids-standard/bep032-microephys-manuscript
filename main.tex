@@ -17,11 +17,15 @@
 \author[1,*]{Reema Gupta}
 \author[2]{Benjamin Dichter}
 \author[3,4]{Robert Oostenveld}
+\author[5]{Peyman Najafi}
+\author[5]{Andrew P. Davison}
+
 
 \affil[1]{Ludwig-Maximilians-Universit\"at M\"unchen, Munich, Germany}
 \affil[2]{CatalystNeuro}
 \affil[3]{Donders Institute for Brain, Cognition and Behaviour, Radboud University Nijmegen, The Netherlands}
 \affil[4]{NatMEG, Karolinska Institutet, Stockholm, Sweden}
+\affil[5]{Paris-Saclay Institute of Neuroscience, CNRS, Université Paris-Saclay, Saclay, France}
 
 \date{}
 
@@ -33,7 +37,7 @@
 	The Brain Imaging Data Structure (BIDS) has facilitated data sharing and tool development in human neuroimaging.
 	We present an extension for microelectrode electrophysiology recordings in animals, specifically addressing the unique requirements of intracellular and extracellular recordings.
 	This extension introduces two new data types: \texttt{icephys} for intracellular and \texttt{ecephys} for extracellular recordings, supporting diverse recording modalities from patch-clamp to high-density silicon probes.
-	Building on existing BIDS principles and the prior electrophysiology extensions for EEG and iEEG, we specify metadata for probes, electrodes, and channels, with particular attention to metadata required for spike sorting analysis.
+	Building on existing BIDS principles and the prior electrophysiology extensions for EEG and iEEG, we specify metadata for probes, electrodes, and channels, paying particular attention to metadata required for spike sorting analysis.
 	The extension adopts NWB (Neurodata Without Borders) and NIX (Neuroscience Information Exchange) as data formats, ensuring comprehensive metadata capture while maintaining compatibility with existing analysis ecosystems.
 	We provide example datasets covering common use cases and discuss integration with established tools.
 	This standardization enables reproducible analysis pipelines, facilitates data sharing through repositories like DANDI, G-Node and EBRAINS, and bridges different scales from cellular to systems neuroscience.
@@ -43,20 +47,20 @@
 
 \section*{Introduction}
 
-Microelectrode electrophysiology encompasses techniques for recording electrical activity from individual neurons to local field potentials, providing crucial insights into neural computation at high spatial and temporal resolution, often with the ability to track individual neuronal action potentials.
+Microelectrode electrophysiology encompasses techniques for recording electrical activity on spatial scales smaller than one millimetre, such as the membrane potential of individual neurons and local field potentials, providing crucial insights into neural computation at high spatial and temporal resolution, often with the ability to track individual neuronal action potentials.
 Recent technological advances, including high-density silicon probes such as Neuropixels~\cite{jun_fully_2017}, have dramatically increased data acquisition rates, with single probes now capable of recording from hundreds of neurons simultaneously.
 Intracellular techniques such as patch clamp recordings~\cite{sakmann_patch_1984} provide direct access to cellular membrane dynamics, enabling detailed characterization of synaptic transmission and intrinsic neuronal properties.
-These methods are primarily used in animal research but generate data of increasing complexity that demands standardized organization.
+These methods are primarily used in animal research and generate data of increasing complexity that demands standardized organization.
 
 A key challenge in the microelectrode electrophysiology community has been the proliferation of proprietary data formats.
 Different acquisition systems, such as Blackrock, Plexon, TDT, Open Ephys, and SpikeGLX, each produce data in their own formats, creating barriers to data sharing and tool interoperability.
-This fragmentation complicates data sharing and long-term archival: custom readers must be maintained for each format.
+This fragmentation complicates data sharing and long-term archival: custom readers must be maintained for each format (see for example the Neo (\rrid{RRID:SCR\_000634}) library~\cite{garcia_neo_2014}.)
 Undocumented specifications, unmaintained programmatic interfaces, and language lock-in risk rendering data inaccessible.
 
-Two major community efforts have emerged to address this challenge at the session level.
-Neurodata Without Borders (NWB, \rrid{RRID:SCR\_015242})~\cite{rubel_neurodata_2022, teeters_neurodata_2015} is an open data standard for neurophysiology developed as part of the National Institute of Health BRAIN Initiative by a community of researchers over the last 10 years.
+Two major community efforts have emerged to address this challenge at the file format level.
+Neurodata Without Borders (NWB, \rrid{RRID:SCR\_015242})~\cite{rubel_neurodata_2022, teeters_neurodata_2015} is an open data standard for neurophysiology developed as part of the National Institutes of Health BRAIN Initiative by a community of researchers over the last 10 years.
 NWB uses HDF5 or Zarr as its backend and provides a comprehensive schema for storing electrophysiology data alongside stimulus information, behavioral data, and metadata.
-The Neuroscience Information Exchange Format (NIX, \rrid{RRID:SCR\_016196})~\cite{adrian_file_2014} is a data model for annotated scientific datasets that provides a HDF5 file backend for the Neo (\rrid{RRID:SCR\_000634}) library~\cite{garcia_neo_2014}.
+The Neuroscience Information Exchange Format (NIX, \rrid{RRID:SCR\_016196})~\cite{adrian_file_2014} is a data model for annotated scientific datasets that provides an HDF5 file backend for the Neo library.
 Both standards are widely adopted in the neuroscience community and supported by major analysis toolkits such as SpikeInterface (\rrid{RRID:SCR\_021150})~\cite{buccino_spikeinterface_2020}, and both have been endorsed by the International Neuroinformatics Coordinating Facility (INCF) as community standards for electrophysiology data.
 Both NWB and NIX have been successful in standardizing data representation at the single-session level, enabling tool developers to build analysis pipelines that work across laboratories~\cite{denker_collaborative_2018, viejo_pynapple_2023, magland_neurosift_2024}.
 However, neither standard provides organizational guidance at the project level.

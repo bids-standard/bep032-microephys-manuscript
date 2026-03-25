@@ -25,10 +25,10 @@
 \author[1]{Thomas Wachtler}
 \author[6]{Julia Sprenger}
 \author[2]{Yaroslav O. Halchenko}
-\author[7]{Sylvain Takerkart}
-\author[8]{Benjamin Dichter} % senior author
+\author[6]{Sylvain Takerkart}
+\author[7]{Benjamin Dichter} % senior author
 
-
+% note by Sylvain: I just talked with Julia Sprenger today (2025-03-25), she wants to be listed with the same affiliation as me (i.e where her contract was when she contributed)... the email address to be used for her is : julia.sprenger@rwth-aachen.de
 
 
 \affil[1]{Ludwig-Maximilians-Universit\"at M\"unchen, Munich, Germany}
@@ -37,9 +37,8 @@
 \affil[3]{Donders Institute for Brain, Cognition and Behaviour, Radboud University Nijmegen, The Netherlands}
 \affil[4]{NatMEG, Karolinska Institutet, Stockholm, Sweden}
 \affil[5]{Paris-Saclay Institute of Neuroscience, CNRS, Université Paris-Saclay, Saclay, France}
-\affil[6]{}
-\affil[7]{}
-\affil[8]{CatalystNeuro, LLC}
+\affil[6]{Institut de Neurosciences de la Timone UMR7289, CNRS, Aix-Marseille Université, Marseille, France}
+\affil[7]{CatalystNeuro, LLC}
 
 
 
@@ -132,16 +131,21 @@ BEP032 occupies this project-level layer, providing a community standard that bu
 % Original discussion doc https://docs.google.com/document/d/1NTDGBpdAIXVL5VI4Pyjzo-I783-OuCBzrhTFwDMJ5xU/
 % INCF repo with meeting minutes https://github.com/INCF/neuroscience-data-structure/pull/13
 % BEP032tools https://bep032tools.readthedocs.io/en/latest/ (repo: https://github.com/INT-NIT/BEP032tools)
+% mattermost discussion channel (never really been used, but I list it here for exhaustiveness): https://mattermost.brainhack.org/brainhack/channels/animal_data_incf_wg
 
 The BEP032 effort grew out of the Animal Data Organization (AnDO) project, initiated at the Institut de Neurosciences de la Timone in Marseille in early 2020 to standardize experimental data recorded in animal models.
 Following the initial development, the effort was opened to the broader community through the launch of an INCF-endorsed Working Group on Standardized Data.
 The working group, comprising approximately 40 members from institutions across Europe and North America, held monthly teleconferences and made progress in subgroups on well-defined issues between meetings.
-After discussions within the group, a specific standardization effort for electrophysiology was initiated as BIDS Extension Proposal 032.
+After discussions within the group, a specific standardization effort for electrophysiology was initiated as BIDS Extension Proposal 032. % it might be interesting to add that it was a first fairly long debate to decide to go with BIDS or not...?
 The proposal was developed in the open on a Google Document following the standard BEP process, with the community invited to comment directly on the specification.
 
 Several design decisions required coordination with other BIDS extension efforts and with developers of related tools.
 The active participation of developers of other BEPs and of BIDS maintainers was critical to the resolution of design issues, particularly the three-level metadata hierarchy and the dual coordinate system approach.
 % any other better example?
+
+[suggestion by Sylvain: mention in the paragraph above the introduction of the samples.tsv file in BIDS microscopy, which was coordinated with our BEP with the common need to support "animal data" for both microscopy and icephys]
+
+[suggestion by Sylvain (not sure at all on this one): mention in the paragraph above the initial discussions, in 20222, with BEP026, which seems abandoned today; there's a fair probability that BEP032 answers most of the needs of BEP026...]
 
 % BEP032tools: https://github.com/INT-NIT/BEP032tools
 Upon reaching community consensus, the proposal was submitted as a pull request to the BIDS specification repository, concurrently with the preparation of example datasets and the update of the BIDS validator schema.
@@ -480,6 +484,7 @@ EU H2020 (GA 956669),
 EU HE (GA 101147319), 
 [NWB U24 grant]
 [DANDI R grant]
+[French Agence Nationale de la Recherche, project ShareElec ANR-19-DATA-0021]
 ...
 
 \section*{Author Contributions}

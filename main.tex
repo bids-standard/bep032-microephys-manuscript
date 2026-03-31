@@ -32,7 +32,7 @@
 
 
 \affil[1]{Ludwig-Maximilians-Universit\"at M\"unchen, Munich, Germany}
-\affil[2]{Psychological and Brain Sciences, Dartmouth University, Hanover, NH}
+\affil[2]{Center for Open Neuroscience, Psychological and Brain Sciences, Dartmouth College, Hanover, NH}
 
 \affil[3]{Donders Institute for Brain, Cognition and Behaviour, Radboud University Nijmegen, The Netherlands}
 \affil[4]{NatMEG, Karolinska Institutet, Stockholm, Sweden}
@@ -159,8 +159,7 @@ A typical workflow for creating a BIDS-compliant microephys dataset consists of 
 	      The Neo library~\citep{garcia_neo_2014} provides readers for dozens of proprietary acquisition formats and serves as the foundation for conversion tools; NeuroConv~\citep{mayorquin_neuroconv_2025} builds on Neo to automate conversion to NWB, while Neo also supports writing NIX files directly.
 	\item \textbf{Organize into BIDS.}
 	      Arrange the converted files into a BIDS directory structure and generate sidecar metadata files.
-	      % TODO: add nwb2bids citation
-	      nwb2bids extracts metadata from NWB files to populate BIDS sidecar TSV and JSON files and reorganizes files into the required directory layout, with explicit support for the \texttt{ecephys} and \texttt{icephys} datatypes defined in this extension.
+	      nwb2bids\citep{nwb2bids_zenodo} extracts metadata from NWB files to populate BIDS sidecar TSV and JSON files and reorganizes files into the required directory layout, with explicit support for the \texttt{ecephys} and \texttt{icephys} datatypes defined in this extension.
 	\item \textbf{Complete metadata.}
 	      Review and complete the generated metadata: verify that probe coordinates, electrode positions, and channel mappings are consistent, and fill in any information not captured in the source files (for example, stereotaxic surgical coordinates).
 	\item \textbf{Validate.}
@@ -453,7 +452,8 @@ The first is a conversion of the Reach-to-Grasp multi-electrode array dataset~\c
 It contains extracellular recordings from two macaque subjects using 96-channel Utah arrays, with both local field potential (1~kHz) and high-pass (30~kHz) data streams, behavioral channels, and task events.
 The second is a synthetic dataset demonstrating both \texttt{ecephys} and \texttt{icephys} datatypes, including registration to the Allen CCF v3 coordinate system, multiple simultaneous probes, and both ProbeInterface library references and custom probe definition files.
 
-TODO: add mention of ongoing bids-dandisets as a project of examples (Cody will publish to zenodo at some point when in a better state for persistence)
+% TODO: Cody will publish to zenodo at some point when in a better state for persistence
+GitHub organization bids-dandisets (https://github.com/bids-dandisets/) contains results of organizing existing DANDI datasets as BIDS datasets using nwb2bids\cite{nwb2bids_zenodo}.
 
 \section*{Code Availability}
 

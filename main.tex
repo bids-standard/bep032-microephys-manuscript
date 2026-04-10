@@ -17,40 +17,40 @@
 % TODO: Add remaining authors - 3 meetings threshold
 % Ask maintainers how to credit them
 % Review feedback deadline - April 15th
-\author[1]{Reema Gupta} % first author
-\author[2]{Cody Baker}
-\author[3,4]{Robert Oostenveld}
-\author[5]{Peyman Najafi}
-\author[11]{Lyuba Zehl}
-\author[5]{Andrew P. Davison}
-\author[10]{Michael Denker}
-\author[9]{Samuel Garcia}
+\author[1,2]{Reema Gupta} % first author
+\author[3]{Cody Baker}
+\author[4,5]{Robert Oostenveld}
+\author[6]{Peyman Najafi}
+\author[12]{Lyuba Zehl}
+\author[6]{Andrew P. Davison}
+\author[11]{Michael Denker}
+\author[10]{Samuel Garcia}
 \author[1]{Thomas Wachtler}
-\author[8]{Oliver Ruebel}
-\author[6]{Frederic V. Barthelemy}
-\author[6]{Julia Sprenger}
-\author[2]{Yaroslav O. Halchenko}
-\author[6]{Sylvain Takerkart}
-\author[12]{Niccolò Bonacchi}
-\author[7]{Benjamin Dichter} % senior author
+\author[9]{Oliver Ruebel}
+\author[7]{Frederic V. Barthelemy}
+\author[7]{Julia Sprenger}
+\author[3]{Yaroslav O. Halchenko}
+\author[7]{Sylvain Takerkart}
+\author[13]{Niccolò Bonacchi}
+\author[8]{Benjamin Dichter} % senior author
 
 % note by Sylvain: I just talked with Julia Sprenger today (2025-03-25), she wants to be listed with the same affiliation as me (i.e where her contract was when she contributed)... the email address to be used for her is : julia.sprenger@rwth-aachen.de
 % note by Fred Barthelemy. Seems fair I do the same for my affiliation. Also I put my name somewhere randomly, feel free to move it.
 % note by Niccolò: I added my name to the last place before Ben's which is marked as senior author, feel free to redistribute, not first for sure, not last so one of the alphabetically ordered middle authors :)  
 
-\affil[1]{Ludwig-Maximilians-Universit\"at M\"unchen, Munich, Germany}
-\affil[2]{Center for Open Neuroscience, Psychological and Brain Sciences, Dartmouth College, Hanover, NH}
-
-\affil[3]{Donders Institute for Brain, Cognition and Behaviour, Radboud University Nijmegen, The Netherlands}
-\affil[4]{NatMEG, Karolinska Institutet, Stockholm, Sweden}
-\affil[5]{Paris-Saclay Institute of Neuroscience, CNRS, Université Paris-Saclay, Saclay, France}
-\affil[6]{Institut de Neurosciences de la Timone UMR7289, CNRS, Aix-Marseille Université, Marseille, France}
-\affil[7]{CatalystNeuro, LLC}
-\affil[8]{Scientific Data Division, Lawrence Berkeley National Laboratory, Berkeley, United States}
-\affil[9]{Centre de Recherche en Neuroscience de Lyon, CNRS, Lyon, France}
-\affil[10]{Institute for Advanced Simulation (IAS-6), Jülich Research Centre, Jülich, Germany}
-\affil[11]{EBRAINS AISBL, Brussels, Belgium}
-\affil[12]{William James Center for Research (WJCR), ISPA - Instituto Universitário, Rua Jardim do Tabaco, 34, 1149-041 Lisbon, Portugal}
+\affil[1]{Faculty of Biology, Ludwig-Maximilians-Universit\"{a}t M\"{u}nchen, Planegg-Martinsried, Germany}
+\affil[2]{Graduate School of Systemic Neurosciences, Ludwig-Maximilians-Universit\"at M\"unchen, Planegg-Martinsried, Germany}
+\affil[3]{Center for Open Neuroscience, Psychological and Brain Sciences, Dartmouth College, Hanover, NH}
+\affil[4]{Donders Institute for Brain, Cognition and Behaviour, Radboud University Nijmegen, The Netherlands}
+\affil[5]{NatMEG, Karolinska Institutet, Stockholm, Sweden}
+\affil[6]{Paris-Saclay Institute of Neuroscience, CNRS, Université Paris-Saclay, Saclay, France}
+\affil[7]{Institut de Neurosciences de la Timone UMR7289, CNRS, Aix-Marseille Université, Marseille, France}
+\affil[8]{CatalystNeuro, LLC}
+\affil[9]{Scientific Data Division, Lawrence Berkeley National Laboratory, Berkeley, United States}
+\affil[10]{Centre de Recherche en Neuroscience de Lyon, CNRS, Lyon, France}
+\affil[11]{Institute for Advanced Simulation (IAS-6), Jülich Research Centre, Jülich, Germany}
+\affil[12]{EBRAINS AISBL, Brussels, Belgium}
+\affil[13]{William James Center for Research (WJCR), ISPA - Instituto Universitário, Rua Jardim do Tabaco, 34, 1149-041 Lisbon, Portugal}
 
 
 \date{}
@@ -72,24 +72,27 @@
 
 \section*{Introduction}
 
-Microelectrode electrophysiology encompasses techniques for recording electrical activity on spatial scales smaller than one millimeter, such as the membrane potential of individual neurons and local field potentials, providing crucial insights into neural computation at high spatial and temporal resolution, often with the ability to track individual neuronal action potentials.
-Recent technological advances, including high-density silicon probes such as Neuropixels~\citep{jun_fully_2017, Steinmetz2021}, have dramatically increased data acquisition rates. Single probes are now capable of recording from hundreds of neurons simultaneously generating more than $\approx 80+ GB/h$ per probe.
-Intracellular techniques, such as patch clamp recordings~\citep{sakmann_patch_1984}, provide direct access to cellular membrane dynamics, enabling detailed characterization of synaptic transmission and intrinsic neuronal properties.
-These methods are used primarily in animal research and generate data of increasing complexity that demand a standardized organization.
+Microelectrode electrophysiology encompasses techniques for recording electrical activity on spatial scales smaller than one millimeter, such as the membrane potential of individual neurons and local field potentials.
+These measurements provide crucial insights into neural computation at high spatial and temporal resolution, often with the ability to track individual neuronal action potentials.
+Recent technological advances, including high-density silicon probes such as Neuropixels~\citep{jun_fully_2017, Steinmetz2021}, have dramatically increased the volume of the acquired data. 
+Single probes are now capable of recording extracellularly from hundreds of neurons simultaneously generating more than $\approx 80$~GB/h per probe.
+Intracellular techniques, such as patch clamp recordings~\citep{sakmann_patch_1984}, are a complementary class of experimental methods that provide direct access to cellular membrane dynamics, enabling detailed characterization of synaptic transmission and intrinsic neuronal properties.
+While the amount of acquired data for intracellular techniques is typically less than those estimated above, they share a similarly high degree of heterogeneity from the underlying experimental diversity.
+These two classes of methods are used primarily in animal research and generate data of increasing complexity that demand a standardized organization.
 
 A key challenge in the microelectrode electrophysiology community has been the proliferation of proprietary data formats.
-Different acquisition systems, such as Blackrock, Plexon, TDT, Open Ephys, and SpikeGLX, each produce data in their own formats, creating barriers to data sharing and tool interoperability.
-This fragmentation complicates sharing and long-term archiving of data. Dedicated readers must be maintained for each format (for example in Neo (\rrid{RRID:SCR\_000634})~\citep{garcia_neo_2014}) and
-undocumented specifications, unmaintained programmatic interfaces, and language lock-in risk rendering data inaccessible.
+Different acquisition systems, such as Blackrock, Plexon, TDT, Open Ephys, and SpikeGLX, each produce data in their own formats.
+This fragmentation creates barriers that complicate data sharing, tool interoperability, and long-term archiving of data. 
+Dedicated readers must be maintained for each format. For example, the Neo ~\citep[\rrid{RRID:SCR\_000634}; ][]{garcia_neo_2014} library for data handling in electrophysiology currently supports over 40 different interfaces to different file formats. Despite the availability of such software tools, undocumented specifications, unmaintained programmatic interfaces, and language lock-in risk rendering data inaccessible.
 
 Two major community efforts have emerged to address this challenge at the file format level for individual recording sessions.
 Neurodata Without Borders (NWB, \rrid{RRID:SCR\_015242})~\citep{rubel_neurodata_2022, teeters_neurodata_2015} is an open data standard for neurophysiology developed as part of the National Institutes of Health (NIH) BRAIN Initiative by a community of researchers over the last 10 years.
 NWB uses HDF5 or Zarr as its storage backend and provides a comprehensive schema for storing electrophysiology data alongside stimulus information, behavioral data, and metadata.
-The Neuroscience Information Exchange Format (NIX, \rrid{RRID:SCR\_016196})~\citep{adrian_file_2014} is a data model for annotated scientific datasets that provides an HDF5 file backend for the Neo library.
-Both standards are widely adopted in the neuroscience community, are supported by widely-used analysis toolkits such as SpikeInterface (\rrid{RRID:SCR\_021150})~\citep{buccino_spikeinterface_2020}, and have been endorsed by the International Neuroinformatics Coordinating Facility (INCF) as community standards for electrophysiology data.
-NWB and NIX  standardize the representation of data at the single-session level, allowing tool developers to build analysis pipelines that work across laboratories~\citep{denker_collaborative_2018, viejo_pynapple_2023, magland_neurosift_2024}.
-However, neither standard provides organizational guidance at the project level for organizing collections of NWB or NIX files that represent recordings from many sessions, subjects, and experimental conditions within a study.
-Researchers must still make \textit{ad hoc} decisions about directory structures, naming conventions, and the placement of study-level metadata, such as participant information and experimental protocols.
+The Neuroscience Information Exchange Format (NIX, \rrid{RRID:SCR\_016196})~\citep{adrian_file_2014} is an open data model for annotated self-descriptive scientific datasets that provides an HDF5 file backend for the Neo data model.
+Both standards are widely adopted in the neuroscience community, are supported by widely-used analysis toolkits such as SpikeInterface (\rrid{RRID:SCR\_021150})~\citep{buccino_spikeinterface_2020}, and have been endorsed by the International Neuroinformatics Coordinating Facility (INCF) as community standards for neuroscience data storage.
+NWB and NIX standardize the representation of data at the single-file level, which is typically used to store data of a single recording session. These file formats allow tool developers to build analysis pipelines that work across laboratories~\citep{denker_collaborative_2018, gutzen_2014, viejo_pynapple_2023, magland_neurosift_2024}.
+However, neither standard provides organizational guidance at the study level for organizing collections of NWB or NIX files that represent recordings from many sessions, subjects, and experimental conditions within a study.
+Researchers must still make \textit{ad hoc} decisions about directory structures, naming conventions, and the placement of study-level metadata, such as participant information and experimental protocols. In addition, some of the basic metadata describing the specific electrophysiology setting of the study, such as electrode configurations, remain difficult to access as part of the included binary files.
 
 The Brain Imaging Data Structure (BIDS, \rrid{RRID:SCR\_016124})~\citep{gorgolewski_brain_2016} is a community-driven standard for organizing and sharing neuroscience data. Originally developed for MRI, BIDS has been extended through community-driven proposals to additional modalities including MEG~\citep{niso_meg-bids_2018}, EEG~\citep{pernet_eeg-bids_2019}, iEEG~\citep{holdgraf_ieeg-bids_2019}, PET, and microscopy.
 With over a thousand public datasets on OpenNeuro and endorsement by the INCF, BIDS has become a widely adopted framework for FAIR neuroscience data~\citep{wilkinson_fair_2016}.
@@ -99,13 +102,13 @@ Files follow a structured naming scheme that encodes relevant metadata such as s
 Additional metadata are encoded in sidecar metadata files with formal schemas. Specifically, JSON sidecar files provide detailed metadata for each data file, while TSV files capture tabular information, such as participant demographics and channel properties.
 A \texttt{dataset\_description.json} file describes the dataset as a whole, and JSON metadata at higher directory levels are inherited by lower levels unless overridden.
 
-The existing EEG and iEEG extensions for BIDS~\citep{pernet_eeg-bids_2019, holdgraf_ieeg-bids_2019} established patterns for organizing time-series neural data that we build upon here.
-This extension bridges the gap between session-level data standardization (NWB/NIX) and study-level organization (BIDS), combining the strengths of both approaches.
+Two existing EEG and iEEG extensions for BIDS~\citep{pernet_eeg-bids_2019, holdgraf_ieeg-bids_2019} established patterns for organizing time-series neural data for meso- and macro-scale electrophysiology experiments.
+Building on these two extensions, we present an extension for microelectrode electrophysiology that bridges the gap between session-level data standardization (NWB/NIX) and study-level organization (BIDS), combining the strengths of both approaches.
 BIDS provides the organizational framework for datasets containing multiple subjects and sessions, consistent with existing modalities, while NWB and NIX handle the complex internal structure of electrophysiology recordings within each session.
 This complementary relationship mirrors how BIDS for neuroimaging organizes NIfTI files.
 BIDS does not replace standardized file formats, but provides the organizational context around them.
 
-The design of this enhancement proposal reflects the unique demands of microelectrode electrophysiology while preserving compatibility with existing (BIDS) conventions whenever possible. In particular, this effort addresses the following key challenges:
+The design of this enhancement proposal reflects the unique demands of microelectrode electrophysiology while preserving compatibility with existing (BIDS) conventions and BIDS extensions whenever possible. In particular, this effort addresses the following key challenges:
 \begin{enumerate}[noitemsep]
 	\item Electrode scales that span orders of magnitude (submicrometer tips to millimeter arrays).
 	\item Diverse target species with different anatomical brain reference spaces and atlases.
@@ -513,7 +516,9 @@ not necessarily represent the official views of the National Institutes of Healt
 % CRediT-style contributions
 \textbf{Oliver Ruebel:} Writing - Review \& Editing, Conceptualization, Feedback  
 \textbf{Niccolò Bonacchi:} Writing - Review \& Editing, Conceptualization, Feedback, Meeting attendance 
+\textbf{Michael Denker:} Writing - Review \& Editing, Testing, Feedback, Meeting attendance
 \textbf{Samuel Garcia:} Early design for probeinterface integration
+\textbf{Lyuba Zehl:} Writing - Review \& Editing, Conceptualization, Feedback, Meeting attendance, Supervision?
 
 \section*{Competing Interests}
 The authors declare no competing interests.

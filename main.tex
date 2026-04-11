@@ -100,7 +100,8 @@ With over a thousand public datasets on OpenNeuro and endorsement by the INCF, B
 In a BIDS dataset, all data from each subject are organized hierarchically in subject-specific directories, with optional session subdirectories containing modality-specific folders for the data files themselves.
 Files follow a structured naming scheme that encodes relevant metadata such as subject, session, and task.
 Additional metadata are encoded in sidecar metadata files with formal schemas. Specifically, JSON sidecar files provide detailed metadata for each data file, while TSV files capture tabular information, such as participant demographics and channel properties.
-A \texttt{dataset\_description.json} file describes the dataset as a whole, and JSON metadata at higher directory levels are inherited by lower levels unless overridden.
+A \texttt{dataset\_description.json} file describes the dataset as a whole. 
+Through the Inheritance Principle, metadata files at higher directory levels apply to lower levels unless overridden.
 
 Two existing EEG and iEEG extensions for BIDS~\citep{pernet_eeg-bids_2019, holdgraf_ieeg-bids_2019} established patterns for organizing time-series neural data for meso- and macro-scale electrophysiology experiments.
 Building on these two extensions, we present an extension for microelectrode electrophysiology that bridges the gap between session-level data standardization (NWB/NIX) and study-level organization (BIDS), combining the strengths of both approaches.
@@ -118,7 +119,7 @@ The design of this enhancement proposal reflects the unique demands of microelec
 \end{enumerate}
 
 Here, we present the extension of BIDS to microelectrode electrophysiology with a focus on animal models.
-We define two datatypes, ecephys and icephys, introduce a three-level metadata model spanning probes, electrodes, and channels, and specify how physical, stereotaxic, and atlas-based coordinate information should be represented. Together, these additions provide a project-level organizational standard for collections of NWB and NIX files across subjects and sessions.
+We define two datatypes, ecephys and icephys, introduce a three-level metadata model spanning probes, electrodes, and channels, and specify how physical, stereotaxic, and atlas-based coordinate information should be represented. Together, these additions provide a study-level organizational standard for collections of NWB and NIX files across subjects and sessions.
 
 \subsection*{Standardization Landscape}
 
@@ -126,8 +127,8 @@ The MINI checklist~\citep{gibson_minimum_2009}, developed by the CARMEN consorti
 odML (\rrid{RRID:SCR\_001376})~\citep{grewe_bottom-up_2011} addressed how to structure such metadata through flexible key-value annotation and was adopted in practice for multi-electrode array datasets~\citep{zehl_handling_2016}.
 NWB~\citep{teeters_neurodata_2015} and NIX~\citep{adrian_file_2014} then standardized the data format itself, embedding metadata within self-describing files, while Neo~\citep{garcia_neo_2014} provided the programmatic I/O layer that bridges proprietary acquisition formats to open standards.
 
-At the project level, large-scale collaborations developed their own organizational conventions to organize collections of files from many recording sessions and modalities. For example, the Allen Brain Observatory~\citep{de_vries_sharing_2023} adopted internal data management practices and the International Brain Laboratory designed the Open Neurophysiology Environment (ONE)~\citep{one2024} to coordinate Neuropixels recordings across dozens of laboratories.
-BEP032 described here occupies this project-level layer, providing a community standard that builds on the mature ecosystems from these earlier initiatives and that could serve as a common baseline for such collaborative efforts.
+At the study level, large-scale collaborations developed their own organizational conventions to organize collections of files from many recording sessions and modalities. For example, the Allen Brain Observatory~\citep{de_vries_sharing_2023} adopted internal data management practices and the International Brain Laboratory designed the Open Neurophysiology Environment (ONE)~\citep{one2024, international_brain_laboratory_modular_2023} to coordinate Neuropixels recordings across dozens of laboratories.
+BEP032 described here occupies this study-level layer, providing a community standard that builds on the mature ecosystems from these earlier initiatives and that could serve as a common baseline for such collaborative efforts.
 
 \section*{Methods}
 
@@ -141,7 +142,7 @@ BEP032 described here occupies this project-level layer, providing a community s
 % mattermost discussion channel (never really been used, but I list it here for exhaustiveness): https://mattermost.brainhack.org/brainhack/channels/animal_data_incf_wg
 
 The BEP032 effort grew out of the Animal Data Organization (AnDO) project, initiated at the Institut de Neurosciences de la Timone in Marseille in early 2020 to standardize experimental data recorded in animal models.
-Following the initial development, the effort was opened to the broader community through the launch of an INCF-endorsed Working Group on Standardized Data.
+Following the initial development, the effort was opened to the broader community through the launch of an INCF-endorsed Working Group on Standardized Data~\citep{incf_wg_standardized_data}.
 The working group consisted of approximately 40 members from institutions across Europe and North America. The group held monthly teleconferences and made progress in subgroups on well-defined issues between meetings.
 After discussions within the group, a specific standardization effort for electrophysiology was initiated as BIDS Extension Proposal 032. % it might be interesting to add that it was a first fairly long debate to decide to go with BIDS or not...?
 The proposal was developed in the open on a Google Document following the standard BEP process, with the community invited to comment directly on the specification.

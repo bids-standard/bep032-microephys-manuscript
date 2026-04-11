@@ -75,14 +75,14 @@
 Microelectrode electrophysiology encompasses techniques for recording electrical activity on spatial scales smaller than one millimeter, such as the membrane potential of individual neurons and local field potentials.
 These measurements provide crucial insights into neural computation at high spatial and temporal resolution, often with the ability to track individual neuronal action potentials.
 Recent technological advances, including high-density silicon probes such as Neuropixels~\citep{jun_fully_2017, Steinmetz2021}, have dramatically increased the volume of the acquired data. 
-Single probes are now capable of recording extracellularly from hundreds of neurons simultaneously generating more than $\approx 80$~GB/h per probe.
+Single probes are now capable of recording extracellularly from hundreds of neurons simultaneously generating more than $\approx 80$~GB/h per probe~\citealp{Steinmetz2021}.
 Intracellular techniques, such as patch clamp recordings~\citep{sakmann_patch_1984}, are a complementary class of experimental methods that provide direct access to cellular membrane dynamics, enabling detailed characterization of synaptic transmission and intrinsic neuronal properties.
 While the amount of acquired data for intracellular techniques is typically less than those estimated above, they share a similarly high degree of heterogeneity from the underlying experimental diversity.
 These two classes of methods are used primarily in animal research and generate data of increasing complexity that demand a standardized organization.
 
-A key challenge in the microelectrode electrophysiology community has been the proliferation of proprietary data formats.
+A key challenge in the microelectrode electrophysiology community has been the proliferation of proprietary file formats.
 Different acquisition systems, such as Blackrock, Plexon, TDT, Open Ephys, and SpikeGLX, each produce data in their own formats.
-This fragmentation creates barriers that complicate data sharing, tool interoperability, and long-term archiving of data. 
+While to some extent this fragmentation is rooted in a data recorder's need to optimize the file format for write efficiency given a certain hardware design, it creates barriers that complicate data sharing, tool interoperability, and long-term archiving of data. 
 Dedicated readers must be maintained for each format. For example, the Neo ~\citep[\rrid{RRID:SCR\_000634}; ][]{garcia_neo_2014} library for data handling in electrophysiology currently supports over 40 different interfaces to different file formats. Despite the availability of such software tools, undocumented specifications, unmaintained programmatic interfaces, and language lock-in risk rendering data inaccessible.
 
 Two major community efforts have emerged to address this challenge at the file format level for individual recording sessions.
@@ -117,15 +117,8 @@ The design of this enhancement proposal reflects the unique demands of microelec
 	\item Spike sorting as an essential pre-processing step, requiring specific metadata.
 \end{enumerate}
 
-Here, we present BIDS Extension Proposal 032 (BEP032), extending BIDS to microelectrode electrophysiology with a focus on animal models.
-This extension:
-\begin{itemize}[noitemsep]
-	\item Introduces two datatypes (\texttt{ecephys} for extracellular and \texttt{icephys} for intracellular recordings).
-	\item Defines metadata across three levels: probes, electrodes, and channels.
-	\item Standardizes probe and electrode metadata including stereotaxic surgical coordinates.
-	\item Integrates with the ProbeInterface library~\citep{garcia_probeinterface_2022} for probe geometry definitions.
-	\item Defines coordinate systems for multiple species including rodent and primate brain atlases.
-\end{itemize}
+Here, we present the extension of BIDS to microelectrode electrophysiology with a focus on animal models.
+We define two datatypes, ecephys and icephys, introduce a three-level metadata model spanning probes, electrodes, and channels, and specify how physical, stereotaxic, and atlas-based coordinate information should be represented. Together, these additions provide a project-level organizational standard for collections of NWB and NIX files across subjects and sessions.
 
 \subsection*{Standardization Landscape}
 
@@ -153,12 +146,9 @@ The working group consisted of approximately 40 members from institutions across
 After discussions within the group, a specific standardization effort for electrophysiology was initiated as BIDS Extension Proposal 032. % it might be interesting to add that it was a first fairly long debate to decide to go with BIDS or not...?
 The proposal was developed in the open on a Google Document following the standard BEP process, with the community invited to comment directly on the specification.
 
-Several design decisions required coordination with other BIDS extension efforts, with NWB and NIX, and with developers of related tools.
+Several design decisions required coordination with other BIDS extension efforts, including Microscopy-BIDS~\citep{bourget_microscopy-bids_2022}, as well as with NWB, NIX, and developers of related tools. In particular, alignment on animal-sample metadata and the introduction of \texttt{samples.tsv} helped ensure consistency across BIDS extensions involving non-human data.
 The active participation of developers of other BEPs and of BIDS maintainers was critical to the resolution of design issues, particularly the three-level metadata hierarchy and the dual coordinate system approach.
 % any other better example?
-
-% [suggestion by Sylvain: mention in the paragraph above the introduction of the samples.tsv file in BIDS microscopy, which was coordinated with our BEP with the common need to support "animal data" for both microscopy and icephys]
-%[Something like: “Several design decisions required coordination with other BIDS extension efforts, including Microscopy-BIDS, as well as with NWB, NIX, and developers of related tools. In particular, alignment on animal-sample metadata and the introduction of samples.tsv helped ensure consistency across BIDS extensions involving non-human data.”  maybe?]
 % [suggestion by Sylvain (not sure at all on this one): mention in the paragraph above the initial discussions, in 2022, with BEP026, which seems abandoned today; there's a fair probability that BEP032 answers most of the needs of BEP026...]
 
 % BEP032tools: https://github.com/INT-NIT/BEP032tools
@@ -232,7 +222,7 @@ The \texttt{species}, \texttt{strain}, and \texttt{strain\_rrid} columns introdu
 % https://github.com/bids-standard/bids-specification/issues/1800
 % Discussion doc: https://docs.google.com/document/d/1GlHr3Go5sR2o_zmxyCU6Sq1W1LLAaV_XZcKpeG_iBFw/edit
 
-Microelectrode electrophysiology (microephys) constitutes a single modality—electrical measurements made with micrometer-scale electrodes, distinguishing it from related BIDS modalities (EEG, MEG, iEEG) that use larger electrodes. Microephys covers two different techniques: extracellular electrophysiology (\texttt{ecephys}), and intracellular electrophysiology  (\texttt{icephys}). In extracellular electrophysiology, electrodes remain in the extracellular space, recording field potentials in the microvolt range from populations of nearby neurons without directly accessing any single cell.
+Microelectrode electrophysiology (microephys) constitutes a single modality, electrical measurements made with micrometer-scale electrodes, distinguishing it from related BIDS modalities (EEG, MEG, iEEG) that use larger electrodes. Microephys covers two different techniques: extracellular electrophysiology (\texttt{ecephys}), and intracellular electrophysiology  (\texttt{icephys}). In extracellular electrophysiology, electrodes remain in the extracellular space, recording field potentials in the microvolt range from populations of nearby neurons without directly accessing any single cell.
 In intracellular electrophysiology, electrodes penetrate or attach to cell membranes, providing direct access to intracellular voltage (tens of millivolts) or current with sub-millisecond temporal resolution of individual synaptic events and intrinsic membrane properties.
 This distinction is well-established across electrophysiology data standards: NWB organizes its schema into separate \texttt{icephys} and \texttt{ecephys} modules, openMINDS defines ExtracellularElectrophysiology as a distinct technique in its terminology service, and the Ontology for Biomedical Investigations (OBI) classifies them as separate assay types.
 We adopt this distinction at the datatype level, creating \texttt{ecephys} and \texttt{icephys} as two datatypes within the microelectrode electrophysiology modality, analogous to how MRI in BIDS encompasses T1w, T2w, and BOLD.
@@ -274,7 +264,7 @@ The maturation of NWB 2.0 and its subsequent INCF endorsement justify its promot
 Unlike iEEG-BIDS, which maintains separate tiers of compliant and unofficially-supported formats, we adopt a simpler two-format approach.
 Both NWB and NIX are fully supported with no unofficial tier.
 
-To support the organization of complex data collection and ensure a complete description of experiments, BIDS may require metadata that are also provided in NWB and NIX files to ensure complete provenance of recording sessions within a self-contained container. BEB32 explicitly allows such metadata to appear in both places (i.e., within NWB/NIX files and BIDS metadata fields). This ensures that tools designed for the different standards (NWB, NIX, and BIDS) can function independently. This also simplifies data conversion as tools like nwb2bids can extract metadata directly from the source data to automatically populate corresponding fields in BIDS. Also, SpikeInterface can already extract probe geometry from NWB files, and future integration of SpikeInterface with BIDS sidecars will provide similar functionality for ecephys data in BIDS.
+To support the organization of complex data collection and ensure a complete description of experiments, BIDS may require metadata that are also provided in NWB and NIX files to ensure complete provenance of recording sessions within a self-contained container. The presented extension explicitly allows such metadata to appear in both places (i.e., within NWB/NIX files and BIDS metadata fields). This ensures that tools designed for the different standards (NWB, NIX, and BIDS) can function independently. This also simplifies data conversion as tools like nwb2bids can extract metadata directly from the source data to automatically populate corresponding fields in BIDS. Also, SpikeInterface can already extract probe geometry from NWB files, and future integration of SpikeInterface with BIDS sidecars will provide similar functionality for ecephys data in BIDS.
 
 \subsection*{Probes, Electrodes, and Channels}
 
@@ -454,7 +444,7 @@ DANDI requires NWB and supports BIDS validation for uploaded datasets.
 EBRAINS (\rrid{RRID:SCR\_019260}) recommends BIDS for human neuroimaging data and provides general data organisation guidelines (modality separation, subject-based hierarchy, machine-readable metadata) that align with BIDS conventions; its recommendation has not yet extended to electrophysiology because no animal microelectrode extension existed until now.
 Repositories such as GIN (\rrid{RRID:SCR\_015864}) store data with full filesystem fidelity, making the benefits of a harmonized directory structure immediately apparent to both humans and machines.
 
-Adoption of the BEB32 extension would enable BIDS-Apps that exploit the standardized structure and metadata for automated processing workflows, and provide laboratories with a consistent organisational framework.
+Adoption of the presented extension would enable BIDS-Apps that exploit the standardized structure and metadata for automated processing workflows, and provide laboratories with a consistent organisational framework.
 Domain-specific standards address the unique requirements of individual modalities, but modern neurophysiology experiments increasingly combine electrophysiology with neuroimaging, optical physiology, and behavioral recordings in the same subjects and sessions.
 BIDS complements these standards by providing a modality-spanning organisational layer, and with the addition of microelectrode electrophysiology, now covers the full range of modalities common in systems neuroscience laboratories.
 

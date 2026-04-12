@@ -402,7 +402,8 @@ Beyond the required \verb|electrodes.tsv|, users are encouraged to provide addit
 \begin{figure}[H]
 	\centering
 	\includegraphics[width=\linewidth]{figures/fig-2.pdf}
-	\caption{ProbeInterface integration with microephys-BIDS.
+	% \caption{ProbeInterface integration with microephys-BIDS.
+    \caption{Probe, electrode, and channel metadata organization in microephys-BIDS, with ProbeInterface integration.
 		Three colours encode the mapping to the file hierarchy: probe outline (\textit{green}) maps to \texttt{*\_probes.tsv}, contact positions (\textit{pink}) to \texttt{*\_electrodes.tsv}, and channel wiring (\textit{orange}) to \texttt{*\_channels.tsv}.
 		\textbf{(A)}~Colour-coded microephys-BIDS sidecar tables showing the three-level hierarchy with dashed arrows indicating cross-file references between probe, electrode, and channel entries.
 		The \texttt{*\_probes.json} sidecar links probe models to definitions via two mechanisms: a custom file in the dataset's \texttt{probes/} directory, or a reference to the ProbeInterface library on GitHub.

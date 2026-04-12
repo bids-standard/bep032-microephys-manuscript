@@ -266,9 +266,9 @@ This terminology distinction is well-established across other efforts: NWB organ
 Both datatypes share the core organizational structure of probes, electrodes, and channels (described in detail in the Probes, Electrodes, and Channels section), but populate it with technique-specific metadata as outlined below.
 
 \paragraph*{Extracellular electrophysiology (\texttt{ecephys}).}
-Extracellular electrodes record voltage signals arising from neuronal current flow, capturing both spikes from nearby single units and population-level field potentials (LFPs) without directly accessing intracellular membrane potential.
+Extracellular electrodes record voltage signals arising from neuronal current flow, capturing spikes from nearby single units and population-level field potentials (LFPs) without directly accessing intracellular membrane potential.
 These recordings are predominantly performed in vivo.
-Spike sorting algorithms require probe geometry (such as, inter-electrode spacing and shank arrangement) to reconstruct waveforms and assign action potentials to individual neurons.
+Spike sorting algorithms require probe geometry (such as inter-electrode spacing and shank arrangement) to reconstruct waveforms and assign action potentials to individual neurons.
 For \texttt{ecephys}, \verb|probes.tsv| documents device specifications and surgical placement, \verb|electrodes.tsv| specifies contact positions, and optional ProbeInterface integration links to detailed probe model definitions (see ProbeInterface Integration).
 Channel \texttt{type} supports values such as local field potential (\texttt{LFP}), high-pass filtered (\texttt{HP}), and multi-unit activity (\texttt{MUA}).
 
@@ -567,7 +567,7 @@ However, many steps in the workflow still lack tooling and documentation, partic
 
 Defining the anatomical location of the recorded region is another common challenge across electrophysiological modalities.
 This extension addresses it at three levels: stereotaxic surgical placement of probes, probe-relative electrode geometry, and registration to common coordinate spaces and brain atlases.
-% Suggestions needed to generalize this to icephys
+% TODO: Suggestions needed to generalize this to icephys
 The explicit introduction of the probe level captures surgical placement information.
 The electrode and channel levels in combination with ProbeInterface integration provide standardized probe geometry, critical for spike sorting where inter-electrode spacing directly affects waveform reconstruction.
 Beyond the probe and electrode geometry, localizing contacts in common coordinate spaces requires brain atlases, the availability of which varies across species.
@@ -603,24 +603,45 @@ The second is a synthetic dataset demonstrating both \texttt{ecephys} and \textt
 % TODO: Cody will publish to zenodo at some point when in a better state for persistence
 % TODO: Lyuba: add how to find them in the bids-example repo (e.g. at least add their folder names in the repo)
 % TODO: Add persistent links in general
-
+% TODO: Convert all links to bibtex entries with accessed date
 GitHub organization bids-dandisets (https://github.com/bids-dandisets/) contains results of organizing existing DANDI datasets as BIDS datasets using nwb2bids\cite{nwb2bids_zenodo}.
 
+% \section*{Code Availability}
+
+% Using NWB and NIX as the underlying data format allows microephys BIDS data to utilize the sophisticated software ecosystems associated with these data standards.
+
+% The NWB software ecosystem contains a suite of tools to convert data from the various common electrophysiology data formats to NWB.
+% PyNWB (\rrid{RRID:SCR\_017452}) and MatNWB (\rrid{RRID:SCR\_021156}) provide flexible APIs for writing NWB files~\citep{rubel_neurodata_2022}.
+% NeuroConv automates conversion from 60+ formats, guiding the user in best practices~\citep{mayorquin_neuroconv_2025}.
+% NWB Inspector (\rrid{RRID:SCR\_025465}) provides automated checks to validate NWB files against best practices, and NWB GUIDE provides a graphical interface that provides the features of NeuroConv and NWB Inspector to non-programmers.
+
+% 30+ popular analysis tools support NWB as an input and/or output format, many of which are relevant to microephys data.
+% SpikeInterface provides tools for creating spike sorting pipelines~\citep{buccino_spikeinterface_2020}.
+% Neurosift (\rrid{RRID:SCR\_025466}) provides interactive dashboards for visualizing NWB data~\citep{magland_neurosift_2024}, and Pynapple (\rrid{RRID:SCR\_023312})~\citep{viejo_pynapple_2023} provides tools for common neurophysiology analyses.
+
+% NIX can be written from NEO~\citep{garcia_neo_2014}, which supports reading diverse electrophysiology data formats.
+% NIX also supports data analysis libraries, such as Elephant (\rrid{RRID:SCR\_003833})~\citep{denker_collaborative_2018}.
+
 \section*{Code Availability}
+Using NWB and NIX as the underlying data formats allows microephys BIDS datasets to benefit from the software ecosystems built around these formats.
 
-Using NWB and NIX as the underlying data format allows microephys BIDS data to utilize the sophisticated software ecosystems associated with these data standards.
+Both have mature programmatic interfaces.
+PyNWB (\rrid{RRID:SCR\_017452}) and MatNWB (\rrid{RRID:SCR\_021156}) provide APIs for reading and writing NWB files~\citep{rubel_neurodata_2022}.
+NIX (\rrid{RRID:SCR\_016196}) is supported through nixpy (\url{https://github.com/G-Node/nixpy}) in Python, a C++ reference implementation (\url{https://github.com/G-Node/nix}), and MATLAB bindings via nix-mx (\url{https://github.com/G-Node/nix-mx}).
 
-The NWB software ecosystem contains a suite of tools to convert data from the various common electrophysiology data formats to NWB.
-PyNWB (\rrid{RRID:SCR\_017452}) and MatNWB (\rrid{RRID:SCR\_021156}) provide flexible APIs for writing NWB files~\citep{rubel_neurodata_2022}.
-NeuroConv automates conversion from 60+ formats, guiding the user in best practices~\citep{mayorquin_neuroconv_2025}.
-NWB Inspector (\rrid{RRID:SCR\_025465}) provides automated checks to validate NWB files against best practices, and NWB GUIDE provides a graphical interface that provides the features of NeuroConv and NWB Inspector to non-programmers.
+Two main paths exist for converting proprietary acquisition formats.
+Neo~\citep[\rrid{RRID:SCR\_000634}; ][]{garcia_neo_2014} can read dozens of proprietary formats and write NIX files directly, as NIX serves as Neo's native storage backend.
+Neo can also write NWB files, though this requires additional NWB-specific annotations to map Neo's data model to the NWB schema (see Neo documentation~\citep{neo_documentation}).
+NeuroConv (\url{https://github.com/catalystneuro/neuroconv})~\citep{mayorquin_neuroconv_2025} uses Neo and SpikeInterface as backends to automate conversion from 60+ proprietary formats to NWB.
+NWB GUIDE (\url{https://github.com/NeuralEnsemble/nwb-guide}) provides a graphical interface for non-programmers to convert data to NWB and validate the results.
+NWB Inspector (\rrid{RRID:SCR\_025465}) validates NWB files against best practices and the NWB schema.
+NIX files are validated at write time by the nixpy and C++ libraries.
 
-30+ popular analysis tools support NWB as an input and/or output format, many of which are relevant to microephys data.
-SpikeInterface provides tools for creating spike sorting pipelines~\citep{buccino_spikeinterface_2020}.
-Neurosift (\rrid{RRID:SCR\_025466}) provides interactive dashboards for visualizing NWB data~\citep{magland_neurosift_2024}, and Pynapple (\rrid{RRID:SCR\_023312})~\citep{viejo_pynapple_2023} provides tools for common neurophysiology analyses.
+Neurosift (\rrid{RRID:SCR\_025466})~\citep{magland_neurosift_2024} provides interactive visualization of NWB data, including direct browsing of datasets on DANDI.
 
-NIX can be written from NEO~\citep{garcia_neo_2014}, which supports reading diverse electrophysiology data formats.
-NIX also supports data analysis libraries, such as Elephant (\rrid{RRID:SCR\_003833})~\citep{denker_collaborative_2018}.
+A broad range of analysis tools relevant to microephys data support these formats.
+SpikeInterface (\rrid{RRID:SCR\_022205})~\citep{buccino_spikeinterface_2020} provides spike sorting pipelines with native NWB and NIX support via Neo.
+Elephant (\rrid{RRID:SCR\_003833})~\citep{denker_collaborative_2018} supports spike train and LFP analysis.
 
 \bibliographystyle{plainnat}
 \bibliography{bep032}

@@ -178,19 +178,35 @@ The microephys extension introduces two datatypes: \texttt{ecephys} for extracel
 Both use NWB or NIX as raw data formats.
 Data files reside in modality-specific folders (\texttt{ecephys/} or \texttt{icephys/}) with accompanying TSV/JSON metadata following standard BIDS inheritance principles.
 
-\paragraph*{Spatial Metadata:}
-Extracellular recordings present a spatial metadata challenge because a multi-channel probe is both a manufactured device with fixed electrode geometry and an implanted object at a specific brain location.
-Spike sorting algorithms require the former, i.e., inter-electrode spacing, shank arrangement, and contact impedances, to reconstruct spike waveforms and assign them to recording sites.
-Anatomical interpretation requires the latter, i.e., stereotaxic coordinates, brain region labels, and atlas registration, to relate spiking activity to circuit function.
-The extension therefore organizes metadata in a three-level hierarchy: 
-\begin{enumerate}[noitemsep]
-    \item \texttt{probes.tsv} describes devices and their surgical placement, 
-    \item \texttt{electrodes.tsv} provides contact positions in probe-relative coordinates (required), and 
-    \item \texttt{channels.tsv} links recorded signals to those contacts.
-\end{enumerate}
-\noindent Anatomical coordinates are optional and distinguished by \texttt{space-<label>} prefixes (for example, \texttt{space-AllenCCFv3\_electrodes.tsv}).
-For intracellular recordings, \texttt{samples.tsv} links individual recordings to characterized cells or tissue slices, inheriting animal metadata conventions from Microscopy-BIDS\citep{bourget_microscopy-bids_2022}.
+% \paragraph*{Spatial Metadata:}
+% Extracellular recordings present a spatial metadata challenge because a multi-channel probe is both a manufactured device with fixed electrode geometry and an implanted object at a specific brain location.
+% Spike sorting algorithms require the former, i.e., inter-electrode spacing, shank arrangement, and contact impedances, to reconstruct spike waveforms and assign them to recording sites.
+% Anatomical interpretation requires the latter, i.e., stereotaxic coordinates, brain region labels, and atlas registration, to relate spiking activity to circuit function.
+% The extension therefore organizes metadata in a three-level hierarchy: 
+% \begin{enumerate}[noitemsep]
+%     \item \texttt{probes.tsv} describes devices and their surgical placement, 
+%     \item \texttt{electrodes.tsv} provides contact positions in probe-relative coordinates (required), and 
+%     \item \texttt{channels.tsv} links recorded signals to those contacts.
+% \end{enumerate}
+% \noindent Anatomical coordinates are optional and distinguished by \texttt{space-<label>} prefixes (for example, \texttt{space-AllenCCFv3\_electrodes.tsv}).
+% For intracellular recordings, \texttt{samples.tsv} links individual recordings to characterized cells or tissue slices, inheriting animal metadata conventions from Microscopy-BIDS\citep{bourget_microscopy-bids_2022}.
 
+\paragraph*{Spatial Metadata:}
+Microelectrode recordings present a spatial metadata challenge that needs to consider probe geometry, surgical placement, and spatial anchoring to common coordinate spaces and anatomical atlases.
+
+Probe geometry and characteristics have an effect on data processing, primarily in extracellular recordings where spike sorting algorithms require inter-electrode spacing, shank arrangement, and contact impedances to reconstruct waveforms and assign them to individual neurons.
+The extension therefore organizes this information in a three-level hierarchy:
+\begin{enumerate}[noitemsep]
+    \item \verb|probes.tsv| describes devices and their characteristics,
+    \item \verb|electrodes.tsv| provides contact positions in probe-relative coordinates (required), and
+    \item \verb|channels.tsv| links recorded signals to those contacts.
+\end{enumerate}
+
+Surgical placement is highly variable because stereotaxic reproducibility can be quite poor even under ideal circumstances~\citep{international_brain_laboratory_reproducibility_2025}, and is often missing entirely when probes are placed without a stereotaxic instrument, such as Utah arrays positioned based on gyral patterns.
+Surgical coordinates are therefore recorded in \verb|probes.tsv| but are not required.
+
+Spatial anchoring to a common coordinate space or brain atlas is needed for cross-subject comparison, but requires additional post hoc procedures such as histology or imaging and is not always available.
+Anatomical coordinates are therefore optional and distinguished by \verb|space-<label>| prefixes (for example, \verb|space-AllenCCFv3_electrodes.tsv|).
 
 
 \begin{figure}[H]

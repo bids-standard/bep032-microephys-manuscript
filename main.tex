@@ -233,13 +233,15 @@ The \texttt{species}, \texttt{strain}, and \texttt{strain\_rrid} columns introdu
 
 \subsection*{Specific Microephys-BIDS Considerations}
 
-\subsection*{Intracellular vs Extracellular Datatypes}
+\subsubsection*{Intracellular vs Extracellular Datatypes}
 % https://github.com/bids-standard/bids-specification/issues/1800
 % Discussion doc: https://docs.google.com/document/d/1GlHr3Go5sR2o_zmxyCU6Sq1W1LLAaV_XZcKpeG_iBFw/edit
 
-Microelectrode electrophysiology (microephys) constitutes a single modality, electrical measurements made with micrometer-scale electrodes, distinguishing it from related BIDS modalities (EEG, MEG, iEEG) that use larger electrodes. Microephys covers two different techniques: extracellular electrophysiology (\texttt{ecephys}), and intracellular electrophysiology  (\texttt{icephys}). In extracellular electrophysiology, electrodes remain in the extracellular space, recording field potentials in the microvolt range from populations of nearby neurons without directly accessing any single cell.
+Microelectrode electrophysiology (microephys) constitutes a single modality, electrical measurements made with micrometer-scale electrodes, distinguishing it from related BIDS modalities (EEG, MEG, iEEG) that use larger electrodes. Microephys covers two different techniques: extracellular electrophysiology (\texttt{ecephys}), and intracellular electrophysiology  (\texttt{icephys}). 
+% In extracellular electrophysiology, electrodes remain in the extracellular space, recording field potentials in the microvolt range from populations of nearby neurons without directly accessing any single cell.
+Extracellular electrodes record extracellular voltage signals arising from neuronal current flow, capturing both spikes from nearby single units and population-level field potentials (LFPs) without directly accessing intracellular membrane potential.
 In intracellular electrophysiology, electrodes penetrate or attach to cell membranes, providing direct access to intracellular voltage (tens of millivolts) or current with sub-millisecond temporal resolution of individual synaptic events and intrinsic membrane properties.
-This distinction is well-established across electrophysiology data standards: NWB organizes its schema into separate \texttt{icephys} and \texttt{ecephys} modules, openMINDS defines ExtracellularElectrophysiology as a distinct technique in its terminology service, and the Ontology for Biomedical Investigations (OBI) classifies them as separate assay types.
+This distinction is well-established across electrophysiology data standards: NWB organizes its schema into separate \texttt{icephys} and \texttt{ecephys} modules, openMINDS (\rrid{RRID:SCR\_027358}) defines ExtracellularElectrophysiology as a distinct technique in its terminology service, and the Ontology for Biomedical Investigations (OBI) classifies them as separate assay types.
 We adopt this distinction at the datatype level, creating \texttt{ecephys} and \texttt{icephys} as two datatypes within the microelectrode electrophysiology modality, analogous to how MRI in BIDS encompasses T1w, T2w, and BOLD.
 In the accompanying examples, repeated task trials are distinguished using \texttt{run-<index>}, while the specification supports \texttt{acq-<label>} for different recording configurations within a session.
 
@@ -254,7 +256,7 @@ For \texttt{ecephys}, \texttt{probes.tsv} documents surgical placement and devic
 For \texttt{icephys}, \texttt{samples.tsv} (inherited from Microscopy-BIDS~\citep{bourget_microscopy-bids_2022}) links acquisitions to characterized biological samples with fields such as \texttt{sample\_type}, \texttt{derived\_from}, and \texttt{pathology}.
 Channel \texttt{type} indicates the types of data recorded on each channel, and supports values relevant to \texttt{icephys}, such as membrane voltage (\texttt{VM}) and current (\texttt{IM}), as well as values relevant to \texttt{ecephys}, such as local field potential (\texttt{LFP}), high-pass filtered (\texttt{HP}), and multi-unit activity (\texttt{MUA}).
 
-\subsection*{Data Format Requirements}
+\subsubsection*{Data Format Requirements}
 
 Following the approach of prior BIDS electrophysiology extensions~\citep{pernet_eeg-bids_2019, holdgraf_ieeg-bids_2019}, our selection of data formats was governed by three requirements:
 
@@ -281,7 +283,7 @@ Both NWB and NIX are fully supported with no unofficial tier.
 
 To support the organization of complex data collection and ensure a complete description of experiments, BIDS may require metadata that are also provided in NWB and NIX files to ensure complete provenance of recording sessions within a self-contained container. The presented extension explicitly allows such metadata to appear in both places (i.e., within NWB/NIX files and BIDS metadata fields). This ensures that tools designed for the different standards (NWB, NIX, and BIDS) can function independently. This also simplifies data conversion as tools like nwb2bids can extract metadata directly from the source data to automatically populate corresponding fields in BIDS. Also, SpikeInterface can already extract probe geometry from NWB files, and future integration of SpikeInterface with BIDS sidecars will provide similar functionality for ecephys data in BIDS.
 
-\subsection*{Probes, Electrodes, and Channels}
+\subsubsection*{Probes, Electrodes, and Channels}
 
 Although the NIX and NWB files can contain all information about the channels, electrode placement and probe design, in the BIDS representation these are explicitly made available in human- and machine-readable format in tabular TSV and in JSON files.
 Microephys uses three tables to capture the metadata of an experiment: \texttt{probes.tsv}, \texttt{electrodes.tsv}, and \texttt{channels.tsv} (and the corresponding \texttt{.json} files).

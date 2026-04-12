@@ -103,11 +103,7 @@ Additional metadata are encoded in sidecar metadata files with formal schemas. S
 A \texttt{dataset\_description.json} file describes the dataset as a whole. 
 Through the Inheritance Principle, metadata files at higher directory levels apply to lower levels unless overridden.
 
-Two existing EEG and iEEG extensions for BIDS~\citep{pernet_eeg-bids_2019, holdgraf_ieeg-bids_2019} established patterns for organizing time-series neural data for meso- and macro-scale electrophysiology experiments.
-Building on these two extensions, we present an extension for microelectrode electrophysiology that bridges the gap between session-level data standardization (NWB/NIX) and study-level organization (BIDS), combining the strengths of both approaches.
-BIDS provides the organizational framework for datasets containing multiple subjects and sessions, consistent with existing modalities, while NWB and NIX handle the complex internal structure of electrophysiology recordings within each session.
-This complementary relationship mirrors how BIDS for neuroimaging organizes NIfTI files.
-BIDS does not replace standardized file formats, but provides the organizational context around them.
+The existing EEG and iEEG modalities in BIDS~\citep{pernet_eeg-bids_2019, holdgraf_ieeg-bids_2019} established patterns for organizing time-series neural data for meso- and macro-scale electrophysiology experiments. Building on these modalities, this extension addresses the distinct requirements of recordings at smaller spatial scales.
 
 The design of this enhancement proposal reflects the unique demands of microelectrode electrophysiology while preserving compatibility with existing (BIDS) conventions and BIDS extensions whenever possible. In particular, this effort addresses the following key challenges:
 \begin{enumerate}[noitemsep]

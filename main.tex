@@ -557,6 +557,11 @@ While decoupling of metadata and data enables organizing, browsing, and validati
 The extension therefore combines both approaches, explicitly allowing metadata to appear in both places and ensures that tools designed for NWB, NIX, and BIDS can each function independently.
 This is similar to how the MRI modality in BIDS adopted NIfTI as its data format but also extracts metadata from the NIfTI header into JSON sidecars, combining format-level and study-level metadata.
 
+As with the transition from proprietary scanner formats to NIfTI in neuroimaging, adopting NWB and NIX requires a conversion step.
+Most commercial acquisition systems (Blackrock, Plexon, Intan, Neuralynx, SpikeGLX, TDT) do not natively output these formats, with Open Ephys being a notable exception.
+% TODO: quantify format counts if possible (Neo lists 36 RawIO modules as of 2026-03; NeuroConv docs claim ~50)
+Conversion tools such as Neo and NeuroConv already support dozens of acquisition formats, but further tooling, like nwb2bids and documentation to streamline the conversion and metadata extraction pipeline would lower the barrier to adoption.
+
 Defining the anatomical location of the recorded region is a common challenge across electrophysiological modalities.
 This extension addresses it at three levels: stereotaxic surgical placement of probes, probe-relative electrode geometry, and registration to common coordinate spaces and brain atlases.
 % Suggestions needed to generalize this to icephys

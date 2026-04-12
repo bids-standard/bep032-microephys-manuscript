@@ -233,28 +233,31 @@ The \texttt{species}, \texttt{strain}, and \texttt{strain\_rrid} columns introdu
 
 \subsection*{Specific Microephys-BIDS Considerations}
 
-\subsubsection*{Intracellular vs Extracellular Datatypes}
-% https://github.com/bids-standard/bids-specification/issues/1800
-% Discussion doc: https://docs.google.com/document/d/1GlHr3Go5sR2o_zmxyCU6Sq1W1LLAaV_XZcKpeG_iBFw/edit
+% \subsubsection*{Intracellular vs Extracellular Datatypes}
+% % https://github.com/bids-standard/bids-specification/issues/1800
+% % Discussion doc: https://docs.google.com/document/d/1GlHr3Go5sR2o_zmxyCU6Sq1W1LLAaV_XZcKpeG_iBFw/edit
 
-Microelectrode electrophysiology (microephys) constitutes a single modality, electrical measurements made with micrometer-scale electrodes, distinguishing it from related BIDS modalities (EEG, MEG, iEEG) that use larger electrodes. Microephys covers two different techniques: extracellular electrophysiology (\texttt{ecephys}), and intracellular electrophysiology  (\texttt{icephys}). 
-% In extracellular electrophysiology, electrodes remain in the extracellular space, recording field potentials in the microvolt range from populations of nearby neurons without directly accessing any single cell.
-Extracellular electrodes record extracellular voltage signals arising from neuronal current flow, capturing both spikes from nearby single units and population-level field potentials (LFPs) without directly accessing intracellular membrane potential.
-In intracellular electrophysiology, electrodes penetrate or attach to cell membranes, providing direct access to intracellular voltage (tens of millivolts) or current with sub-millisecond temporal resolution of individual synaptic events and intrinsic membrane properties.
-This distinction is well-established across electrophysiology data standards: NWB organizes its schema into separate \texttt{icephys} and \texttt{ecephys} modules, openMINDS (\rrid{RRID:SCR\_027358}) defines ExtracellularElectrophysiology as a distinct technique in its terminology service, and the Ontology for Biomedical Investigations (OBI) classifies them as separate assay types.
-We adopt this distinction at the datatype level, creating \texttt{ecephys} and \texttt{icephys} as two datatypes within the microelectrode electrophysiology modality, analogous to how MRI in BIDS encompasses T1w, T2w, and BOLD.
-In the accompanying examples, repeated task trials are distinguished using \texttt{run-<index>}, while the specification supports \texttt{acq-<label>} for different recording configurations within a session.
+% Microelectrode electrophysiology (microephys) constitutes a single modality, electrical measurements made with micrometer-scale electrodes, distinguishing it from related BIDS modalities (EEG, MEG, iEEG) that use larger electrodes. Microephys covers two different techniques: extracellular electrophysiology (\texttt{ecephys}), and intracellular electrophysiology  (\texttt{icephys}). 
+% % In extracellular electrophysiology, electrodes remain in the extracellular space, recording field potentials in the microvolt range from populations of nearby neurons without directly accessing any single cell.
+% Extracellular electrodes record extracellular voltage signals arising from neuronal current flow, capturing both spikes from nearby single units and population-level field potentials (LFPs) without directly accessing intracellular membrane potential.
+% In intracellular electrophysiology, electrodes penetrate or attach to cell membranes, providing direct access to intracellular voltage (tens of millivolts) or current with sub-millisecond temporal resolution of individual synaptic events and intrinsic membrane properties.
+% This distinction is well-established across electrophysiology data standards: NWB organizes its schema into separate \texttt{icephys} and \texttt{ecephys} modules, openMINDS (\rrid{RRID:SCR\_027358}) defines ExtracellularElectrophysiology as a distinct technique in its terminology service, and the Ontology for Biomedical Investigations (OBI) classifies them as separate assay types.
+% We adopt this distinction at the datatype level, creating \texttt{ecephys} and \texttt{icephys} as two datatypes within the microelectrode electrophysiology modality, analogous to how MRI in BIDS encompasses T1w, T2w, and BOLD.
+% In the accompanying examples, repeated task trials are distinguished using \texttt{run-<index>}, while the specification supports \texttt{acq-<label>} for different recording configurations within a session.
 
-The different techniques require different metadata.
-Spike sorting algorithms run on ecephys data require probe geometry (such as inter-electrode spacing, shank arrangement, contact impedance) to reconstruct waveforms from voltage deflections distributed across contacts and assign action potentials to individual neurons.
-A tetrode array's four closely-spaced wires enable sorting by differential geometry; a Neuropixels probe with 384 contacts and known inter-site spacing allows isolation of hundreds of neurons from overlapping electrical signatures.
-Intracellular recordings instead require documentation of the cell or tissue: pipette solution composition, seal resistance, recording mode (current-clamp, voltage-clamp), and the relationship between each acquisition and the biological sample (acute slice, organotypic culture, in vivo preparation).
-Patch-clamp experiments often involve multiple cells from the same tissue slice or multiple slices from the same animal, requiring explicit tracking from participant to sample to acquisition.
+% The different techniques require different metadata.
+% Spike sorting algorithms run on ecephys data require probe geometry (such as inter-electrode spacing, shank arrangement, contact impedance) to reconstruct waveforms from voltage deflections distributed across contacts and assign action potentials to individual neurons.
+% A tetrode array's four closely-spaced wires enable sorting by differential geometry; a Neuropixels probe with 384 contacts and known inter-site spacing allows isolation of hundreds of neurons from overlapping electrical signatures.
+% Intracellular recordings instead require documentation of the cell or tissue: pipette solution composition, seal resistance, recording mode (current-clamp, voltage-clamp), and the relationship between each acquisition and the biological sample (acute slice, organotypic culture, in vivo preparation).
+% Patch-clamp experiments often involve multiple cells from the same tissue slice or multiple slices from the same animal, requiring explicit tracking from participant to sample to acquisition.
 
-Both datatypes share the core organizational structure of probes, electrodes, and channels, but populate it with technique-specific metadata.
-For \texttt{ecephys}, \texttt{probes.tsv} documents surgical placement and device specifications, \texttt{electrodes.tsv} specifies contact layout for spike sorting, and optional ProbeInterface integration links to detailed probe specification.
-For \texttt{icephys}, \texttt{samples.tsv} (inherited from Microscopy-BIDS~\citep{bourget_microscopy-bids_2022}) links acquisitions to characterized biological samples with fields such as \texttt{sample\_type}, \texttt{derived\_from}, and \texttt{pathology}.
-Channel \texttt{type} indicates the types of data recorded on each channel, and supports values relevant to \texttt{icephys}, such as membrane voltage (\texttt{VM}) and current (\texttt{IM}), as well as values relevant to \texttt{ecephys}, such as local field potential (\texttt{LFP}), high-pass filtered (\texttt{HP}), and multi-unit activity (\texttt{MUA}).
+% Both datatypes share the core organizational structure of probes, electrodes, and channels, but populate it with technique-specific metadata.
+% For \texttt{ecephys}, \texttt{probes.tsv} documents surgical placement and device specifications, \texttt{electrodes.tsv} specifies contact layout for spike sorting, and optional ProbeInterface integration links to detailed probe specification.
+% For \texttt{icephys}, \texttt{samples.tsv} (inherited from Microscopy-BIDS~\citep{bourget_microscopy-bids_2022}) links acquisitions to characterized biological samples with fields such as \texttt{sample\_type}, \texttt{derived\_from}, and \texttt{pathology}.
+% Channel \texttt{type} indicates the types of data recorded on each channel, and supports values relevant to \texttt{icephys}, such as membrane voltage (\texttt{VM}) and current (\texttt{IM}), as well as values relevant to \texttt{ecephys}, such as local field potential (\texttt{LFP}), high-pass filtered (\texttt{HP}), and multi-unit activity (\texttt{MUA}).
+
+
+
 
 \subsubsection*{Data Format Requirements}
 

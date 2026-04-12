@@ -308,25 +308,47 @@ Both NWB and NIX are fully supported with no unofficial tier.
 
 To support the organization of complex data collection and ensure a complete description of experiments, BIDS may require metadata that are also provided in NWB and NIX files to ensure complete provenance of recording sessions within a self-contained container. The presented extension explicitly allows such metadata to appear in both places (i.e., within NWB/NIX files and BIDS metadata fields). This ensures that tools designed for the different standards (NWB, NIX, and BIDS) can function independently. This also simplifies data conversion as tools like nwb2bids can extract metadata directly from the source data to automatically populate corresponding fields in BIDS. Also, SpikeInterface can already extract probe geometry from NWB files, and future integration of SpikeInterface with BIDS sidecars will provide similar functionality for ecephys data in BIDS.
 
+% \subsubsection*{Probes, Electrodes, and Channels}
+
+% Although the NIX and NWB files can contain all information about the channels, electrode placement and probe design, in the BIDS representation these are explicitly made available in human- and machine-readable format in tabular TSV and in JSON files.
+% Microephys uses three tables to capture the metadata of an experiment: \texttt{probes.tsv}, \texttt{electrodes.tsv}, and \texttt{channels.tsv} (and the corresponding \texttt{.json} files).
+% The \texttt{probes.tsv} file lists each probe with its type and surgical placement.
+% The \texttt{electrodes.tsv} file enumerates contact sites, linking each to its probe and specifying probe-relative coordinates for spike sorting.
+% The \texttt{channels.tsv} file documents recorded signals: sampling frequency, units, source electrode, and reference.
+% Channels without electrodes (sync, stimulus) use \texttt{n/a}; ground, typically hardware like a skull screw or ear clip, is defined globally in the sidecar JSON and can be overridden per-channel if it differs.
+% A \texttt{stream\_id} column links channels to data objects within the NWB or NIX file.
+
+% The iEEG-BIDS and EEG-BIDS extensions distinguish electrodes from channels: an electrode is a contact point with tissue, a channel is the amplifier and digitizer that produces a stored time series.
+% These are not equivalent and are not always one-to-one.
+% A differential recording derives one channel from two electrodes, a Neuropixels electrode may yield separate highpass and LFP channels at different sampling rates, and a sync signal is a channel with no electrode at all.
+% The prior extensions noted that electrodes can be ``organized into arrays, grids, or probes,'' but their metadata captured only electrodes and channels, not this grouping.
+
+% We add an explicit probe level.
+% A probe is the physical device that carries one or more electrodes, such as a Neuropixels probe, tetrode bundle, patch pipette probe.
+% The Probe table stores metadata about a single or multiple probes, such as manufacturer, surgical coordinates, and insertion angle.
+% It provides a mechanism to link to formal probe model specifications.
+
 \subsubsection*{Probes, Electrodes, and Channels}
 
-Although the NIX and NWB files can contain all information about the channels, electrode placement and probe design, in the BIDS representation these are explicitly made available in human- and machine-readable format in tabular TSV and in JSON files.
-Microephys uses three tables to capture the metadata of an experiment: \texttt{probes.tsv}, \texttt{electrodes.tsv}, and \texttt{channels.tsv} (and the corresponding \texttt{.json} files).
-The \texttt{probes.tsv} file lists each probe with its type and surgical placement.
-The \texttt{electrodes.tsv} file enumerates contact sites, linking each to its probe and specifying probe-relative coordinates for spike sorting.
-The \texttt{channels.tsv} file documents recorded signals: sampling frequency, units, source electrode, and reference.
-Channels without electrodes (sync, stimulus) use \texttt{n/a}; ground, typically hardware like a skull screw or ear clip, is defined globally in the sidecar JSON and can be overridden per-channel if it differs.
-A \texttt{stream\_id} column links channels to data objects within the NWB or NIX file.
+The iEEG-BIDS and EEG-BIDS extensions~\citep{pernet_eeg-bids_2019, holdgraf_ieeg-bids_2019} established definitions for electrodes and channels.
+A channel is ``a single analog-digital converter in the recording system that regularly samples the value of a transducer, which results in a signal being represented as a time series in the data.''
+An electrode is ``a single point of contact between the acquisition system and the recording site.''
+These are not equivalent and are not always one-to-one. For example, a differential recording derives one channel from two electrodes, a Neuropixels electrode may yield separate highpass and LFP channels at different sampling rates, and a sync signal is a channel with no electrode at all.
+The prior extensions noted that electrodes can be ``organized into arrays, grids, leads, strips, probes, shafts, etc.,'' but their metadata captured only electrodes and channels, not this grouping.
+We retain these definitions and add an explicit probe level.
 
-The iEEG-BIDS and EEG-BIDS extensions distinguish electrodes from channels: an electrode is a contact point with tissue, a channel is the amplifier and digitizer that produces a stored time series.
-These are not equivalent and are not always one-to-one.
-A differential recording derives one channel from two electrodes, a Neuropixels electrode may yield separate highpass and LFP channels at different sampling rates, and a sync signal is a channel with no electrode at all.
-The prior extensions noted that electrodes can be ``organized into arrays, grids, or probes,'' but their metadata captured only electrodes and channels, not this grouping.
+A probe is the physical device that carries one or more electrodes, such as a Neuropixels probe, tetrode bundle, or patch pipette.
+Making probes explicit is necessary because microephys experiments frequently use multiple probes per session, each with distinct geometry, manufacturer specifications, and surgical placement.
+The probe level also provides a mechanism to link to formal probe model specifications (see ProbeInterface Integration).
 
-We add an explicit probe level.
-A probe is the physical device that carries one or more electrodes, such as a Neuropixels probe, tetrode bundle, patch pipette probe.
-The Probe table stores metadata about a single or multiple probes, such as manufacturer, surgical coordinates, and insertion angle.
-It provides a mechanism to link to formal probe model specifications.
+Although NIX and NWB files can contain all information about channels, electrode placement, and probe design, in the BIDS representation these are explicitly made available in human- and machine-readable format in tabular TSV and JSON files.
+Microephys uses three tables to capture this metadata.
+The \verb|probes.tsv| file lists each probe with its type, manufacturer, surgical coordinates, and insertion angle.
+The \verb|electrodes.tsv| file enumerates contact sites, linking each to its probe and specifying probe-relative coordinates for spike sorting.
+The \verb|channels.tsv| file documents recorded signals, including sampling frequency, units, source electrode, and reference.
+Channels without electrodes (sync, stimulus) use \texttt{n/a}. Ground is defined globally in the sidecar JSON and can be overridden per channel if it differs.
+A \verb|stream_id| column links channels to data objects within the NWB or NIX file.
+
 
 \subsection*{ProbeInterface Integration}
 

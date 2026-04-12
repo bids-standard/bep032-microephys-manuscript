@@ -553,7 +553,7 @@ NWB and NIX follow an all-in-one approach, storing data and metadata together in
 BIDS takes a different approach, extracting key metadata from data files into separate human- and machine-readable TSV and JSON sidecars.
 Both approaches have trade-offs.
 The all-in-one approach ensures that metadata always travel with the data, while decoupling metadata from data enables organizing, browsing, and validating datasets without opening the data files themselves.
-The extension therefore combines both approaches, explicitly allowing metadata to appear in both places and ensures that tools designed for NWB, NIX, and BIDS can each function independently.
+The extension therefore combines both approaches, explicitly allowing metadata to appear in both places. This ensures that tools designed for NWB, NIX, and BIDS can each function independently.
 This is similar to how the MRI modality in BIDS adopted NIfTI as its data format but also extracts metadata from the NIfTI header into JSON sidecars, combining format-level and study-level metadata.
 
 As with the transition from proprietary scanner formats to NIfTI in neuroimaging, adopting NWB and NIX requires a conversion step.
@@ -561,7 +561,7 @@ Most commercial acquisition systems (Blackrock, Plexon, Intan, Neuralynx, SpikeG
 % TODO: quantify format counts if possible (Neo lists 36 RawIO modules as of 2026-03; NeuroConv docs claim ~50)
 Conversion tools such as Neo and NeuroConv already support dozens of acquisition formats, but further tooling such as nwb2bids, along with better documentation, would lower the barrier to adoption.
 
-Defining the anatomical location of the recorded region is a common challenge across electrophysiological modalities.
+Defining the anatomical location of the recorded region is another common challenge across electrophysiological modalities.
 This extension addresses it at three levels: stereotaxic surgical placement of probes, probe-relative electrode geometry, and registration to common coordinate spaces and brain atlases.
 % Suggestions needed to generalize this to icephys
 The explicit introduction of the probe level captures surgical placement information.

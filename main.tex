@@ -559,7 +559,11 @@ This is similar to how the MRI modality in BIDS adopted NIfTI as its data format
 As with the transition from proprietary scanner formats to NIfTI in neuroimaging, adopting NWB and NIX requires a conversion step.
 Most commercial acquisition systems (Blackrock, Plexon, Intan, Neuralynx, SpikeGLX, TDT) do not natively output these formats, with Open Ephys being a notable exception.
 % TODO: quantify format counts if possible (Neo lists 36 RawIO modules as of 2026-03; NeuroConv docs claim ~50)
-Conversion tools such as Neo and NeuroConv already support dozens of acquisition formats, but further tooling such as nwb2bids, along with better documentation, would lower the barrier to adoption.
+Conversion tools such as Neo and NeuroConv already support dozens of acquisition formats.
+For NWB, NWB GUIDE provides a graphical interface for non-programmers.
+Neo can directly write NIX files, as NIX serves as the native storage backend for Neo's data model.
+Tools such as nwb2bids can then populate BIDS files from NWB.
+However, many steps in the workflow, particularly completing and curating distributed metadata, remains a barrier in adoption to support scientific utility.
 
 Defining the anatomical location of the recorded region is another common challenge across electrophysiological modalities.
 This extension addresses it at three levels: stereotaxic surgical placement of probes, probe-relative electrode geometry, and registration to common coordinate spaces and brain atlases.

@@ -156,7 +156,10 @@ A typical workflow for creating a BIDS-compliant microelectrode electrophysiolog
 \begin{enumerate}[noitemsep]
 	\item \textbf{Convert raw data.}
 	      Convert recordings from the acquisition system's proprietary format to NWB or NIX\@.
-	      The Neo library~\citep{garcia_neo_2014} provides readers for dozens of proprietary acquisition formats and serves as the foundation for conversion tools; NeuroConv~\citep{mayorquin_neuroconv_2025} builds on Neo to automate conversion to NWB, while Neo also supports writing NIX files directly.
+	      The Neo library~\citep{garcia_neo_2014} provides readers for dozens of proprietary acquisition formats and serves as the foundation for conversion tools.
+          % NeuroConv~\citep{mayorquin_neuroconv_2025} builds on Neo to automate conversion to NWB, while Neo also supports writing NIX files directly.
+          % NeuroConv~\citep{mayorquin_neuroconv_2025} builds on Neo to automate conversion to NWB. Neo can also write NWB files via PyNWB, though NWB's own schema requires a translation step, whereas NIX serves as a native storage backend for Neo's data model and can be written directly.
+          NeuroConv~\citep{mayorquin_neuroconv_2025} builds on Neo to automate conversion to NWB. Neo can also write NWB files, though NWB's own schema requires a translation step, whereas NIX can be written directly.
 	\item \textbf{Organize into BIDS.}
 	      Arrange the converted files into a BIDS directory structure and generate sidecar metadata files.
 	      nwb2bids \citep{nwb2bids_zenodo} extracts metadata from NWB files to populate BIDS sidecar TSV and JSON files and reorganizes files into the required directory layout, with explicit support for the \texttt{ecephys} and \texttt{icephys} datatypes defined in this extension.

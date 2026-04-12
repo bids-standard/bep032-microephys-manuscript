@@ -299,7 +299,7 @@ NWB and NIX represent complementary design philosophies.
 NWB provides a well-defined schema with extensive validation, ensuring consistency across datasets.
 NIX uses a minimal, generic data model that gives users more freedom in how they organize data, and serves as a storage backend for the Neo electrophysiology library~\citep{garcia_neo_2014}.
 To ensure interoperability, the BEP32 extension requires that \texttt{.nix} files follow Neo's internal structure conventions, where Neo's object hierarchy and type annotations serve as the domain-specific schema that NIX itself does not prescribe.
-Both have been reviewed and endorsed by the INCF as standard practices~\citep{martone_pcall_2019, noauthor_nix_nodate}. A dedicated archival repository, DANDI (\rrid{RRID:SCR_017571}), exists for neurophysiology data stored in NWB. NIX datasets can be archived through neuroscience repositories such as the G-Node Infrastructure (GIN, \rrid{RRID:SCR_015864}).
+Both have been reviewed and endorsed by the INCF as standard practices~\citep{noauthor_nix_nodate, martone_pcall_2019}. A dedicated archival repository, DANDI (\rrid{RRID:SCR_017571}), exists for neurophysiology data stored in NWB. NIX datasets can be archived through neuroscience repositories such as the G-Node Infrastructure (GIN, \rrid{RRID:SCR_015864}).
 
 In iEEG-BIDS~\citep{holdgraf_ieeg-bids_2019}, NWB was listed as an unofficially-supported format due to its then-nascent ecosystem.
 The maturation of NWB 2.0 and its subsequent INCF endorsement justify its promotion to fully compliant status here.
@@ -345,35 +345,59 @@ Although NIX and NWB files can contain all information about channels, electrode
 Microephys uses three tables to capture this metadata.
 The \verb|probes.tsv| file lists each probe with its type, manufacturer, surgical coordinates, and insertion angle.
 The \verb|electrodes.tsv| file enumerates contact sites, linking each to its probe and specifying probe-relative coordinates for spike sorting.
+An \verb|electrodes.tsv| file without a \verb|space| entity is required for every \texttt{ecephys} recording, using \texttt{x}, \texttt{y}, and optionally \texttt{z} columns to specify the position of each electrode relative to the probe tip.
+Electrodes in an alternative coordinate space may be defined in additional \verb|electrodes.tsv| files with the \verb|space| entity.
 The \verb|channels.tsv| file documents recorded signals, including sampling frequency, units, source electrode, and reference.
 Channels without electrodes (sync, stimulus) use \texttt{n/a}. Ground is defined globally in the sidecar JSON and can be overridden per channel if it differs.
 A \verb|stream_id| column links channels to data objects within the NWB or NIX file.
 
 
+% \subsection*{ProbeInterface Integration}
+
+% In extracellular electrophysiology, the spatial layout of the electrodes (i.e.\ contacts) on the probe is important for data processing (such as via spike sorting), and in particular on high-density probes~\citep{buccino_spikeinterface_2020}.
+% The positions of the electrodes on a template brain can be useful as well, but often the relative positions of the electrodes are substantially warped in the registration process, so microephys needs to also store relative positions of the electrodes on the probe.
+% The ProbeInterface library (\rrid{RRID:SCR\_021150}, part of the SpikeInterface project)~\citep{garcia_probeinterface_2022} provides a JSON-based schema for specifying the layout of electrodes on a probe, as well as for specifying the shapes of the electrodes and the geometry of the probe itself, which may be used for further visualization and analysis (Figure~\ref{fig:probeinterface}).
+
+% The \texttt{ecephys} datatype provides three possible mechanisms to provide the layout of the electrodes:
+% \begin{enumerate}[noitemsep]
+% 	\item \textbf{\texttt{electrodes.tsv} (required):}
+% 	      An \texttt{electrodes.tsv} file without the use of a \texttt{space} entity is required, and this file uses \texttt{x}, \texttt{y}, and sometimes \texttt{z} to specify the positions of each electrode relative to the probe tip.
+% 	      This data is present for every electrophysiology data stream, and can be used by downstream tools.
+% 	      Electrodes in an alternative space may be defined in \texttt{electrodes.tsv} files with the \texttt{space} entity defined.
+
+% 	\item \textbf{Link to probeinterface\_library:}
+% 	      ProbeInterface maintains a library of popular probes.
+% 	      % TODO: fill in current count (currently xxx)
+% 	      If the \texttt{ecephys} is recorded from a probe that is defined in this library, the user is encouraged to link to the formal ProbeInterface definition of the probe, which contains additional information about the probe, including the electrode shape, and probe shape.
+% 	      This link uses the \texttt{Levels} mechanism with \texttt{TermURL} to link from values of the \texttt{probe\_model} column of the \texttt{probes.tsv} table to the URL of the probe definition on GitHub.
+
+% 	\item \textbf{Define custom ProbeInterface files:}
+% 	      If probeinterface\_library does not have the probe used, users are encouraged to create a probe definition JSON file.
+% 	      This file can be placed in \texttt{/probes}, and the \texttt{probe\_model} column of the \texttt{probes.tsv} table can use \texttt{Levels} with a BIDS URI to direct to the file.
+% 	      The user may also consider submitting this probe configuration file to the probeinterface\_library for use in future datasets.
+% \end{enumerate}
+
 \subsection*{ProbeInterface Integration}
 
-In extracellular electrophysiology, the spatial layout of the electrodes (i.e.\ contacts) on the probe is important for data processing (such as via spike sorting), and in particular on high-density probes~\citep{buccino_spikeinterface_2020}.
-The positions of the electrodes on a template brain can be useful as well, but often the relative positions of the electrodes are substantially warped in the registration process, so microephys needs to also store relative positions of the electrodes on the probe.
-The ProbeInterface library (\rrid{RRID:SCR\_021150}, part of the SpikeInterface project)~\citep{garcia_probeinterface_2022} provides a JSON-based schema for specifying the layout of electrodes on a probe, as well as for specifying the shapes of the electrodes and the geometry of the probe itself, which may be used for further visualization and analysis (Figure~\ref{fig:probeinterface}).
+The same probe models are frequently used across many laboratories.
+The ProbeInterface library (\rrid{RRID:SCR\_021150}, part of the SpikeInterface project)~\citep{garcia_probeinterface_2022} provides a JSON-based schema for specifying contact layout, contact shapes, and probe geometry.
+It also maintains a shared library of commercial probe definitions (Figure~\ref{fig:probeinterface}).
+The extension integrates with ProbeInterface to enable reuse of these definitions across datasets.
 
-The \texttt{ecephys} datatype provides three possible mechanisms to provide the layout of the electrodes:
+Beyond the required \verb|electrodes.tsv|, users are encouraged to provide additional probe geometry defined using the ProbeInterface specification in one of two ways:
 \begin{enumerate}[noitemsep]
-	\item \textbf{\texttt{electrodes.tsv} (required):}
-	      An \texttt{electrodes.tsv} file without the use of a \texttt{space} entity is required, and this file uses \texttt{x}, \texttt{y}, and sometimes \texttt{z} to specify the positions of each electrode relative to the probe tip.
-	      This data is present for every electrophysiology data stream, and can be used by downstream tools.
-	      Electrodes in an alternative space may be defined in \texttt{electrodes.tsv} files with the \texttt{space} entity defined.
-
 	\item \textbf{Link to probeinterface\_library:}
-	      ProbeInterface maintains a library of popular probes.
 	      % TODO: fill in current count (currently xxx)
-	      If the \texttt{ecephys} is recorded from a probe that is defined in this library, the user is encouraged to link to the formal ProbeInterface definition of the probe, which contains additional information about the probe, including the electrode shape, and probe shape.
-	      This link uses the \texttt{Levels} mechanism with \texttt{TermURL} to link from values of the \texttt{probe\_model} column of the \texttt{probes.tsv} table to the URL of the probe definition on GitHub.
+	      If the recording uses a probe defined in the probeinterface\_library, users are encouraged to link to it.
+	      This link uses the general BIDS \texttt{Levels} mechanism with \texttt{TermURL} to link from values of the \verb|probe_model| column of \verb|probes.tsv| to the URL of the probe definition on GitHub.
 
 	\item \textbf{Define custom ProbeInterface files:}
 	      If probeinterface\_library does not have the probe used, users are encouraged to create a probe definition JSON file.
-	      This file can be placed in \texttt{/probes}, and the \texttt{probe\_model} column of the \texttt{probes.tsv} table can use \texttt{Levels} with a BIDS URI to direct to the file.
-	      The user may also consider submitting this probe configuration file to the probeinterface\_library for use in future datasets.
+	      This file can be placed in \texttt{/probes}, and the \verb|probe_model| column of \verb|probes.tsv| can use \texttt{Levels} with a BIDS URI to reference the file.
+	      Users may also consider submitting this configuration to the probeinterface\_library for use in future datasets.
 \end{enumerate}
+
+
 
 \begin{figure}[H]
 	\centering
@@ -430,7 +454,7 @@ The most common method is to take histological slices of the brain where the pro
 
 The gold standard for anatomical localization in microephys experiments is to register the probe to a 3-dimensional coordinate system.
 This technique registers electrodes implanted in different subjects onto a common brain, analogous to registration procedures that are commonplace in MRI.
-Most microelectrode electrophysiology data is from non-human animal subjects, so we must provide a new set of coordinate systems for different species.
+Most microelectrode electrophysiology data are from non-human animal subjects, so we must provide a new set of coordinate systems for different species.
 The most popular coordinate system for mice is the Allen Institute Common Coordinate Framework (CCF) v3~\citep{wang_allen_2020}.
 Other atlases have been developed for mice and a variety of other species, though complete coverage of species will require new coordinate systems and atlases to be added as they are developed.
 

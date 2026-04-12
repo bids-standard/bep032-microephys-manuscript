@@ -563,7 +563,7 @@ Conversion tools such as Neo and NeuroConv already support dozens of acquisition
 For NWB, NWB GUIDE provides a graphical interface for non-programmers.
 Neo can directly write NIX files, as NIX serves as the native storage backend for Neo's data model.
 Tools such as nwb2bids can then populate BIDS files from NWB.
-However, many steps in the workflow, particularly completing and curating distributed metadata, remains a barrier in adoption to support scientific utility.
+However, many steps in the workflow still lack tooling and documentation, particularly around curating the metadata needed for a complete BIDS dataset.
 
 Defining the anatomical location of the recorded region is another common challenge across electrophysiological modalities.
 This extension addresses it at three levels: stereotaxic surgical placement of probes, probe-relative electrode geometry, and registration to common coordinate spaces and brain atlases.
@@ -601,6 +601,9 @@ It contains extracellular recordings from two macaque subjects using 96-channel 
 The second is a synthetic dataset demonstrating both \texttt{ecephys} and \texttt{icephys} datatypes, including registration to the Allen CCF v3 coordinate system, multiple simultaneous probes, and both ProbeInterface library references and custom probe definition files.
 
 % TODO: Cody will publish to zenodo at some point when in a better state for persistence
+% TODO: Lyuba: add how to find them in the bids-example repo (e.g. at least add their folder names in the repo)
+% TODO: Add persistent links in general
+
 GitHub organization bids-dandisets (https://github.com/bids-dandisets/) contains results of organizing existing DANDI datasets as BIDS datasets using nwb2bids\cite{nwb2bids_zenodo}.
 
 \section*{Code Availability}

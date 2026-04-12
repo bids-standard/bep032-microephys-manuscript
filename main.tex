@@ -537,8 +537,49 @@ Here we deviate from the iEEG datatype---the main \texttt{electrodes.tsv} file m
 % Domain-specific standards address the unique requirements of individual modalities, but modern neurophysiology experiments increasingly combine electrophysiology with neuroimaging, optical physiology, and behavioral recordings in the same subjects and sessions.
 % BIDS complements these standards by providing a modality-spanning organisational layer, and with the addition of microelectrode electrophysiology, now covers the full range of modalities common in systems neuroscience laboratories.
 
-\section{Discussion}
+\section*{Discussion}
 
+This extension introduces two datatypes, \texttt{ecephys} and \texttt{icephys}, for organizing microelectrode electrophysiology data within BIDS.
+It defines a three-level metadata hierarchy of probes, electrodes, and channels, integrates with the ProbeInterface specification for probe geometry, and supports anatomical localization through species-specific coordinate systems and brain atlases.
+
+Although BIDS has supported human electrophysiology through EEG and iEEG extensions, microelectrode electrophysiology has remained absent despite being one of the most widely used techniques in neuroscience.
+This gap is significant because microephys data are generated primarily in animal research, a domain where BIDS adoption has been limited.
+By extending BIDS to cover this modality, the specification now provides a common organizational framework for both human and animal electrophysiology.
+This also fosters broader BIDS adoption in animal research, though further optimizations may be needed to fully serve the animal research community.
+For example, BIDS uses the term ``participant'' rather than ``subject,'' reflecting its origins in human research.
+Similarly, the subject-based directory hierarchy, while natural for in vivo recordings, is less intuitive for intracellular experiments where the primary organizational unit is often a tissue sample or cell rather than an individual animal.
+
+NWB and NIX follow an all-in-one approach, storing data and metadata together in self-describing files.
+BIDS takes a different approach, extracting key metadata from data files into separate human- and machine-readable TSV and JSON sidecars.
+Both approaches have trade-offs.
+The all-in-one approach ensures that metadata always travel with the data.
+While decoupling of metadata and data enables organizing, browsing, and validating datasets without opening the data files themselves.
+The extension therefore combines both approaches, explicitly allowing metadata to appear in both places and ensures that tools designed for NWB, NIX, and BIDS can each function independently.
+This is similar to how the MRI modality in BIDS adopted NIfTI as its data format but also extracts metadata from the NIfTI header into JSON sidecars, combining format-level and study-level metadata.
+
+Defining the anatomical location of the recorded region is a common challenge across electrophysiological modalities.
+This extension addresses it at three levels: stereotaxic surgical placement of probes, probe-relative electrode geometry, and registration to common coordinate spaces and brain atlases.
+% Suggestions needed to generalize this to icephys
+The explicit introduction of the probe level captures surgical placement information.
+The electrode and channel levels in combination with ProbeInterface integration provide standardized probe geometry, critical for spike sorting where inter-electrode spacing directly affects waveform reconstruction.
+Beyond the probe and electrode geometry, localizing contacts in common coordinate spaces requires brain atlases, the availability of which varies across species.
+The coordinate systems defined in this extension cover the most commonly used animal models (mouse, rat, macaque, marmoset), but electrophysiology is performed in many additional species for which standardized digital brain atlases either do not yet exist or have not reached sufficient community adoption for inclusion.
+A broader challenge is that both coordinate spaces and probe definitions are maintained by independent communities and evolve over time as new atlases are published and new devices become available.
+The coordinate systems in BIDS are currently not sourced from a single standardized authority, and a process for reviewing and incorporating new coordinate systems will be needed as the field advances.
+
+The specification defines the organization of raw data but does not yet address derived data.
+In extracellular electrophysiology, spike sorting is the most common processing step, producing spike times, cluster assignments, and associated quality metrics.
+Beyond spike sorting, common derived outputs include band-pass filtered signals such as LFP extraction, current source density estimates, and spectrograms.
+For intracellular recordings, derived data may include extracted spike times, passive membrane property estimates, and stimulus-response curves.
+SpikeInterface already produces standardized spike sorting outputs, providing a pathway toward a derivatives specification for microephys data.
+
+The major neurophysiology repositories already operate on principles that this extension complements.
+DANDI requires NWB and validates uploaded datasets against the NWB standard.
+EBRAINS (\rrid{RRID:SCR\_019260}) recommends BIDS for human neuroimaging data and provides general data organization guidelines that align with the conventions described here.
+Repositories such as GIN (\rrid{RRID:SCR\_015864}) store data with full filesystem fidelity, making the benefits of a harmonized directory structure immediately apparent.
+Rather than creating a new standard for organizing microephys data, this work extends BIDS.
+This means existing BIDS infrastructure, tooling, and community familiarity apply directly and foster downstream interoperability across the growing ecosystem of BIDS-aware tools.
+BIDS provides cross-domain standardization, meaning that laboratories combining electrophysiology with neuroimaging, optical physiology, or behavioral recordings can organize all modalities within a single consistent structure.
 
 
 

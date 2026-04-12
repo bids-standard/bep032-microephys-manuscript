@@ -245,7 +245,7 @@ The \texttt{species}, \texttt{strain}, and \texttt{strain\_rrid} columns introdu
 % We adopt this distinction at the datatype level, creating \texttt{ecephys} and \texttt{icephys} as two datatypes within the microelectrode electrophysiology modality, analogous to how MRI in BIDS encompasses T1w, T2w, and BOLD.
 % In the accompanying examples, repeated task trials are distinguished using \texttt{run-<index>}, while the specification supports \texttt{acq-<label>} for different recording configurations within a session.
 
-% The different techniques require different metadata.
+% I aThe different techniques require different metadata.
 % Spike sorting algorithms run on ecephys data require probe geometry (such as inter-electrode spacing, shank arrangement, contact impedance) to reconstruct waveforms from voltage deflections distributed across contacts and assign action potentials to individual neurons.
 % A tetrode array's four closely-spaced wires enable sorting by differential geometry; a Neuropixels probe with 384 contacts and known inter-site spacing allows isolation of hundreds of neurons from overlapping electrical signatures.
 % Intracellular recordings instead require documentation of the cell or tissue: pipette solution composition, seal resistance, recording mode (current-clamp, voltage-clamp), and the relationship between each acquisition and the biological sample (acute slice, organotypic culture, in vivo preparation).
@@ -256,7 +256,29 @@ The \texttt{species}, \texttt{strain}, and \texttt{strain\_rrid} columns introdu
 % For \texttt{icephys}, \texttt{samples.tsv} (inherited from Microscopy-BIDS~\citep{bourget_microscopy-bids_2022}) links acquisitions to characterized biological samples with fields such as \texttt{sample\_type}, \texttt{derived\_from}, and \texttt{pathology}.
 % Channel \texttt{type} indicates the types of data recorded on each channel, and supports values relevant to \texttt{icephys}, such as membrane voltage (\texttt{VM}) and current (\texttt{IM}), as well as values relevant to \texttt{ecephys}, such as local field potential (\texttt{LFP}), high-pass filtered (\texttt{HP}), and multi-unit activity (\texttt{MUA}).
 
+\subsubsection*{Intracellular vs Extracellular Datatypes}
 
+Microelectrode electrophysiology (microephys) constitutes a single modality: electrical measurements made with micrometer-scale electrodes, distinguishing it from related BIDS modalities (EEG, MEG, iEEG) that use larger electrodes.
+This modality encompasses two datatypes: extracellular electrophysiology (\texttt{ecephys}) and intracellular electrophysiology (\texttt{icephys}).
+This is analogous to how MRI in BIDS encompasses the datatypes \texttt{anat}, \texttt{func}, and \texttt{dwi}, each with their own metadata requirements and file suffixes.
+This terminology distinction is well-established across other efforts: NWB organizes its schema into separate \texttt{icephys} and \texttt{ecephys} modules, open Metadata Initiative for Neuroscience Data Structures (openMINDS, \rrid{RRID:SCR\_027358}) represents extracellular and intracellular electrophysiology as separate instances in its controlled technique vocabulary, and the Ontology for Biomedical Investigations (OBI, \rrid{RRID:SCR\_006266}) classifies them as separate assay types.
+% TODO: consistently cross reference sections with labels
+Both datatypes share the core organizational structure of probes, electrodes, and channels (described in detail in the Probes, Electrodes, and Channels section), but populate it with technique-specific metadata as outlined below.
+
+\paragraph*{Extracellular electrophysiology (\texttt{ecephys}).}
+Extracellular electrodes record voltage signals arising from neuronal current flow, capturing both spikes from nearby single units and population-level field potentials (LFPs) without directly accessing intracellular membrane potential.
+These recordings are predominantly performed in vivo.
+Spike sorting algorithms require probe geometry (such as, inter-electrode spacing and shank arrangement) to reconstruct waveforms and assign action potentials to individual neurons.
+For \texttt{ecephys}, \verb|probes.tsv| documents device specifications and surgical placement, \verb|electrodes.tsv| specifies contact positions, and optional ProbeInterface integration links to detailed probe model definitions (see ProbeInterface Integration).
+Channel \texttt{type} supports values such as local field potential (\texttt{LFP}), high-pass filtered (\texttt{HP}), and multi-unit activity (\texttt{MUA}).
+
+\paragraph*{Intracellular electrophysiology (\texttt{icephys}).}
+Intracellular electrodes penetrate or attach to cell membranes, providing direct access to intracellular voltage (tens of millivolts) or current with sub-millisecond temporal resolution of individual synaptic events and intrinsic membrane properties.
+These recordings can be performed both in vivo (sharp electrode) and ex vivo (patch clamp in acute slices or organotypic cultures).
+In \texttt{icephys}, the probe is typically a single pipette with one electrode contact, making the probe, electrode, and channel hierarchy simpler than in \texttt{ecephys}.
+The additional organizational challenge here is sample tracking: patch-clamp experiments often involve multiple cells from the same tissue slice or multiple slices from the same animal.
+As described above, \verb|samples.tsv| tracks provenance from participant to sample to acquisition.
+Channel \texttt{type} supports values such as membrane voltage (\texttt{VM}) and current (\texttt{IM}).
 
 
 \subsubsection*{Data Format Requirements}

@@ -510,32 +510,37 @@ Here we deviate from the iEEG datatype---the main \texttt{electrodes.tsv} file m
 	\end{tabular}
 \end{table}
 
-\section*{Discussion}
+% \section*{Discussion}
 
-While NWB and NIX standardize electrophysiology data within individual recording sessions, this extension provides consistent organization across subjects and sessions, making essential metadata available in human-readable, machine-parseable form through TSV and JSON sidecars.
-By separating extracellular and intracellular recordings into distinct datatypes, each with technique-specific metadata (probe geometry and electrode coordinates for spike sorting, sample provenance and recording mode for patch clamp), the extension ensures that analysis tools can discover and interpret microephys datasets without parsing the underlying data files.
+% While NWB and NIX standardize electrophysiology data within individual recording sessions, this extension provides consistent organization across subjects and sessions, making essential metadata available in human-readable, machine-parseable form through TSV and JSON sidecars.
+% By separating extracellular and intracellular recordings into distinct datatypes, each with technique-specific metadata (probe geometry and electrode coordinates for spike sorting, sample provenance and recording mode for patch clamp), the extension ensures that analysis tools can discover and interpret microephys datasets without parsing the underlying data files.
 
-The specification defines the organization of raw data but does not yet address the most common forms of derived data, particularly spike sorting results and associated quality metrics.
-However, the standardized probe geometry enabled by ProbeInterface integration, when consumed by tools such as SpikeInterface, provides a pathway toward standardized spike sorting outputs that complement this specification.
+% The specification defines the organization of raw data but does not yet address the most common forms of derived data, particularly spike sorting results and associated quality metrics.
+% However, the standardized probe geometry enabled by ProbeInterface integration, when consumed by tools such as SpikeInterface, provides a pathway toward standardized spike sorting outputs that complement this specification.
 
-The brain coordinate systems defined in this extension cover the most common animal models (mouse, rat, macaque, marmoset), but electrophysiology is performed in many additional species for which standardized digital brain atlases either do not exist or have not yet reached the level of community adoption required for inclusion.
-The specification accommodates unlisted atlases through the \texttt{Other} coordinate system keyword with a free-text description; commonly-used atlases can be promoted to named entries in future specification updates.
+% The brain coordinate systems defined in this extension cover the most common animal models (mouse, rat, macaque, marmoset), but electrophysiology is performed in many additional species for which standardized digital brain atlases either do not exist or have not yet reached the level of community adoption required for inclusion.
+% The specification accommodates unlisted atlases through the \texttt{Other} coordinate system keyword with a free-text description; commonly-used atlases can be promoted to named entries in future specification updates.
 
-NWB and NIX are not the native output format of most commercial acquisition systems.
-Of the major platforms (Blackrock, Plexon, Intan, Neuralynx, SpikeGLX, TDT), only Open Ephys supports NWB recording natively.
-Researchers may also prefer native formats during acquisition and analysis for performance reasons.
-The conversion step, while a barrier to adoption, reflects the same transition neuroimaging underwent from proprietary scanner formats to NIfTI: without a common data format, reusable tools cannot be built across laboratories.
-% TODO: quantify format counts if possible (Neo lists 36 RawIO modules as of 2026-03; NeuroConv docs claim ~50)
-Conversion tools such as Neo and NeuroConv support reading from dozens of acquisition formats and lower this barrier in practice.
+% NWB and NIX are not the native output format of most commercial acquisition systems.
+% Of the major platforms (Blackrock, Plexon, Intan, Neuralynx, SpikeGLX, TDT), only Open Ephys supports NWB recording natively.
+% Researchers may also prefer native formats during acquisition and analysis for performance reasons.
+% The conversion step, while a barrier to adoption, reflects the same transition neuroimaging underwent from proprietary scanner formats to NIfTI: without a common data format, reusable tools cannot be built across laboratories.
+% % TODO: quantify format counts if possible (Neo lists 36 RawIO modules as of 2026-03; NeuroConv docs claim ~50)
+% Conversion tools such as Neo and NeuroConv support reading from dozens of acquisition formats and lower this barrier in practice.
 
-The major neurophysiology repositories already operate on principles that microephys-BIDS complements.
-DANDI requires NWB and supports BIDS validation for uploaded datasets.
-EBRAINS (\rrid{RRID:SCR\_019260}) recommends BIDS for human neuroimaging data and provides general data organisation guidelines (modality separation, subject-based hierarchy, machine-readable metadata) that align with BIDS conventions; its recommendation has not yet extended to electrophysiology because no animal microelectrode extension existed until now.
-Repositories such as GIN (\rrid{RRID:SCR\_015864}) store data with full filesystem fidelity, making the benefits of a harmonized directory structure immediately apparent to both humans and machines.
+% The major neurophysiology repositories already operate on principles that microephys-BIDS complements.
+% DANDI requires NWB and supports BIDS validation for uploaded datasets.
+% EBRAINS (\rrid{RRID:SCR\_019260}) recommends BIDS for human neuroimaging data and provides general data organisation guidelines (modality separation, subject-based hierarchy, machine-readable metadata) that align with BIDS conventions; its recommendation has not yet extended to electrophysiology because no animal microelectrode extension existed until now.
+% Repositories such as GIN (\rrid{RRID:SCR\_015864}) store data with full filesystem fidelity, making the benefits of a harmonized directory structure immediately apparent to both humans and machines.
 
-Adoption of the presented extension would enable BIDS-Apps that exploit the standardized structure and metadata for automated processing workflows, and provide laboratories with a consistent organisational framework.
-Domain-specific standards address the unique requirements of individual modalities, but modern neurophysiology experiments increasingly combine electrophysiology with neuroimaging, optical physiology, and behavioral recordings in the same subjects and sessions.
-BIDS complements these standards by providing a modality-spanning organisational layer, and with the addition of microelectrode electrophysiology, now covers the full range of modalities common in systems neuroscience laboratories.
+% Adoption of the presented extension would enable BIDS-Apps that exploit the standardized structure and metadata for automated processing workflows, and provide laboratories with a consistent organisational framework.
+% Domain-specific standards address the unique requirements of individual modalities, but modern neurophysiology experiments increasingly combine electrophysiology with neuroimaging, optical physiology, and behavioral recordings in the same subjects and sessions.
+% BIDS complements these standards by providing a modality-spanning organisational layer, and with the addition of microelectrode electrophysiology, now covers the full range of modalities common in systems neuroscience laboratories.
+
+\section{Discussion}
+
+
+
 
 \section*{Data Availability}
 

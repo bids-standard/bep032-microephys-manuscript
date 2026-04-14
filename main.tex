@@ -75,7 +75,7 @@
 Microelectrode electrophysiology encompasses techniques for recording electrical activity on spatial scales smaller than one millimeter, such as the membrane potential of individual neurons and local field potentials.
 These measurements provide crucial insights into neural computation at high spatial and temporal resolution, often with the ability to track individual neuronal action potentials.
 Recent technological advances, including high-density silicon probes such as Neuropixels~\citep{jun_fully_2017, Steinmetz2021}, have dramatically increased the volume of the acquired data. 
-Single probes are now capable of recording extracellularly from hundreds of neurons simultaneously generating more than $\approx 80$~GB/h per probe~\citealp{Steinmetz2021}.
+Single probes are now capable of recording extracellularly from hundreds of neurons simultaneously, generating more than $\approx 80$~GB/h per probe~\citealp{Steinmetz2021}.
 Intracellular techniques, such as patch clamp recordings~\citep{sakmann_patch_1984}, are a complementary class of experimental methods that provide direct access to cellular membrane dynamics, enabling detailed characterization of synaptic transmission and intrinsic neuronal properties.
 While the amount of acquired data for intracellular techniques is typically less than those estimated above, they share a similarly high degree of heterogeneity from the underlying experimental diversity.
 These two classes of methods are used primarily in animal research and generate data of increasing complexity that demand a standardized organization.
@@ -97,7 +97,7 @@ Researchers must still make \textit{ad hoc} decisions about directory structures
 The Brain Imaging Data Structure (BIDS, \rrid{RRID:SCR\_016124})~\citep{gorgolewski_brain_2016} is a community-driven standard for organizing and sharing neuroscience data. Originally developed for MRI, BIDS has been extended through community-driven proposals to additional modalities including MEG~\citep{niso_meg-bids_2018}, EEG~\citep{pernet_eeg-bids_2019}, iEEG~\citep{holdgraf_ieeg-bids_2019}, PET, and microscopy.
 With over a thousand public datasets on OpenNeuro and endorsement by the INCF, BIDS has become a widely adopted framework for FAIR neuroscience data~\citep{wilkinson_fair_2016}.
 
-In a BIDS dataset, all data from each subject are organized hierarchically in subject-specific directories, with optional session subdirectories containing modality-specific folders for the data files themselves.
+In a BIDS dataset, all data from each subject are organized hierarchically in subject-specific directories, with optional session subdirectories containing modality-specific directories for the data files themselves.
 Files follow a structured naming scheme that encodes relevant metadata such as subject, session, and task.
 Additional metadata are encoded in sidecar metadata files with formal schemas. Specifically, JSON sidecar files provide detailed metadata for each data file, while TSV files capture tabular information, such as participant demographics and channel properties.
 A \texttt{dataset\_description.json} file describes the dataset as a whole. 

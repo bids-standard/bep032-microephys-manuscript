@@ -404,8 +404,8 @@ Beyond the required \verb|electrodes.tsv|, users are encouraged to provide addit
 	\includegraphics[width=\linewidth]{figures/fig-2.pdf}
 	% \caption{ProbeInterface integration with microephys-BIDS.
     \caption{Probe, electrode, and channel metadata organization in microephys-BIDS, with ProbeInterface integration.
-		Three colours encode the mapping to the file hierarchy: probe outline (\textit{green}) maps to \texttt{*\_probes.tsv}, contact positions (\textit{pink}) to \texttt{*\_electrodes.tsv}, and channel wiring (\textit{orange}) to \texttt{*\_channels.tsv}.
-		\textbf{(A)}~Colour-coded microephys-BIDS sidecar tables showing the three-level hierarchy with dashed arrows indicating cross-file references between probe, electrode, and channel entries.
+		Three colors encode the mapping to the file hierarchy: probe outline (\textit{green}) maps to \texttt{*\_probes.tsv}, contact positions (\textit{pink}) to \texttt{*\_electrodes.tsv}, and channel wiring (\textit{orange}) to \texttt{*\_channels.tsv}.
+		\textbf{(A)}~Color-coded microephys-BIDS sidecar tables showing the three-level hierarchy with dashed arrows indicating cross-file references between probe, electrode, and channel entries.
 		The \texttt{*\_probes.json} sidecar links probe models to definitions via two mechanisms: a custom file in the dataset's \texttt{probes/} directory, or a reference to the ProbeInterface library on GitHub.
 		\textbf{(B)}~NeuroNexus A4x8-5mm-100-200-177 probe geometry (4~shanks, 32~channels) from the ProbeInterface library~\citep{garcia_probeinterface_2022}; interleaved electrode identifiers reflect the manufacturer's connector pin numbering.
 		\textbf{(C)}~ProbeInterface JSON fields highlighted by their microephys-BIDS level: probe-level fields (green), contact positions (pink), and device channel indices (orange).
@@ -435,7 +435,7 @@ We adopt and formalize this convention here, and encourage others to do the same
 In microephys, the stereotaxic coordinates are stored as columns of the \texttt{probes.tsv} table.
 This includes 3 axes of direction: anterior/posterior (AP), medial/lateral (ML), and dorsal/ventral (DV); and 3 rotational axes: AP Angle, ML Angle, and rotation (i.e.\ twist).
 
-In non-human neuroanatomy, the direction towards the top of the brain is usually referred to as dorsal (D) and the bottom ventral (V).
+In non-human neuroanatomy, the direction toward the top of the brain is usually referred to as dorsal (D) and the bottom ventral (V).
 In human neuroanatomy, these directions are usually called superior and inferior, respectively.
 We note that we are using the animal convention (D/V), here, as we expect the majority of stereotaxic microelectrode electrophysiology experiments to be done in non-humans.
 

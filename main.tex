@@ -82,16 +82,16 @@ These two classes of methods are used primarily in animal research and generate 
 A key challenge in the microelectrode electrophysiology community has been the proliferation of proprietary file formats.
 Different acquisition systems, such as Blackrock, Plexon, TDT, Open Ephys, and SpikeGLX, each produce data in their own formats.
 While to some extent this fragmentation is rooted in a data recorder's need to optimize the file format for write efficiency given a certain hardware design, it creates barriers that complicate data sharing, tool interoperability, and long-term archiving of data. 
-Dedicated readers must be maintained for each format. For example, the Neo ~\citep[\rrid{RRID:SCR\_000634}; ][]{garcia_neo_2014} library for data handling in electrophysiology currently supports over 40 different interfaces to different file formats. Despite the availability of such software tools, undocumented specifications, unmaintained programmatic interfaces, and language lock-in risk rendering data inaccessible.
+Dedicated readers must be maintained for each format. For example, the Neo ~\citep[\rrid{RRID:SCR\_000634}; ][]{garcia_neo_2014} library for data handling in electrophysiology currently supports over 40 different interfaces to different file formats. Despite the availability of such software tools, undocumented specifications, unmaintained programmatic interfaces, and language lock-in risk rendering data in proprietary formats inaccessible.
 
 Two major community efforts have emerged to address this challenge at the file format level for individual recording sessions.
 Neurodata Without Borders (NWB, \rrid{RRID:SCR\_015242})~\citep{rubel_neurodata_2022, teeters_neurodata_2015} is an open data standard for neurophysiology developed as part of the National Institutes of Health (NIH) BRAIN Initiative by a community of researchers over the last 10 years.
 NWB uses HDF5 or Zarr as its storage backend and provides a comprehensive schema for storing electrophysiology data alongside stimulus information, behavioral data, and metadata.
-The Neuroscience Information Exchange Format (NIX, \rrid{RRID:SCR\_016196})~\citep{adrian_file_2014} is an open data model for annotated self-descriptive scientific datasets that provides an HDF5 file backend for the Neo data model.
+The Neuroscience Information Exchange Format (NIX, \rrid{RRID:SCR\_016196})~\citep{adrian_file_2014} is an open data model for annotated self-descriptive scientific datasets with an HDF5 file backend, providing a file format for the Neo data model.
 Both standards are widely adopted in the neuroscience community, are supported by widely-used analysis toolkits such as SpikeInterface (\rrid{RRID:SCR\_021150})~\citep{buccino_spikeinterface_2020}, and have been endorsed by the International Neuroinformatics Coordinating Facility (INCF) as community standards for neuroscience data storage.
 NWB and NIX standardize the representation of data at the single-file level, which is typically used to store data of a single recording session. These file formats allow tool developers to build analysis pipelines that work across laboratories~\citep{denker_collaborative_2018, gutzen_2014, viejo_pynapple_2023, magland_neurosift_2024}.
 However, neither standard provides organizational guidance at the study level for organizing collections of NWB or NIX files that represent recordings from many sessions, subjects, and experimental conditions within a study.
-Researchers must still make \textit{ad hoc} decisions about directory structures, naming conventions, and the placement of study-level metadata, such as participant information and experimental protocols. In addition, some of the basic metadata describing the specific electrophysiology setting of the study, such as electrode configurations, remain difficult to access as part of the included binary files.
+Researchers must still make decisions about directory structures, naming conventions, and the placement of study-level metadata, such as participant information and experimental protocols. In addition, some of the basic metadata describing the specific electrophysiology setting of the study, such as electrode configurations, remain difficult to access as part of the included data files.
 
 The Brain Imaging Data Structure (BIDS, \rrid{RRID:SCR\_016124})~\citep{gorgolewski_brain_2016} is a community-driven standard for organizing and sharing neuroscience data. Originally developed for MRI, BIDS has been extended through community-driven proposals to additional modalities including MEG~\citep{niso_meg-bids_2018}, EEG~\citep{pernet_eeg-bids_2019}, iEEG~\citep{holdgraf_ieeg-bids_2019}, PET, and microscopy.
 With over a thousand public datasets on OpenNeuro and endorsement by the INCF, BIDS has become a widely adopted framework for FAIR neuroscience data~\citep{wilkinson_fair_2016}.
@@ -118,9 +118,9 @@ We define two datatypes, ecephys and icephys, introduce a three-level metadata m
 
 \subsection*{Standardization Landscape}
 
-The MINI checklist~\citep{gibson_minimum_2009}, developed by the CARMEN consortium, was among the first community efforts to define what metadata should accompany electrophysiology recordings, covering subject, electrode, recording location, and stimulus information, but explicitly left data format and organization out of scope.
+The MINI checklist~\citep{gibson_minimum_2009}, developed by the CARMEN consortium, and later guidelines by the INCF Task Force on electrophysiology data sharing \citep{teeters_requirements_2016} were among the first community efforts to define what metadata should accompany electrophysiology recordings, covering subject, electrode, recording location, and stimulus information, but explicitly left data format and organization out of scope.
 odML (\rrid{RRID:SCR\_001376})~\citep{grewe_bottom-up_2011} addressed how to structure such metadata through flexible key-value annotation and was adopted in practice for multi-electrode array datasets~\citep{zehl_handling_2016}.
-NWB~\citep{teeters_neurodata_2015} and NIX~\citep{adrian_file_2014} then standardized the data format itself, embedding metadata within self-describing files, while Neo~\citep{garcia_neo_2014} provided the programmatic I/O layer that bridges proprietary acquisition formats to open standards.
+NWB~\citep{teeters_neurodata_2015} and NIX~\citep{adrian_file_2014} then standardized the data format itself, embedding metadata within self-describing files, while Neo~\citep{garcia_neo_2014} provided a common programmatic representation together with an I/O layer that bridges proprietary acquisition formats to open standards.
 
 At the study level, large-scale collaborations developed their own organizational conventions to organize collections of files from many recording sessions and modalities. For example, the Allen Brain Observatory~\citep{de_vries_sharing_2023} adopted internal data management practices and the International Brain Laboratory designed the Open Neurophysiology Environment (ONE)~\citep{one2024, international_brain_laboratory_modular_2023} to coordinate Neuropixels recordings across dozens of laboratories.
 % BEP032 described here occupies this study-level layer, providing a community standard that builds on the mature ecosystems from these earlier initiatives and that could serve as a common baseline for such collaborative efforts.
@@ -291,21 +291,22 @@ Following the approach of prior BIDS electrophysiology extensions~\citep{pernet_
 \end{enumerate}
 
 We require data to be stored in either NWB~\citep{rubel_neurodata_2022} or NIX~\citep{adrian_file_2014}.
-Both are HDF5-based, open-source (BSD-3 licensed), and self-documenting, with the file itself containing the schema needed to interpret its contents.
+Both are HDF5-based, open-source (BSD-3 licensed) and self-documenting with HDF5 file backends where the data file itself contains the schema needed to interpret its contents.
 HDF5 offers practical advantages for multi-gigabyte recordings, supporting hierarchical organization, built-in compression, and lazy loading without reading entire files into memory.
+NWB alternatively offers a Zarr backend.
 
-NWB and NIX represent complementary design philosophies.
-NWB provides a well-defined schema with extensive validation, ensuring consistency across datasets.
-NIX uses a minimal, generic data model that gives users more freedom in how they organize data, and serves as a storage backend for the Neo electrophysiology library~\citep{garcia_neo_2014}.
-To ensure interoperability, the BEP32 extension requires that \texttt{.nix} files follow Neo's internal structure conventions, where Neo's object hierarchy and type annotations serve as the domain-specific schema that NIX itself does not prescribe.
-Both have been reviewed and endorsed by the INCF as standard practices~\citep{noauthor_nix_nodate, martone_pcall_2019}. A dedicated archival repository, DANDI (\rrid{RRID:SCR\_017571}), exists for neurophysiology data stored in NWB. NIX datasets can be archived through neuroscience repositories such as the G-Node Infrastructure (GIN, \rrid{RRID:SCR\_015864}).
+Both NWB and NIX are designed for storing fully annotated datasets, that is, integrating data and metadata, but they represent complementary design philosophies.
+NWB provides a detailed schema of domain-specific data and metadata items with specified terminology and organized according to a strict concept hierachy.
+NIX uses a minimal, generic data model for scientific data and metadata that gives users more freedom in how they organize data but does not provide a domain-specific schema.
+To ensure interoperability, the BEP32 extension requires that \texttt{.nix} files follow the data object structure defined by the Neo electrophysiology library~\citep{garcia_neo_2014}, where Neo's object hierarchy and type annotations serve as the domain-specific schema.
+Both NWB and NIX have been reviewed and endorsed by the INCF as standard best practices. A dedicated archival repository, DANDI (\rrid{RRID:SCR\_017571}), exists for neurophysiology data stored in NWB. NIX datasets can be archived through neuroscience repositories such as the G-Node Infrastructure (GIN, \rrid{RRID:SCR\_015864}) or EBRAINS (\rrid{RRID:SCR\_019260}).
 
 In iEEG-BIDS~\citep{holdgraf_ieeg-bids_2019}, NWB was listed as an unofficially-supported format due to its then-nascent ecosystem.
 The maturation of NWB 2.0 and its subsequent INCF endorsement justify its promotion to fully compliant status here.
 Unlike iEEG-BIDS, which maintains separate tiers of compliant and unofficially-supported formats, we adopt a simpler two-format approach.
 Both NWB and NIX are fully supported with no unofficial tier.
 
-To support the organization of complex data collection and ensure a complete description of experiments, BIDS may require metadata that are also provided in NWB and NIX files to ensure complete provenance of recording sessions within a self-contained container. The presented extension explicitly allows such metadata to appear in both places (i.e., within NWB/NIX files and BIDS metadata fields). This ensures that tools designed for the different standards (NWB, NIX, and BIDS) can function independently. This also simplifies data conversion as tools like nwb2bids can extract metadata directly from the source data to automatically populate corresponding fields in BIDS. Also, SpikeInterface can already extract probe geometry from NWB files, and future integration of SpikeInterface with BIDS sidecars will provide similar functionality for ecephys data in BIDS.
+To support the organization of complex data collection and ensure a complete description of experiments, BIDS may require metadata that are also provided within the self-contained NWB and NIX files. The presented extension explicitly allows such metadata to appear in both places (i.e., within NWB/NIX files and BIDS metadata fields). This ensures that tools designed for the different standards (NWB, NIX, and BIDS) can function independently. This also simplifies data conversion as tools like nwb2bids can extract metadata directly from the source data to automatically populate corresponding fields in BIDS. Also, SpikeInterface can already extract probe geometry from NWB files, and future integration of SpikeInterface with BIDS sidecars will provide similar functionality for ecephys data in BIDS.
 
 % \subsubsection*{Probes, Electrodes, and Channels}
 
@@ -644,7 +645,7 @@ Neurosift (\rrid{RRID:SCR\_025466})~\citep{magland_neurosift_2024} provides inte
 
 A broad range of analysis tools relevant to microephys data support these formats.
 SpikeInterface (\rrid{RRID:SCR\_022205})~\citep{buccino_spikeinterface_2020} provides spike sorting pipelines with native NWB and NIX support via Neo.
-Elephant (\rrid{RRID:SCR\_003833})~\citep{denker_collaborative_2018} supports spike train and LFP analysis.
+Elephant (\rrid{RRID:SCR\_003833})~\citep{denker_collaborative_2018} builds on Neo and provides various analysis functions for spike train and LFP analysis.
 
 \bibliographystyle{plainnat}
 \bibliography{bep032}

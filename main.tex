@@ -107,7 +107,7 @@ The design of this enhancement proposal reflects the unique demands of microelec
 \begin{enumerate}[noitemsep]
 	\item Electrode scales that span orders of magnitude (submicrometer tips to millimeter arrays).
 	\item Diverse target species with different anatomical brain reference spaces and atlases.
-	\item Large data volumes, which can exceed $100~GB$ for an individual session.
+	\item Large data volumes, which can exceed hundreds of gigabytes for an individual session.
 	\item Diverse probe geometries, requiring specialized coordinate systems.
 	\item Spike sorting as an essential pre-processing step, requiring specific metadata.
 \end{enumerate}
@@ -121,7 +121,7 @@ The MINI checklist~\citep{gibson_minimum_2009}, developed by the CARMEN consorti
 odML (\rrid{RRID:SCR\_001376})~\citep{grewe_bottom-up_2011} addressed how to structure such metadata through flexible key-value annotation and was adopted in practice for multi-electrode array datasets~\citep{zehl_handling_2016}.
 NWB~\citep{teeters_neurodata_2015} and NIX~\citep{adrian_file_2014} then standardized the data format itself, embedding metadata within self-describing files, while Neo~\citep{garcia_neo_2014} provided a common programmatic representation together with an I/O layer that bridges proprietary acquisition formats to open standards.
 
-At the study level, large-scale collaborations developed their own organizational conventions to organize collections of files from many recording sessions and modalities. For example, the Allen Brain Observatory~\citep{de_vries_sharing_2023} adopted internal data management practices and the International Brain Laboratory designed the Open Neurophysiology Environment (ONE)~\citep{one2024, international_brain_laboratory_modular_2023} to coordinate Neuropixels recordings across dozens of laboratories.
+At the study level, large-scale electrophysiology collaborations developed their own organizational conventions to organize collections of files from many recording sessions and modalities. For example, the Allen Brain Observatory~\citep{de_vries_sharing_2023} adopted internal data management practices and the International Brain Laboratory designed the Open Neurophysiology Environment (ONE)~\citep{one2024, international_brain_laboratory_modular_2023} to coordinate Neuropixels recordings across dozens of laboratories.
 % BEP032 described here occupies this study-level layer, providing a community standard that builds on the mature ecosystems from these earlier initiatives and that could serve as a common baseline for such collaborative efforts.
 This work occupies this study-level layer, providing a community standard that builds on the mature ecosystems from these earlier initiatives and that could serve as a common baseline for such collaborative efforts.
 
@@ -599,7 +599,6 @@ The first is a conversion of the Reach-to-Grasp multi-electrode array dataset~\c
 It contains extracellular recordings from two macaque subjects using 96-channel Utah arrays, with both local field potential (1~kHz) and high-pass (30~kHz) data streams, behavioral channels, and task events.
 The second is a synthetic dataset demonstrating both \texttt{ecephys} and \texttt{icephys} datatypes, including registration to the Allen CCF v3 coordinate system, multiple simultaneous probes, and both ProbeInterface library references and custom probe definition files.
 
-% TODO: Cody will publish to zenodo at some point when in a better state for persistence
 % TODO: Lyuba: add how to find them in the bids-example repo (e.g. at least add their folder names in the repo)
 % TODO: Add persistent links in general
 % TODO: Convert all links to bibtex entries with accessed date

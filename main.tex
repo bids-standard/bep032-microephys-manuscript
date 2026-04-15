@@ -6,8 +6,7 @@
 \usepackage{graphicx}
 \usepackage{booktabs}
 \usepackage{float}
-\usepackage{hyperref}
-\usepackage{enumitem}
+\addbibresource{bep032.bib}
 \newcommand{\rrid}[1]{\href{https://scicrunch.org/resolver/#1}{#1}}
 
 \linenumbers
@@ -647,8 +646,7 @@ A broad range of analysis tools relevant to microephys data support these format
 SpikeInterface (\rrid{RRID:SCR\_022205})~\citep{buccino_spikeinterface_2020} provides spike sorting pipelines with native NWB and NIX support via Neo.
 Elephant (\rrid{RRID:SCR\_003833})~\citep{denker_collaborative_2018} builds on Neo and provides various analysis functions for spike train and LFP analysis.
 
-\bibliographystyle{plainnat}
-\bibliography{bep032}
+\printbibliography
 
 % \section*{Acknowledgements}
 % % INCF Working Group members, funders, community contributors

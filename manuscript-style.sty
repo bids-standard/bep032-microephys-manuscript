@@ -88,7 +88,104 @@
 \RequirePackage[colorlinks=true, allcolors=blue]{hyperref}
 
 %% ---- Bibliography ----
-\RequirePackage{natbib}
+% \RequirePackage{natbib}  % Replaced by biblatex (biber backend) for UTF-8 support and Lastname, F. convention.
+\RequirePackage[
+    style = authoryear,
+    natbib = true,          % \cite, \citep, \citet keep working
+    backend = biber,
+    giveninits = true,      % Lastname, F.
+    maxcitenames = 2,
+    maxbibnames = 99,
+    uniquelist = false,
+    uniquename = false,
+    dashed = false,
+]{biblatex}
+
+%%% Make the entire in-text citation (author + year) one clickable hyperlink %%%
+\DeclareCiteCommand{\cite}
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\parencite}[\mkbibparens]
+  {\usebibmacro{prenote}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{cite}}}
+  {\multicitedelim}
+  {\usebibmacro{postnote}}
+
+\DeclareCiteCommand{\textcite}
+  {\boolfalse{cbx:parens}}
+  {\usebibmacro{citeindex}%
+   \printtext[bibhyperref]{\usebibmacro{textcite}}}
+  {\ifbool{cbx:parens}{\bibcloseparen\global\boolfalse{cbx:parens}}{}%
+   \multicitedelim}
+  {\usebibmacro{textcite:postnote}}
+
+%% ---- Reference formatting ---- %%
+% Target: Authors (Year) Title. Journal Vol(Number):Pages. doi:DOI
+
+% Allow DOIs and URLs to break across lines
+\setcounter{biburlnumpenalty}{100}
+\setcounter{biburlucpenalty}{100}
+\setcounter{biburllcpenalty}{100}
+
+% DOI as clickable hyperlink with "doi:" prefix
+\DeclareFieldFormat{doi}{%
+  doi\addcolon\space
+  \ifhyperref
+    {\href{https://doi.org/#1}{\nolinkurl{#1}}}
+    {\nolinkurl{#1}}%
+}
+
+% Suppress ISSN and "visited on" date everywhere; hide URL when DOI is present
+\AtEveryBibitem{\clearfield{issn}}
+\AtEveryBibitem{%
+  \clearfield{urlyear}%
+  \clearfield{urlmonth}%
+  \clearfield{urlday}%
+}
+\AtEveryBibitem{%
+  \iffieldundef{doi}
+    {}
+    {\clearfield{url}}%
+}
+
+% Year only — no month or day for papers
+\AtEveryBibitem{%
+  \clearfield{month}%
+  \clearfield{day}%
+  \clearfield{endmonth}%
+  \clearfield{endday}%
+}
+
+% Suppress publisher/location for articles and preprints (keep for book/inbook)
+\AtEveryBibitem{%
+  \ifentrytype{book}
+    {}
+    {\ifentrytype{inbook}
+      {}
+      {\clearlist{publisher}\clearlist{location}}}%
+}
+
+% Omit "In:" before journal names (keep for book chapters)
+\renewbibmacro{in:}{%
+  \ifentrytype{article}{}{\printtext{\bibstring{in}\intitlepunct}}%
+}
+
+% Volume(Number):Pages format
+\renewbibmacro*{volume+number+eid}{%
+  \printfield{volume}%
+  \iffieldundef{number}
+    {}
+    {\mkbibparens{\printfield{number}}}%
+  \setunit*{\addcolon}%
+  \printfield{eid}%
+}
+\DeclareFieldFormat[article]{pages}{#1}
+%% ---- End reference formatting ---- %%
 
 %% ---- Abstract formatting ----
 % Shaded box with sans-serif ABSTRACT header, matching Nature style

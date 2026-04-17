@@ -101,6 +101,13 @@
     dashed = false,
 ]{biblatex}
 
+% Invert ALL author names (Lastname, F.) not just the first one
+\DeclareNameAlias{sortname}{family-given}
+
+% Drop period after initials: Gupta R, Smith J (not Gupta, R., Smith, J.)
+\renewcommand*{\bibinitperiod}{}
+\renewcommand*{\bibinitdelim}{\addnbspace}
+
 %%% Make the entire in-text citation (author + year) one clickable hyperlink %%%
 \DeclareCiteCommand{\cite}
   {\usebibmacro{prenote}}
